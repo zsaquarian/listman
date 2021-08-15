@@ -57,7 +57,7 @@ mr-2"
 mr-2"
             />
           {/if}
-          <p class="text-center self-center">{item}</p>
+          <p class={`text-center self-center ${!isMasterList && done ? 'line-through' : ''}`}>{item}</p>
           <button
             class="bg-red-500 text-white ml-auto rounded-md p-2"
             on:click={() => {
