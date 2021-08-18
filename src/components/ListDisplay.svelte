@@ -87,8 +87,12 @@ mr-2"
   <form
     class="flex absolute bottom-0 w-full"
     on:submit|preventDefault={() => {
-      list.items = [...list.items, { item: addInput, done: false }];
-      addInput = '';
+      // regex which checks for non-whitespace strings
+      if (/\S*$/.test(addInput)) {
+        console.log(addInput, /\S+/.test(''));
+        list.items = [...list.items, { item: addInput, done: false }];
+        addInput = '';
+      }
     }}
   >
     <input type="text" class="input w-full" bind:value={addInput} />
