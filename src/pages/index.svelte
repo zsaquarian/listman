@@ -12,13 +12,13 @@
 </script>
 
 <h1 class="text-4xl m-2">Lists:</h1>
-<div class="flex flex-col text-center text-3xl">
+<div class="flex flex-col text-center text-3xl m-4 bg-gray-100 rounded-lg p-2">
   {#each lists as { name, key }, i (i)}
     {#if key !== 'master'}
       <div class="flex">
-        <a href={`/list/${key}`}>{name}</a>
+        <a href={`/list/${key}`} class="underline self-center">{name}</a>
         <button
-          class="bg-red-500 text-white ml-auto rounded-md p-2"
+          class="bg-red-500 text-white ml-auto rounded-md p-2 my-2"
           on:click={async () => {
             await Storage.remove({ key });
             lists = [...lists.slice(0, i), ...lists.slice(i + 1)];

@@ -4,15 +4,18 @@
 </script>
 
 <div
-  class="bg-blue-500 p-2 text-white w-screen "
+  class="bg-blue-500 p-2 text-white w-screen"
   on:focusout={() => {
     open = false;
   }}
 >
-  <button class="text-4xl" on:click={() => (open = !open)}>{open ? 'x' : '≡'}</button>
+  <div class="flex">
+    <button class="text-4xl w-4 h-4" on:click={() => (open = !open)}>{open ? 'x' : '≡'}</button>
+    <h1 class="text-5xl m-auto">Listman</h1>
+  </div>
   <aside class="absolute -left-full z-50 w-full" class:left-0={open}>
     <nav class="bg-blue-400 flex flex-col h-screen p-2 mt-2">
-      <a class="text-4xl" href="/">Home</a>
+      <a class="text-4xl mb-4" href="/">Home</a>
       <a class="text-4xl" href="/master">Master list</a>
       <hr class="my-2 border-1 rounded-lg" />
     </nav>
