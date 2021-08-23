@@ -2,8 +2,9 @@
 /public/build/
 /public
 .routify/
-android/
-ios/
+.idea/
+
+/build
 
 package-lock.json
 .env
