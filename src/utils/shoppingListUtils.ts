@@ -59,7 +59,8 @@ export const getLists = async (): Promise<Lists> => {
 };
 
 export const listToString = (list: ShoppingList) => {
-  let ret = '';
+  let ret = `${list.name} list is being shared with you from Listman app
+ `;
   list.items.forEach((val) => {
     ret += `${val.done ? '[x]' : '[ ]'} ${val.item}
 `;
