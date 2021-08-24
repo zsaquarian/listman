@@ -1,10 +1,13 @@
 <script lang="ts">
-  import { createList, loadList, storeList } from '@utils/shoppingListUtils';
+  import { createList, loadList, storeList, listToString } from '@utils/shoppingListUtils';
   import type { ShoppingList } from '@utils/shoppingListUtils';
   import { onMount } from 'svelte';
   import { fade } from 'svelte/transition';
   import { v4 } from 'uuid';
   import { goto } from '@roxi/routify';
+  import { Share } from '@capacitor/share';
+  import Icon from 'svelte-awesome/components/Icon.svelte';
+  import { shareAlt } from 'svelte-awesome/icons';
 
   export let key: string;
 
@@ -29,15 +32,28 @@
 <div class="h-full flex flex-col items-center">
   <div class="m-2 p-2 w-full">
     {#if list}
-      {#if isMasterList}
-        <h1 class="text-4xl text-center">Master List</h1>
-      {:else}
-        <input
-          class="text-4xl text-center bg-gray-100 focus:bg-gray-200 rounded-lg w-5/6 mx-auto block"
-          bind:value={list.name}
-          placeholder="Enter name"
-        />
-      {/if}
+      <div class="flex">
+        {#if isMasterList}
+          <h1 class="text-4xl text-center">Master List</h1>
+        {:else}
+          <input
+            class="text-4xl text-center bg-gray-100 focus:bg-gray-200 rounded-lg w-5/6 mx-auto block"
+            bind:value={list.name}
+            placeholder="Enter name"
+          />
+        {/if}
+        <button
+          on:click={async () => {
+            await Share.share({
+              title: list.name,
+              text: listToString(list),
+              dialogTitle: 'Share list',
+            });
+          }}
+        >
+          <Icon data={shareAlt} class="m-2" style="color: #3B82F6;" />
+        </button>
+      </div>
       {#if list.items.length == 0}
         <h1 class="text-2xl text-gray-400 text-center">Try adding some items</h1>
       {/if}

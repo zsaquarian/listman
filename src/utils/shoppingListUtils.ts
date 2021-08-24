@@ -57,3 +57,12 @@ export const getLists = async (): Promise<Lists> => {
 
   return names;
 };
+
+export const listToString = (list: ShoppingList) => {
+  let ret = '';
+  list.items.forEach((val) => {
+    ret += `${val.done ? '[x]' : '[ ]'} ${val.item}
+`;
+  });
+  return ret;
+};
