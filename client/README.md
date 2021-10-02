@@ -7,3 +7,5 @@ Unfortunately, until [cypress-svelte-unit-test pr#270](https://github.com/bahmut
       throw new Error("In order to use mount or unmount functions please place the spec in component folder");
   }
 ```
+
+If you have have run cypress before, remember to run `rm -rfd node_modules/.vite` so that vite takes the new file
