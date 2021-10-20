@@ -5,6 +5,7 @@
 
 
 import type { MyContext } from "./src/context"
+import type { FieldAuthorizeResolver } from "nexus/dist/plugins/fieldAuthorizePlugin"
 
 
 
@@ -29,11 +30,13 @@ export interface NexusGenScalars {
 
 export interface NexusGenObjects {
   AuthPayload: { // root type
+    error?: string | null; // String
+    token?: string | null; // String
     user?: NexusGenRootTypes['User'] | null; // User
   }
+  Mutation: {};
   Query: {};
   User: { // root type
-    email: string; // String!
     id: number; // Int!
     username: string; // String!
     uuid: string; // String!
@@ -52,10 +55,17 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
   AuthPayload: { // field return type
+    error: string | null; // String
+    token: string | null; // String
     user: NexusGenRootTypes['User'] | null; // User
   }
+  Mutation: { // field return type
+    createUser: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
+    googleSignIn: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
+    login: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
+  }
   Query: { // field return type
-    ok: boolean; // Boolean!
+    me: NexusGenRootTypes['User'] | null; // User
   }
   User: { // field return type
     email: string; // String!
@@ -67,10 +77,17 @@ export interface NexusGenFieldTypes {
 
 export interface NexusGenFieldTypeNames {
   AuthPayload: { // field return type name
+    error: 'String'
+    token: 'String'
     user: 'User'
   }
+  Mutation: { // field return type name
+    createUser: 'AuthPayload'
+    googleSignIn: 'AuthPayload'
+    login: 'AuthPayload'
+  }
   Query: { // field return type name
-    ok: 'Boolean'
+    me: 'User'
   }
   User: { // field return type name
     email: 'String'
@@ -81,6 +98,21 @@ export interface NexusGenFieldTypeNames {
 }
 
 export interface NexusGenArgTypes {
+  Mutation: {
+    createUser: { // args
+      email: string; // String!
+      password: string; // String!
+      username: string; // String!
+    }
+    googleSignIn: { // args
+      token?: string | null; // String
+      username?: string | null; // String
+    }
+    login: { // args
+      password?: string | null; // String
+      usernameOrEmail?: string | null; // String
+    }
+  }
 }
 
 export interface NexusGenAbstractTypeMembers {
@@ -146,6 +178,15 @@ declare global {
   interface NexusGenPluginInputTypeConfig<TypeName extends string> {
   }
   interface NexusGenPluginFieldConfig<TypeName extends string, FieldName extends string> {
+    /**
+     * Authorization for an individual field. Returning "true"
+     * or "Promise<true>" means the field can be accessed.
+     * Returning "false" or "Promise<false>" will respond
+     * with a "Not Authorized" error for the field.
+     * Returning or throwing an error will also prevent the
+     * resolver from executing.
+     */
+    authorize?: FieldAuthorizeResolver<TypeName, FieldName>
   }
   interface NexusGenPluginInputFieldConfig<TypeName extends string, FieldName extends string> {
   }

@@ -11,9 +11,11 @@ generator client {
 }
 
 model User {
-  id        Int     @default(autoincrement()) @id
-  username  String  @unique
-  email     String  @unique
-  uuid      String  @unique
-  password  String
+  id          Int     @default(autoincrement()) @id
+  username    String  @unique
+  email       String  @unique
+  uuid        String  @unique
+  // password is optional to allow for google oauth
+  password    String?
+  googleToken String? @unique
 }

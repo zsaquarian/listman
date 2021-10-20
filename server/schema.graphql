@@ -3,11 +3,19 @@
 
 
 type AuthPayload {
+  error: String
+  token: String
   user: User
 }
 
+type Mutation {
+  createUser(email: String!, password: String!, username: String!): AuthPayload
+  googleSignIn(token: String, username: String): AuthPayload
+  login(password: String, usernameOrEmail: String): AuthPayload
+}
+
 type Query {
-  ok: Boolean!
+  me: User
 }
 
 type User {
