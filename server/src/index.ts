@@ -1,29 +1,19 @@
 import express from 'express';
-import { PORT } from './utils/constants';
+import { CORS_ORIGIN, PORT } from './utils/constants';
 import dotenv from 'dotenv';
-import session from 'express-session';
-import { v4 } from 'uuid';
 import { server } from './server';
+import cors from 'cors';
 
 dotenv.config();
-
-const SESSION_SECRET = process.env.SESSION_SECRET;
 
 const main = async () => {
   const app = express();
 
+  app.use(cors({ origin: CORS_ORIGIN, credentials: true }));
+
   await server.start();
 
   server.applyMiddleware({ app, cors: false });
-
-  app.use(
-    session({
-      genid: (_req) => v4(),
-      secret: SESSION_SECRET,
-      resave: false,
-      saveUninitialized: false,
-    })
-  );
 
   app.get('/', (_req, res) => {
     res.send('Hello world');

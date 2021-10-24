@@ -2,10 +2,10 @@ import { extendType, nonNull, nullable, objectType, stringArg } from 'nexus';
 import { verifyToken } from '../utils/google';
 import jwt from 'jsonwebtoken';
 import { v4 } from 'uuid';
-import { GoogleUserInfo, JWTToken } from '../utils/types';
+import { GoogleUserInfo, JWTToken, RedisTokenInfo } from '../utils/types';
 import { isPasswordValid, isUsernameValid } from '../utils/usernamePasswordReqs';
 import { compare, hash } from 'bcrypt';
-import { SESSION_SECRET } from '../utils/constants';
+import { JWT_EXPIRE_TIME, JWT_SECRET, REFRESH_EXPIRE_TIME, REFRESH_SECRET } from '../utils/constants';
 import { isAuth } from '../utils/isAuth';
 import { User } from '@prisma/client';
 
@@ -15,6 +15,15 @@ export const AuthPayload = objectType({
     t.nullable.field('user', {
       type: 'User',
     });
+    t.nullable.string('token');
+    t.nullable.string('refresh');
+    t.nullable.string('error');
+  },
+});
+
+export const RefreshPayload = objectType({
+  name: 'RefreshPayload',
+  definition: (t) => {
     t.nullable.string('token');
     t.nullable.string('error');
   },
@@ -34,7 +43,7 @@ export const AuthQueries = extendType({
         if (!token) {
           return;
         }
-        const jwtToken = jwt.verify(token, SESSION_SECRET) as JWTToken;
+        const jwtToken = jwt.verify(token, JWT_SECRET) as JWTToken;
 
         const user = await ctx.db.user.findUnique({ where: { id: jwtToken.id } });
         return user;
@@ -58,7 +67,6 @@ export const AuthMutations = extendType({
           id = await verifyToken(token);
         } catch (e) {
           return {
-            user: null,
             error: 'bad token',
           };
         }
@@ -67,23 +75,25 @@ export const AuthMutations = extendType({
 
         if (foundUser) {
           const jwtToken = jwt.sign(
-            { id: foundUser.id, googleToken: foundUser.googleToken } as JWTToken,
-            SESSION_SECRET,
-            {
-              expiresIn: '3d',
-            }
+            { id: foundUser.id, email: foundUser.email, username: foundUser.username, googleToken: token } as JWTToken,
+            JWT_SECRET,
+            { expiresIn: JWT_EXPIRE_TIME }
           );
+          const refresh = jwt.sign({ id: foundUser.id } as JWTToken, REFRESH_SECRET, {
+            expiresIn: REFRESH_EXPIRE_TIME,
+          });
+
+          ctx.redis.get(foundUser.id.toString());
 
           return {
             user: foundUser,
             token: jwtToken,
-            error: null,
+            refresh,
           };
         }
 
         if (!username) {
           return {
-            user: null,
             error: 'user does not exist and no username has been provided for sign up',
           };
         }
@@ -91,14 +101,17 @@ export const AuthMutations = extendType({
         const info = jwt.decode(token) as GoogleUserInfo;
 
         const user = await ctx.db.user.create({ data: { uuid: v4(), email: info.email, username, googleToken: id } });
-        const jwtToken = jwt.sign({ id: user.id, googleToken: user.googleToken } as JWTToken, SESSION_SECRET, {
-          expiresIn: '3d',
-        });
+        const jwtToken = jwt.sign(
+          { id: user.id, email: user.email, username: user.username, googleToken: token } as JWTToken,
+          JWT_SECRET,
+          { expiresIn: JWT_EXPIRE_TIME }
+        );
+        const refresh = jwt.sign({ id: user.id } as JWTToken, REFRESH_SECRET, { expiresIn: REFRESH_EXPIRE_TIME });
 
         return {
-          user,
+          user: foundUser,
           token: jwtToken,
-          error: null,
+          refresh,
         };
       },
     });
@@ -125,14 +138,12 @@ export const AuthMutations = extendType({
 
         if (existingUser) {
           return {
-            user: null,
             error: 'user already exists',
           };
         }
 
         if (!isPasswordValid(password) || !isUsernameValid(username)) {
           return {
-            user: null,
             error: 'username or password do not comply with requirements',
           };
         }
@@ -141,12 +152,17 @@ export const AuthMutations = extendType({
 
         const user = await ctx.db.user.create({ data: { username, email, uuid: v4(), password: hashedPassword } });
 
-        const token = jwt.sign({ id: user.id } as JWTToken, SESSION_SECRET, { expiresIn: '3d' });
+        const token = jwt.sign({ id: user.id, email: user.email, username: user.username } as JWTToken, JWT_SECRET, {
+          expiresIn: JWT_EXPIRE_TIME,
+        });
+        const refresh = jwt.sign({ id: user.id } as JWTToken, REFRESH_SECRET, { expiresIn: REFRESH_EXPIRE_TIME });
+
+        await ctx.redis.set(refresh, token);
 
         return {
           user,
           token,
-          error: null,
+          refresh,
         };
       },
     });
@@ -180,17 +196,49 @@ export const AuthMutations = extendType({
         const passwordCorrect = await compare(password, user.password);
 
         if (passwordCorrect) {
-          const token = jwt.sign({ id: user.id, email: user.email } as JWTToken, SESSION_SECRET, { expiresIn: '3d' });
+          const token = jwt.sign({ id: user.id, email: user.email, username: user.username } as JWTToken, JWT_SECRET, {
+            expiresIn: JWT_EXPIRE_TIME,
+          });
+          const refresh = jwt.sign({ id: user.id } as JWTToken, REFRESH_SECRET, { expiresIn: REFRESH_EXPIRE_TIME });
+
+          await ctx.redis.set(user.id.toString(), JSON.stringify({ refresh, token, valid: true } as RedisTokenInfo));
 
           return {
             user,
             token,
+            refresh,
           };
         } else {
           return {
             error: 'password is wrong',
           };
         }
+      },
+    });
+    t.field('refresh', {
+      type: 'AuthPayload',
+      args: {
+        refresh: stringArg(),
+        originalToken: stringArg(),
+      },
+      resolve: async (_source, { refresh, originalToken }, ctx, _info) => {
+        const user = jwt.verify(originalToken, JWT_SECRET) as JWTToken;
+        const redisInfo = JSON.parse((await ctx.redis.get(user.id.toString())) || '') as RedisTokenInfo;
+
+        if (redisInfo.refresh !== refresh && redisInfo.token !== originalToken) {
+          return {
+            error: 'refresh or token is invalid',
+          };
+        }
+
+        const newToken = jwt.sign({ id: user.id, email: user.email, username: user.username }, JWT_SECRET, {
+          expiresIn: JWT_EXPIRE_TIME,
+        });
+        ctx.redis.set(user.id.toString(), JSON.stringify({ refresh, token: newToken, valid: true } as RedisTokenInfo));
+
+        return {
+          token: newToken,
+        };
       },
     });
   },

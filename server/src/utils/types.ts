@@ -18,7 +18,14 @@ export interface GoogleUserInfo {
 export interface JWTToken {
   id: number;
   googleToken?: string;
-  email?: string;
+  email: string;
+  username: string;
   iat: number;
   exp: number;
+}
+
+export interface RedisTokenInfo {
+  refresh: string;
+  token: string;
+  valid: boolean;
 }

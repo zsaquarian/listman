@@ -31,11 +31,16 @@ export interface NexusGenScalars {
 export interface NexusGenObjects {
   AuthPayload: { // root type
     error?: string | null; // String
+    refresh?: string | null; // String
     token?: string | null; // String
     user?: NexusGenRootTypes['User'] | null; // User
   }
   Mutation: {};
   Query: {};
+  RefreshPayload: { // root type
+    error?: string | null; // String
+    token?: string | null; // String
+  }
   User: { // root type
     id: number; // Int!
     username: string; // String!
@@ -56,6 +61,7 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 export interface NexusGenFieldTypes {
   AuthPayload: { // field return type
     error: string | null; // String
+    refresh: string | null; // String
     token: string | null; // String
     user: NexusGenRootTypes['User'] | null; // User
   }
@@ -63,9 +69,14 @@ export interface NexusGenFieldTypes {
     createUser: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
     googleSignIn: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
     login: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
+    refresh: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
   }
   Query: { // field return type
     me: NexusGenRootTypes['User'] | null; // User
+  }
+  RefreshPayload: { // field return type
+    error: string | null; // String
+    token: string | null; // String
   }
   User: { // field return type
     email: string; // String!
@@ -78,6 +89,7 @@ export interface NexusGenFieldTypes {
 export interface NexusGenFieldTypeNames {
   AuthPayload: { // field return type name
     error: 'String'
+    refresh: 'String'
     token: 'String'
     user: 'User'
   }
@@ -85,9 +97,14 @@ export interface NexusGenFieldTypeNames {
     createUser: 'AuthPayload'
     googleSignIn: 'AuthPayload'
     login: 'AuthPayload'
+    refresh: 'AuthPayload'
   }
   Query: { // field return type name
     me: 'User'
+  }
+  RefreshPayload: { // field return type name
+    error: 'String'
+    token: 'String'
   }
   User: { // field return type name
     email: 'String'
@@ -111,6 +128,10 @@ export interface NexusGenArgTypes {
     login: { // args
       password?: string | null; // String
       usernameOrEmail?: string | null; // String
+    }
+    refresh: { // args
+      originalToken?: string | null; // String
+      refresh?: string | null; // String
     }
   }
 }

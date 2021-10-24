@@ -19,9 +19,11 @@
     "express-session": "^1.17.2",
     "google-auth-library": "^7.10.1",
     "graphql": "^15.6.1",
+    "handy-redis": "^2.3.1",
     "jsonwebtoken": "^8.5.1",
     "nexus": "^1.1.0",
     "prisma": "3.2.1",
+    "redis": "^3.1.2",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
@@ -31,6 +33,7 @@
     "@types/jsonwebtoken": "^8.5.5",
     "@types/node": "*",
     "@types/passport": "^1.0.7",
+    "@types/redis": "^2.8.32",
     "@types/uuid": "^8.3.1",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",

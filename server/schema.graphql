@@ -4,6 +4,7 @@
 
 type AuthPayload {
   error: String
+  refresh: String
   token: String
   user: User
 }
@@ -12,10 +13,16 @@ type Mutation {
   createUser(email: String!, password: String!, username: String!): AuthPayload
   googleSignIn(token: String, username: String): AuthPayload
   login(password: String, usernameOrEmail: String): AuthPayload
+  refresh(originalToken: String, refresh: String): AuthPayload
 }
 
 type Query {
   me: User
+}
+
+type RefreshPayload {
+  error: String
+  token: String
 }
 
 type User {

@@ -1,7 +1,6 @@
 import { MyContext } from '../context';
 import jwt from 'jsonwebtoken';
-import { JWTToken } from './types';
-import { SESSION_SECRET } from './constants';
+import { JWT_SECRET } from './constants';
 
 export const isAuth = async (_source: any, _args: any, ctx: MyContext) => {
   const token = ctx.req.headers.authorization?.split('Bearer ')[1];
@@ -10,6 +9,10 @@ export const isAuth = async (_source: any, _args: any, ctx: MyContext) => {
     return false;
   }
 
-  jwt.verify(token, SESSION_SECRET) as JWTToken;
+  try {
+    jwt.verify(token, JWT_SECRET);
+  } catch (e) {
+    return false;
+  }
   return true;
 };
