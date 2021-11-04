@@ -1,4 +1,5 @@
 import { objectType } from 'nexus';
+import { getToken } from '../utils/getToken';
 import { MyContext } from '../context';
 
 export const User = objectType({
@@ -9,8 +10,8 @@ export const User = objectType({
     t.nonNull.string('email', {
       resolve: (root, _args, _ctx, _info) => root.email,
       // @ts-ignore
-      authorize: (root, args, ctx: MyContext): boolean => {
-        const jwtToken = ctx.req.headers['authorization'];
+      authorize: (_root, _args, ctx: MyContext): boolean => {
+        const jwtToken = getToken(ctx.req);
 
         return !!jwtToken;
       },

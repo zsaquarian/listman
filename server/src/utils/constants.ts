@@ -10,3 +10,5 @@ export const CORS_ORIGIN = process.env.CORS_ORIGIN;
 
 export const JWT_EXPIRE_TIME = parseInt(process.env.JWT_EXPIRE_TIME);
 export const REFRESH_EXPIRE_TIME = parseInt(process.env.REFRESH_EXPIRE_TIME);
+
+export const IN_PROD = process.env.IN_PROD === 'true';

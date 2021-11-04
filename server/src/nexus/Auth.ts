@@ -5,9 +5,10 @@ import { v4 } from 'uuid';
 import { GoogleUserInfo, JWTToken, RedisTokenInfo } from '../utils/types';
 import { isPasswordValid, isUsernameValid } from '../utils/usernamePasswordReqs';
 import { compare, hash } from 'bcrypt';
-import { JWT_EXPIRE_TIME, JWT_SECRET, REFRESH_EXPIRE_TIME, REFRESH_SECRET } from '../utils/constants';
+import { IN_PROD, JWT_EXPIRE_TIME, JWT_SECRET, REFRESH_EXPIRE_TIME, REFRESH_SECRET } from '../utils/constants';
 import { isAuth } from '../utils/isAuth';
 import { User } from '@prisma/client';
+import { getToken } from '../utils/getToken';
 
 export const AuthPayload = objectType({
   name: 'AuthPayload',
@@ -38,12 +39,9 @@ export const AuthQueries = extendType({
       // recognize that
       authorize: isAuth,
       resolve: async (_source, _args, ctx, _info) => {
-        const token = ctx.req.headers.authorization?.split('Bearer ')[1];
-
-        if (!token) {
-          return;
-        }
-        const jwtToken = jwt.verify(token, JWT_SECRET) as JWTToken;
+        const token = getToken(ctx.req);
+        // @ts-ignore typescript doesn't know that the fields are in the JWT
+        const jwtToken = jwt.decode(token, JWT_SECRET) as JWTToken;
 
         const user = await ctx.db.user.findUnique({ where: { id: jwtToken.id } });
         return user;
@@ -75,7 +73,7 @@ export const AuthMutations = extendType({
 
         if (foundUser) {
           const jwtToken = jwt.sign(
-            { id: foundUser.id, email: foundUser.email, username: foundUser.username, googleToken: token } as JWTToken,
+            { id: foundUser.id, username: foundUser.username, googleToken: token } as JWTToken,
             JWT_SECRET,
             { expiresIn: JWT_EXPIRE_TIME }
           );
@@ -102,7 +100,7 @@ export const AuthMutations = extendType({
 
         const user = await ctx.db.user.create({ data: { uuid: v4(), email: info.email, username, googleToken: id } });
         const jwtToken = jwt.sign(
-          { id: user.id, email: user.email, username: user.username, googleToken: token } as JWTToken,
+          { id: user.id, username: user.username, googleToken: token } as JWTToken,
           JWT_SECRET,
           { expiresIn: JWT_EXPIRE_TIME }
         );
@@ -152,12 +150,13 @@ export const AuthMutations = extendType({
 
         const user = await ctx.db.user.create({ data: { username, email, uuid: v4(), password: hashedPassword } });
 
-        const token = jwt.sign({ id: user.id, email: user.email, username: user.username } as JWTToken, JWT_SECRET, {
+        const token = jwt.sign({ id: user.id, username: user.username } as JWTToken, JWT_SECRET, {
           expiresIn: JWT_EXPIRE_TIME,
         });
         const refresh = jwt.sign({ id: user.id } as JWTToken, REFRESH_SECRET, { expiresIn: REFRESH_EXPIRE_TIME });
 
-        await ctx.redis.set(refresh, token);
+        await ctx.redis.set(user.id.toString(), JSON.stringify({ refresh, token, valid: true } as RedisTokenInfo));
+        ctx.res.cookie('token', token, { httpOnly: true, secure: IN_PROD, sameSite: IN_PROD });
 
         return {
           user,
@@ -196,12 +195,13 @@ export const AuthMutations = extendType({
         const passwordCorrect = await compare(password, user.password);
 
         if (passwordCorrect) {
-          const token = jwt.sign({ id: user.id, email: user.email, username: user.username } as JWTToken, JWT_SECRET, {
+          const token = jwt.sign({ id: user.id, username: user.username } as JWTToken, JWT_SECRET, {
             expiresIn: JWT_EXPIRE_TIME,
           });
           const refresh = jwt.sign({ id: user.id } as JWTToken, REFRESH_SECRET, { expiresIn: REFRESH_EXPIRE_TIME });
 
           await ctx.redis.set(user.id.toString(), JSON.stringify({ refresh, token, valid: true } as RedisTokenInfo));
+          ctx.res.cookie('token', token, { httpOnly: true, secure: IN_PROD, sameSite: IN_PROD });
 
           return {
             user,
@@ -219,22 +219,29 @@ export const AuthMutations = extendType({
       type: 'AuthPayload',
       args: {
         refresh: stringArg(),
-        originalToken: stringArg(),
       },
-      resolve: async (_source, { refresh, originalToken }, ctx, _info) => {
-        const user = jwt.verify(originalToken, JWT_SECRET) as JWTToken;
+      // @ts-ignore see line 38
+      authorize: isAuth,
+      resolve: async (_source, { refresh }, ctx, _info) => {
+        const originalToken = getToken(ctx.req);
+        // @ts-ignore typescript doesn't know that the fields are in the JWT
+        const user = jwt.decode(originalToken, JWT_SECRET) as JWTToken;
         const redisInfo = JSON.parse((await ctx.redis.get(user.id.toString())) || '') as RedisTokenInfo;
+        console.log(redisInfo);
 
-        if (redisInfo.refresh !== refresh && redisInfo.token !== originalToken) {
+        if (redisInfo.refresh !== refresh || redisInfo.token !== originalToken) {
           return {
             error: 'refresh or token is invalid',
           };
         }
 
-        const newToken = jwt.sign({ id: user.id, email: user.email, username: user.username }, JWT_SECRET, {
+        const newToken = jwt.sign({ id: user.id, username: user.username }, JWT_SECRET, {
           expiresIn: JWT_EXPIRE_TIME,
         });
-        ctx.redis.set(user.id.toString(), JSON.stringify({ refresh, token: newToken, valid: true } as RedisTokenInfo));
+        await ctx.redis.set(
+          user.id.toString(),
+          JSON.stringify({ refresh, token: newToken, valid: true } as RedisTokenInfo)
+        );
 
         return {
           token: newToken,

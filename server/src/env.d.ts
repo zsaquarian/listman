@@ -11,5 +11,6 @@ declare namespace NodeJS {
     CORS_ORIGIN: string;
     JWT_EXPIRE_TIME: string;
     REFRESH_EXPIRE_TIME: string;
+    IN_PROD: string;
   }
 }

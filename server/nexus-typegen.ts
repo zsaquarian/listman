@@ -72,6 +72,7 @@ export interface NexusGenFieldTypes {
     refresh: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
   }
   Query: { // field return type
+    helloWorld: string | null; // String
     me: NexusGenRootTypes['User'] | null; // User
   }
   RefreshPayload: { // field return type
@@ -100,6 +101,7 @@ export interface NexusGenFieldTypeNames {
     refresh: 'AuthPayload'
   }
   Query: { // field return type name
+    helloWorld: 'String'
     me: 'User'
   }
   RefreshPayload: { // field return type name
@@ -130,7 +132,6 @@ export interface NexusGenArgTypes {
       usernameOrEmail?: string | null; // String
     }
     refresh: { // args
-      originalToken?: string | null; // String
       refresh?: string | null; // String
     }
   }

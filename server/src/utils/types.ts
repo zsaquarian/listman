@@ -18,7 +18,6 @@ export interface GoogleUserInfo {
 export interface JWTToken {
   id: number;
   googleToken?: string;
-  email: string;
   username: string;
   iat: number;
   exp: number;
