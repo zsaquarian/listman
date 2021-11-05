@@ -1,0 +1,7 @@
+mutation Refresh {
+  refresh {
+    token
+    refresh
+    error
+  }
+}

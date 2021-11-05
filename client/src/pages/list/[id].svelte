@@ -1,7 +1,8 @@
 <script lang="ts">
   import ListDisplay from '@components/ListDisplay.svelte';
   import { params } from '@roxi/routify';
-  import { loadList, ShoppingList, storeList } from '@utils/shoppingListUtils';
+  import { loadList, storeList } from '@utils/shoppingListUtils';
+  import type { ShoppingList } from '@utils/shoppingListUtils';
   import { onMount } from 'svelte';
 
   const key = $params.id;

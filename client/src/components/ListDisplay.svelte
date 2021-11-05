@@ -2,8 +2,8 @@
   import { listToString } from '@utils/shoppingListUtils';
   import type { ShoppingList } from '@utils/shoppingListUtils';
   import { Share } from '@capacitor/share';
-  import Icon from 'svelte-awesome/components/Icon.svelte';
-  import { shareAlt } from 'svelte-awesome/icons';
+  import { Share as ShareIcon } from 'svelte-hero-icons';
+  import Icon from 'svelte-hero-icons/Icon.svelte';
   import ItemDisplay from './ItemDisplay.svelte';
 
   export let isMasterList = false;
@@ -35,7 +35,7 @@
             });
           }}
         >
-          <Icon data={shareAlt} class="m-2 text-blue" />
+          <Icon src={ShareIcon} solid class="text-blue-200 w-8" />
         </button>
       </div>
       {#if list.items.length == 0}

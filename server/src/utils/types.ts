@@ -17,7 +17,7 @@ export interface GoogleUserInfo {
 
 export interface JWTToken {
   id: number;
-  googleToken?: string;
+  isGoogleUser: boolean;
   username: string;
   iat: number;
   exp: number;

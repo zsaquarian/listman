@@ -68,6 +68,7 @@ export interface NexusGenFieldTypes {
   Mutation: { // field return type
     createUser: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
     googleSignIn: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
+    logOut: boolean | null; // Boolean
     login: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
     refresh: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
   }
@@ -97,6 +98,7 @@ export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
     createUser: 'AuthPayload'
     googleSignIn: 'AuthPayload'
+    logOut: 'Boolean'
     login: 'AuthPayload'
     refresh: 'AuthPayload'
   }
@@ -130,9 +132,6 @@ export interface NexusGenArgTypes {
     login: { // args
       password?: string | null; // String
       usernameOrEmail?: string | null; // String
-    }
-    refresh: { // args
-      refresh?: string | null; // String
     }
   }
 }

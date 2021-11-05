@@ -599,18 +599,6 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@fortawesome/fontawesome-common-types@^0.2.36":
-  version "0.2.36"
-  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-0.2.36.tgz#b44e52db3b6b20523e0c57ef8c42d315532cb903"
-  integrity sha512-a/7BiSgobHAgBWeN7N0w+lAhInrGxksn13uK7231n2m8EDPE3BMCl9NZLTGrj9ZXfCmC6LM0QLqXidIizVQ6yg==
-
-"@fortawesome/free-regular-svg-icons@^5.15.4":
-  version "5.15.4"
-  resolved "https://registry.yarnpkg.com/@fortawesome/free-regular-svg-icons/-/free-regular-svg-icons-5.15.4.tgz#b97edab436954333bbeac09cfc40c6a951081a02"
-  integrity sha512-9VNNnU3CXHy9XednJ3wzQp6SwNwT3XaM26oS4Rp391GsxVYA+0oDR2J194YCIWf7jNRCYKjUCOduxdceLrx+xw==
-  dependencies:
-    "@fortawesome/fontawesome-common-types" "^0.2.36"
-
 "@graphql-codegen/cli@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/cli/-/cli-2.2.1.tgz#0bfe7bc64c1d6aa84d679fb2139f5d76337459cc"
@@ -6055,11 +6043,6 @@ supports-color@^8.1.1:
   dependencies:
     has-flag "^4.0.0"
 
-svelte-awesome@^2.4.2:
-  version "2.4.2"
-  resolved "https://registry.yarnpkg.com/svelte-awesome/-/svelte-awesome-2.4.2.tgz#33d617708c4067aff341c763952688281cc27a04"
-  integrity sha512-VV1xhTU+L5ZZSfoAYlBNOcvfvkVPrPMbFrsuTdGo7xjEpWnDfslftfWSXeILSGIhQYsq7TXIfBa/PnEbHUNRaw==
-
 svelte-check@^2.2.4:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/svelte-check/-/svelte-check-2.2.4.tgz#103140eeb4bbe65721e023ab210566041abe7224"
@@ -6074,6 +6057,13 @@ svelte-check@^2.2.4:
     source-map "^0.7.3"
     svelte-preprocess "^4.0.0"
     typescript "*"
+
+svelte-hero-icons@^3.0.0, svelte-hero-icons@^3.0.0-beta.3:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/svelte-hero-icons/-/svelte-hero-icons-3.0.0.tgz#c603159afa13f47344e6f2d69808553af34a4c8c"
+  integrity sha512-QivdVBK5dhUaxGq+GwBCW2EkhCFun4I1kJ22lu9b3dz7M2YJQXWsjwsNu4FIVQ1wBuPkaHAg9mdZeM7KV8fDIA==
+  dependencies:
+    svelte-hero-icons "^3.0.0-beta.3"
 
 svelte-hmr@^0.14.7:
   version "0.14.7"
