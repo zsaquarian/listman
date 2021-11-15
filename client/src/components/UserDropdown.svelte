@@ -6,13 +6,18 @@
 
   const meQuery = operationStore(MeDocument);
   const me = query(meQuery);
+  const refreshTime = 3600; // 1 hour in seconds
+  const refresh = mutation(operationStore(RefreshDocument));
+
+  if ($me.error) {
+    const result = refresh();
+    console.log(result);
+  }
 
   const logOut = mutation(operationStore(LogOutDocument));
 
   let dropdown = false;
 
-  const refreshTime = 3600; // 1 hour in seconds
-  const refresh = mutation(operationStore(RefreshDocument));
   const refreshInterval = setInterval(() => {
     const result = refresh();
     console.log(result);

@@ -41,6 +41,12 @@ export interface NexusGenObjects {
     error?: string | null; // String
     token?: string | null; // String
   }
+  SharedList: { // root type
+    id?: string | null; // ID
+    listUuid?: string | null; // String
+    owner?: string | null; // String
+    sharedWith?: Array<string | null> | null; // [String]
+  }
   User: { // root type
     id: number; // Int!
     username: string; // String!
@@ -71,14 +77,23 @@ export interface NexusGenFieldTypes {
     logOut: boolean | null; // Boolean
     login: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
     refresh: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
+    shareList: boolean | null; // Boolean
   }
   Query: { // field return type
+    canViewList: boolean | null; // Boolean
+    getSharedLists: Array<string | null> | null; // [String]
     helloWorld: string | null; // String
     me: NexusGenRootTypes['User'] | null; // User
   }
   RefreshPayload: { // field return type
     error: string | null; // String
     token: string | null; // String
+  }
+  SharedList: { // field return type
+    id: string | null; // ID
+    listUuid: string | null; // String
+    owner: string | null; // String
+    sharedWith: Array<string | null> | null; // [String]
   }
   User: { // field return type
     email: string; // String!
@@ -101,14 +116,23 @@ export interface NexusGenFieldTypeNames {
     logOut: 'Boolean'
     login: 'AuthPayload'
     refresh: 'AuthPayload'
+    shareList: 'Boolean'
   }
   Query: { // field return type name
+    canViewList: 'Boolean'
+    getSharedLists: 'String'
     helloWorld: 'String'
     me: 'User'
   }
   RefreshPayload: { // field return type name
     error: 'String'
     token: 'String'
+  }
+  SharedList: { // field return type name
+    id: 'ID'
+    listUuid: 'String'
+    owner: 'String'
+    sharedWith: 'String'
   }
   User: { // field return type name
     email: 'String'
@@ -132,6 +156,15 @@ export interface NexusGenArgTypes {
     login: { // args
       password?: string | null; // String
       usernameOrEmail?: string | null; // String
+    }
+    shareList: { // args
+      listUuid?: string | null; // String
+      sharedWith?: string | null; // String
+    }
+  }
+  Query: {
+    canViewList: { // args
+      uuid?: string | null; // String
     }
   }
 }

@@ -27,6 +27,7 @@ export type Mutation = {
   logOut?: Maybe<Scalars['Boolean']>;
   login?: Maybe<AuthPayload>;
   refresh?: Maybe<AuthPayload>;
+  shareList?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -48,16 +49,37 @@ export type MutationLoginArgs = {
   usernameOrEmail?: Maybe<Scalars['String']>;
 };
 
+
+export type MutationShareListArgs = {
+  listUuid?: Maybe<Scalars['String']>;
+  sharedWith?: Maybe<Scalars['String']>;
+};
+
 export type Query = {
   __typename?: 'Query';
+  canViewList?: Maybe<Scalars['Boolean']>;
+  getSharedLists?: Maybe<Array<Maybe<Scalars['String']>>>;
   helloWorld?: Maybe<Scalars['String']>;
   me?: Maybe<User>;
+};
+
+
+export type QueryCanViewListArgs = {
+  uuid?: Maybe<Scalars['String']>;
 };
 
 export type RefreshPayload = {
   __typename?: 'RefreshPayload';
   error?: Maybe<Scalars['String']>;
   token?: Maybe<Scalars['String']>;
+};
+
+export type SharedList = {
+  __typename?: 'SharedList';
+  id?: Maybe<Scalars['ID']>;
+  listUuid?: Maybe<Scalars['String']>;
+  owner?: Maybe<Scalars['String']>;
+  sharedWith?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 export type User = {
@@ -103,6 +125,26 @@ export type RefreshMutationVariables = Exact<{ [key: string]: never; }>;
 
 export type RefreshMutation = { __typename?: 'Mutation', refresh?: { __typename?: 'AuthPayload', token?: string | null | undefined, refresh?: string | null | undefined, error?: string | null | undefined } | null | undefined };
 
+export type ShareListMutationVariables = Exact<{
+  listUuid: Scalars['String'];
+  sharedWith: Scalars['String'];
+}>;
+
+
+export type ShareListMutation = { __typename?: 'Mutation', shareList?: boolean | null | undefined };
+
+export type CanViewListQueryVariables = Exact<{
+  uuid: Scalars['String'];
+}>;
+
+
+export type CanViewListQuery = { __typename?: 'Query', canViewList?: boolean | null | undefined };
+
+export type GetSharedListsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetSharedListsQuery = { __typename?: 'Query', getSharedLists?: Array<string | null | undefined> | null | undefined };
+
 export type HelloWorldQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -119,5 +161,8 @@ export const GoogleSignInDocument = {"kind":"Document","definitions":[{"kind":"O
 export const LogOutDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"LogOut"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"logOut"}}]}}]} as unknown as DocumentNode<LogOutMutation, LogOutMutationVariables>;
 export const LoginDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Login"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"usernameOrEmail"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"password"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"login"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"usernameOrEmail"},"value":{"kind":"Variable","name":{"kind":"Name","value":"usernameOrEmail"}}},{"kind":"Argument","name":{"kind":"Name","value":"password"},"value":{"kind":"Variable","name":{"kind":"Name","value":"password"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"error"}},{"kind":"Field","name":{"kind":"Name","value":"token"}},{"kind":"Field","name":{"kind":"Name","value":"refresh"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"uuid"}},{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]}}]}}]} as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
 export const RefreshDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Refresh"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"refresh"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"token"}},{"kind":"Field","name":{"kind":"Name","value":"refresh"}},{"kind":"Field","name":{"kind":"Name","value":"error"}}]}}]}}]} as unknown as DocumentNode<RefreshMutation, RefreshMutationVariables>;
+export const ShareListDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"ShareList"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"listUuid"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"sharedWith"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"shareList"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"listUuid"},"value":{"kind":"Variable","name":{"kind":"Name","value":"listUuid"}}},{"kind":"Argument","name":{"kind":"Name","value":"sharedWith"},"value":{"kind":"Variable","name":{"kind":"Name","value":"sharedWith"}}}]}]}}]} as unknown as DocumentNode<ShareListMutation, ShareListMutationVariables>;
+export const CanViewListDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"CanViewList"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"uuid"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"canViewList"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"uuid"},"value":{"kind":"Variable","name":{"kind":"Name","value":"uuid"}}}]}]}}]} as unknown as DocumentNode<CanViewListQuery, CanViewListQueryVariables>;
+export const GetSharedListsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetSharedLists"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getSharedLists"}}]}}]} as unknown as DocumentNode<GetSharedListsQuery, GetSharedListsQueryVariables>;
 export const HelloWorldDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"HelloWorld"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"helloWorld"}}]}}]} as unknown as DocumentNode<HelloWorldQuery, HelloWorldQueryVariables>;
 export const MeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"uuid"}}]}}]}}]} as unknown as DocumentNode<MeQuery, MeQueryVariables>;

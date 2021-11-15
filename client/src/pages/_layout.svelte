@@ -1,7 +1,7 @@
 <script lang="ts">
   import NavBar from '@components/NavBar.svelte';
 
-  import { dedupExchange, fetchExchange, initClient } from '@urql/svelte';
+  import { dedupExchange, errorExchange, fetchExchange, initClient } from '@urql/svelte';
   import { cacheExchange } from '@urql/exchange-graphcache';
   import { MeDocument } from '../graphql';
   import type { CreateUserMutation, GoogleSignInMutation, LoginMutation } from '../graphql';

@@ -1,6 +1,7 @@
 <script lang="ts">
   import ListDisplay from '@components/ListDisplay.svelte';
-  import { createList, loadList, ShoppingList, storeList } from '@utils/shoppingListUtils';
+  import { createList, loadList, storeList } from '@utils/shoppingListUtils';
+  import type { ShoppingList } from '@utils/shoppingListUtils';
   import { onMount } from 'svelte';
   import { fade } from 'svelte/transition';
   import { v4 } from 'uuid';
@@ -9,7 +10,6 @@
   const key = 'master';
 
   let list: ShoppingList;
-
   let selected = [] as boolean[]; // note that the 'done' property of the master list denotes whether an item is selected
 
   onMount(async () => {
@@ -22,8 +22,7 @@
   };
 
   $: {
-    if (list) {
-      console.log(list);
+    if (list && list.items) {
       selected = list.items.map((val) => val.done);
       console.log(selected);
       storeList(key, list);

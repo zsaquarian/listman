@@ -24,4 +24,4 @@
   }
 </script>
 
-<ListDisplay bind:list {removeItem} />
+<ListDisplay bind:list {removeItem} listUuid={key} />

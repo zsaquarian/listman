@@ -1,1 +1,1 @@
-export const LIST_SCHEMA_VERSION_NO = '1.0';
+export const LIST_SCHEMA_VERSION_NO = '1.1';

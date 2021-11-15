@@ -15,9 +15,12 @@ type Mutation {
   logOut: Boolean
   login(password: String, usernameOrEmail: String): AuthPayload
   refresh: AuthPayload
+  shareList(listUuid: String, sharedWith: String): Boolean
 }
 
 type Query {
+  canViewList(uuid: String): Boolean
+  getSharedLists: [String]
   helloWorld: String
   me: User
 }
@@ -25,6 +28,13 @@ type Query {
 type RefreshPayload {
   error: String
   token: String
+}
+
+type SharedList {
+  id: ID
+  listUuid: String
+  owner: String
+  sharedWith: [String]
 }
 
 type User {

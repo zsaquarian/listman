@@ -6,7 +6,7 @@
 </script>
 
 <div
-  class="bg-blue-500 p-2 text-white w-screen"
+  class="bg-blue-500 p-2 text-white w-full"
   on:focusout={() => {
     open = false;
   }}

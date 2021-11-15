@@ -9,6 +9,7 @@ export interface ShoppingListItem {
 export interface ShoppingList {
   version: string;
   name: string;
+  isShared: boolean;
   items: ShoppingListItem[];
 }
 
@@ -32,7 +33,7 @@ export const loadList = async (key: string): Promise<ShoppingList> => {
 };
 
 export const createList = (vals: ShoppingListItem[] = []): ShoppingList => {
-  return { version: LIST_SCHEMA_VERSION_NO, items: vals, name: '' };
+  return { version: LIST_SCHEMA_VERSION_NO, items: vals, name: '', isShared: false };
 };
 
 export const addItem = async (list: ShoppingList, newVal: string): Promise<ShoppingList> => {
@@ -47,12 +48,12 @@ export const addItem = async (list: ShoppingList, newVal: string): Promise<Shopp
 
 export const getLists = async (): Promise<Lists> => {
   const { keys } = await Storage.keys();
-  const names: { key: string; name: string }[] = [];
+  const names: { key: string; name: string; isShared: boolean }[] = [];
 
   for (const key of keys) {
-    const { name } = await loadList(key);
+    const { name, isShared } = await loadList(key);
 
-    names.push({ name, key });
+    names.push({ name, key, isShared });
   }
 
   return names;

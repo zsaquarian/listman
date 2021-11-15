@@ -1,0 +1,3 @@
+mutation ShareList($listUuid: String!, $sharedWith: String!) {
+  shareList(listUuid: $listUuid, sharedWith: $sharedWith)
+}
