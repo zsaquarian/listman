@@ -9,3 +9,7 @@ Unfortunately, until [cypress-svelte-unit-test pr#270](https://github.com/bahmut
 ```
 
 If you have have run cypress before, remember to run `rm -rfd node_modules/.vite` so that vite takes the new file
+
+---
+
+This project was generated with the [`svelte-capacitor template`](https://github.com/drannex42/svelte-capacitor)
