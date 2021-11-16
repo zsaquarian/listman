@@ -5,7 +5,7 @@ import { v4 } from 'uuid';
 import { GoogleUserInfo, JWTToken, RedisTokenInfo } from '../utils/types';
 import { isPasswordValid, isUsernameValid } from '../utils/usernamePasswordReqs';
 import { compare, hash } from 'bcrypt';
-import { JWT_SECRET } from '../utils/constants';
+import { JWT_SECRET, REFRESH_SECRET } from '../utils/constants';
 import { isAuth } from '../utils/isAuth';
 import { User } from '@prisma/client';
 import { getRefresh, getToken } from '../utils/getToken';
@@ -198,13 +198,12 @@ export const AuthMutations = extendType({
     });
     t.field('refresh', {
       type: 'AuthPayload',
-      // @ts-ignore see line 38
-      authorize: isAuth,
       resolve: async (_source, _args, ctx, _info) => {
         const originalToken = getToken(ctx.req);
         const refresh = getRefresh(ctx.req);
         // @ts-ignore typescript doesn't know that the fields are in the JWT
         const user = jwt.decode(originalToken, JWT_SECRET) as JWTToken;
+        jwt.verify(refresh, REFRESH_SECRET);
         const redisInfo = JSON.parse((await ctx.redis.get(user.id.toString())) || '') as RedisTokenInfo;
 
         if (redisInfo.refresh !== refresh || redisInfo.token !== originalToken) {
