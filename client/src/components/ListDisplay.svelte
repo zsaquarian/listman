@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { listToString } from '@utils/shoppingListUtils';
+  import { createList, listToString, storeList } from '@utils/shoppingListUtils';
   import type { ShoppingList } from '@utils/shoppingListUtils';
   import { Share } from '@capacitor/share';
-  import { Share as ShareIcon, UserAdd as UserAddIcon } from 'svelte-hero-icons';
+  import { Share as ShareIcon, UserAdd as UserAddIcon, Plus as PlusIcon } from 'svelte-hero-icons';
   import ItemDisplay from './ItemDisplay.svelte';
   import IconButton from './IconButton.svelte';
   import { getContext } from 'svelte';
@@ -10,6 +10,7 @@
   import { ShareListDocument } from '../graphql';
   import { mutation, operationStore } from '@urql/svelte';
   import { goto } from '@roxi/routify';
+  import { v4 } from 'uuid';
 
   export let isMasterList = false;
   export let isShared = false;
@@ -23,23 +24,27 @@
   let addInput: string;
 
   // $: console.log(list);
+  $: selected = list && list.items.filter((val) => val.done);
 </script>
 
-<div class="h-full flex flex-col items-center">
-  <div class="m-2 p-2 w-full">
+<div class="lg:w-3/4 mx-auto flex flex-col items-center">
+  <div class="p-2 w-full">
     {#if list && list.items}
-      <div class="flex bg-gray-100 p-2 rounded-md">
-        {#if isMasterList}
-          <h1 class="text-4xl text-center">Master List</h1>
-        {:else}
-          <input
-            class="text-4xl text-center rounded-lg w-5/6 mx-auto block"
-            bind:value={list.name}
-            placeholder="Enter name"
-          />
-        {/if}
-        <div class="flex ml-auto">
+      <div class="flex flex-col bg-accent-50 p-2 rounded-md">
+        <div class="justify-self-center">
+          {#if isMasterList}
+            <h1 class="text-4xl text-center">Master List</h1>
+          {:else}
+            <input
+              class="text-4xl text-center rounded-lg w-11/12 mx-auto block"
+              bind:value={list.name}
+              placeholder="Enter name"
+            />
+          {/if}
+        </div>
+        <div class="flex justify-between">
           <IconButton
+            class="text-primary-300"
             onClickHandler={async () => {
               await Share.share({
                 title: list.name,
@@ -50,8 +55,31 @@
             icon={ShareIcon}
             text="Share"
           />
+          {#if isMasterList}
+            <IconButton
+              buttonClass={`text-4xl rounded-lg p-2 transition ${
+                selected.length > 0 ? 'text-primary-300' : 'text-black'
+              }`}
+              onClickHandler={() => {
+                const newVals = [];
+                selected.forEach((_val, i) => {
+                  if (selected[i]) newVals.push(list.items[i]);
+                });
+                const newList = createList(newVals);
+                newList.items.forEach((val) => {
+                  val.done = false;
+                });
+                const newKey = v4();
+                storeList(newKey, newList);
+                $goto(`/list/${newKey}`);
+              }}
+              text="Create new list"
+              icon={PlusIcon}
+            />
+          {/if}
           {#if !isMasterList && !isShared}
             <IconButton
+              class="text-primary-300"
               onClickHandler={() => {
                 open(
                   CollabPopup,
@@ -86,7 +114,7 @@
     {/if}
   </div>
   <form
-    class="flex fixed bottom-0 w-full bg-gray-300 m-0"
+    class="flex absolute bottom-0 bg-accent-200 m-0 w-full lg:rounded-lg lg:w-3/4"
     on:submit|preventDefault={() => {
       // regex which checks for non-whitespace strings
       if (/\S*$/.test(addInput) && addInput) {
@@ -100,7 +128,15 @@
       }
     }}
   >
-    <input type="text" class="input w-full rounded-lg p-2" bind:value={addInput} />
-    <button class="ml-auto m-2 rounded-lg bg-gray-500 text-white p-2" type="submit">Add item</button>
+    <input
+      type="text"
+      class="input w-full m-2 rounded-lg p-2"
+      bind:value={addInput}
+      placeholder="Enter the name of a new item"
+    />
+    <button
+      class="ml-auto m-2 rounded-lg bg-primary-500 border-opacity-0 border-white border-2 transition-colors hover:border-opacity-100 text-white p-2"
+      type="submit">Add item</button
+    >
   </form>
 </div>

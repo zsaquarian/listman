@@ -18,22 +18,28 @@
   const canViewList = query(canViewListQuery);
   const { open } = getContext('simple-modal');
 
+  const listStore = syncedStore({ todos: {} as ShoppingList });
+  new WebsocketProvider('ws://localhost:1234', key, getYjsValue(listStore) as any); // sync via websocket
+  let store = svelteSyncedStore(listStore);
+
   $: if ($canViewList.error) {
     console.log($canViewList.error.message);
     if ($canViewList.error.message.includes('Not authorized')) {
+      console.log('saoetnuh');
       open(
         ErrorPopup,
         { error: 'Please login to view collabative lists' },
         {},
         {
           onClosed: () => {
+            list.isShared = false;
             $goto('/login');
           },
         }
       );
     }
 
-    if (!canViewList.error.message.includes('List does not exist')) {
+    if ($canViewList.error.message.includes('List does not exist')) {
       open(
         ErrorPopup,
         { error: 'List does not exst' },
@@ -54,10 +60,6 @@
   if (!$canViewList.fetching && !$canViewList.data.canViewList) {
     open(CantViewList);
   }
-
-  const listStore = syncedStore({ todos: {} as ShoppingList });
-  new WebsocketProvider('ws://localhost:1234', key, getYjsValue(listStore) as any); // sync via websocket
-  let store = svelteSyncedStore(listStore);
 
   onMount(async () => {
     const loadedList = await loadList(key);

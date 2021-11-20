@@ -39,8 +39,8 @@
 </svelte:head>
 
 <div
-  class="grid justify-center m-2 sm:w-3/4 md:w-1/2 lg:w-1/3 mx-auto
-rounded-lg border-gray-300 border-2 bg-gray-200 p-2 drop-shadow"
+  class="grid justify-center m-2 sm:w-3/4 md:w-1/2 lg:w-1/3 md:mx-auto
+rounded-lg border-accent-300 bg-accent-200 border-2 m-2 p-2 drop-shadow"
 >
   <!-- Google Auth -->
   <div class="mx-auto">
@@ -65,7 +65,7 @@ rounded-lg border-gray-300 border-2 bg-gray-200 p-2 drop-shadow"
   </div>
 
   <div class="border-b-2 border-black text-center mt-4 mb-4 justify-center" style="line-height: 0.1rem;">
-    <span class="bg-gray-200 px-4">OR</span>
+    <span class="bg-accent-200 px-4">OR</span>
   </div>
 
   <form action="submit" class="text-center" on:submit|preventDefault={login}>

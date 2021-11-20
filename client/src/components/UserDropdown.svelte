@@ -24,10 +24,7 @@
   }, (refreshTime - 1) * 1000);
 </script>
 
-<div
-  class="rounded-md border-2 border-white p-2 flex items-center
-transition-all"
->
+<div class={`rounded-md border-2 border-white p-2 flex items-center transition-all ${$$props.class}`}>
   <div class="mr-2">
     {#if $me.error || $me.data?.me === null}
       <a href="/login">Log In</a>
@@ -39,6 +36,10 @@ transition-all"
   {#if $me.data?.me}
     <button
       id="menu-button"
+      on:blur={() => {
+        console.log('blur');
+        dropdown = false;
+      }}
       on:click={() => {
         dropdown = !dropdown;
       }}
@@ -50,8 +51,8 @@ transition-all"
       {/if}
     </button>
     <div
-      class={`rounded-md text-black bg-gray-200 p-2 absolute right-2 mt-28 transition-all w-48 duration-200 ease-in-out ${
-        !dropdown ? 'opacity-0' : 'opacity-100'
+      class={`rounded-md bg-primary-200 p-2 absolute right-2 mt-28 w-48 ease-in-out ${
+        !dropdown ? 'invisible' : 'visible'
       }`}
     >
       <button

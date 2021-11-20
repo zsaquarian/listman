@@ -1,28 +1,37 @@
 <script lang="ts">
   import UserDropdown from './UserDropdown.svelte';
+  import Icon from 'svelte-hero-icons/Icon.svelte';
+  import { Menu, X } from 'svelte-hero-icons';
 
   // Most code from https://dev.to/joshnuss/creating-a-sidebar-menu-in-svelte-ih2
   let open = false;
 </script>
 
 <div
-  class="bg-blue-500 p-2 text-white w-full"
+  class="bg-primary-500 p-2 text-white w-full"
   on:focusout={() => {
     open = false;
   }}
 >
-  <div class="flex">
-    <button class="text-4xl w-4 h-4" on:click={() => (open = !open)}>{open ? 'x' : '≡'}</button>
-    <h1 class="text-5xl m-auto">Listman</h1>
-    <UserDropdown />
+  <div class="grid grid-cols-navbar">
+    <button on:click={() => (open = !open)} class="block lg:hidden">
+      {#if open}
+        <Icon src={X} solid class="text-white w-8 h-8" />
+      {:else}
+        <Icon src={Menu} solid class="text-white w-8 h-8" />
+      {/if}
+    </button>
+
+    <aside class="absolute lg:relative -left-full z-50 w-full lg:left-0 lg:w-auto" class:left-0={open}>
+      <nav class="bg-primary-500 flex flex-col gap-4 h-screen lg:h-auto lg:flex-row p-2 mt-12 lg:mt-0">
+        <a class="text-2xl" href="/">Home</a>
+        <a class="text-2xl" href="/master">Master list</a>
+        <hr class="my-2 border-1 rounded-lg lg:hidden" />
+      </nav>
+    </aside>
+    <h1 class="text-5xl text-white text-center flex-auto">Listman</h1>
+    <UserDropdown class="ml-auto" />
   </div>
-  <aside class="absolute -left-full z-50 w-full" class:left-0={open}>
-    <nav class="bg-blue-400 flex flex-col h-screen p-2 mt-2">
-      <a class="text-4xl mb-4" href="/">Home</a>
-      <a class="text-4xl" href="/master">Master list</a>
-      <hr class="my-2 border-1 rounded-lg" />
-    </nav>
-  </aside>
 </div>
 
 <style>

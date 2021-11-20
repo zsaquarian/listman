@@ -8,7 +8,7 @@ const dev = mode === 'development';
 const config = {
   plugins: [
     //Some plugins, like postcss-nested, need to run before Tailwind,
-    tailwindcss(),
+    tailwindcss({ config: './tailwind.config.cjs' }),
     //But others, like autoprefixer, need to run after,
     autoprefixer(),
     !dev &&

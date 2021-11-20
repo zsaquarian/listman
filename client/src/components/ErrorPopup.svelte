@@ -6,6 +6,6 @@
 </script>
 
 <div class="flex items-center">
-  <Icon src={Exclamation} class="text-red-500 w-8 mr-2" />
+  <Icon src={Exclamation} class="text-error-500 w-8 mr-2" />
   <h1>{error}</h1>
 </div>

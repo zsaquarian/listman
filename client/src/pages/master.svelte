@@ -30,26 +30,4 @@
   }
 </script>
 
-<div class="text-center">
-  <ListDisplay bind:list isMasterList={true} {removeItem} />
-
-  {#if selected.filter((val) => val).length > 0}
-    <button
-      class="text-4xl bg-blue-500 text-white fixed bottom-24 rounded-lg p-2"
-      transition:fade={{ duration: 250 }}
-      on:click={() => {
-        const newVals = [];
-        selected.forEach((_val, i) => {
-          if (selected[i]) newVals.push(list.items[i]);
-        });
-        const newList = createList(newVals);
-        newList.items.forEach((val) => {
-          val.done = false;
-        });
-        const newKey = v4();
-        storeList(newKey, newList);
-        $goto(`/list/${newKey}`);
-      }}>Create new list</button
-    >
-  {/if}
-</div>
+<ListDisplay bind:list isMasterList={true} {removeItem} />

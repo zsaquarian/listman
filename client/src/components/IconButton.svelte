@@ -3,11 +3,14 @@
 
   export let onClickHandler: () => void;
   export let icon: any;
-  export let text: string;
-  export let filled = false;
+  export let text: string = '';
+  export let buttonClass = '';
+  export let resize = true;
 </script>
 
-<button class="flex items-center rounded-md p-2" class:bg-blue-300={filled} on:click={onClickHandler}>
-  <p class="text-black mr-2">{text}</p>
-  <Icon src={icon} solid class={`w-8 ${filled ? 'text-white' : 'text-blue-300'}`} />
+<button class={'flex items-center rounded-md p-2 ' + buttonClass} on:click={onClickHandler}>
+  {#if text.length > 0}
+    <p class={`text-black mr-2 hidden ${resize ? 'sm:block' : ''}`}>{text}</p>
+  {/if}
+  <Icon src={icon} solid class={'w-8 ' + $$props.class} />
 </button>
