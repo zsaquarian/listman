@@ -57,9 +57,7 @@
           />
           {#if isMasterList}
             <IconButton
-              buttonClass={`text-4xl rounded-lg p-2 transition ${
-                selected.length > 0 ? 'text-primary-300' : 'text-black'
-              }`}
+              buttonClass={`transition ${selected.length > 0 ? 'text-primary-300' : 'text-black'}`}
               onClickHandler={() => {
                 const newVals = [];
                 selected.forEach((_val, i) => {
