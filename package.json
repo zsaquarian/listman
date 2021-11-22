@@ -1,0 +1,27 @@
+{
+  "workspaces": {
+    "packages": [
+      "client",
+      "server"
+    ]
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^15.0.0",
+    "@commitlint/config-conventional": "^15.0.0",
+    "@types/node": "*",
+    "cz-conventional-changelog": "3.3.0",
+    "husky": "^7.0.0",
+    "standard-version": "^9.3.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "scripts": {
+    "prepare": "husky install",
+    "release": "standard-version"
+  },
+  "packageManager": "yarn@3.1.0",
+  "version": "0.2.1"
+}
