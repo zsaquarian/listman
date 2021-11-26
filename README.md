@@ -21,7 +21,7 @@ To get started with this repo,
 git clone https://github.com/zsaquarian/listman.git
 cd listman
 cd client
-yarn # or npm i
-yarn dev # or npm run dev
+yarn
+yarn dev
 ```
 and then open your browser to [`http://localhost:5000`](http://localhost:5000)
