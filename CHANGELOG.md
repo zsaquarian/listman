@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.1](https://github.com/zsaquarian/listman/compare/v0.3.0...v0.3.1) (2021-11-27)
+
+
+### Features
+
+* **home page:** show name of remote, unsynced lists ([af1417b](https://github.com/zsaquarian/listman/commit/af1417b87b3396a83f82ec0712e7bdbf4585f9fd))
+
 ## [0.3.0](https://github.com/zsaquarian/listman/compare/v0.2.1...v0.3.0) (2021-11-27)
 
 
