@@ -19,9 +19,6 @@
   },
   "version": "0.2.1",
   "standard-version": {
-    "skip": {
-      "commit": true
-    },
     "bumpFiles": [
       {
         "filename": "client/package.json",
@@ -30,6 +27,10 @@
       {
         "filename": "server/package.json",
         "type": "json"
+      },
+      {
+        "filename": "client/src-tauri/tauri-conf.json",
+        "updater": "tauri-updater.js"
       }
     ]
   },
