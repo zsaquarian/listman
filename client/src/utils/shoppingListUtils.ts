@@ -16,6 +16,8 @@ export interface ShoppingList {
 export type Lists = {
   key: string;
   name: string;
+  isShared: boolean;
+  isExternal: boolean;
 }[];
 
 export const storeList = async (key: string, list: ShoppingList): Promise<void> => {
@@ -48,12 +50,12 @@ export const addItem = async (list: ShoppingList, newVal: string): Promise<Shopp
 
 export const getLists = async (): Promise<Lists> => {
   const { keys } = await Storage.keys();
-  const names: { key: string; name: string; isShared: boolean }[] = [];
+  const names: Lists = [];
 
   for (const key of keys) {
     const { name, isShared } = await loadList(key);
 
-    names.push({ name, key, isShared });
+    names.push({ name, key, isShared, isExternal: false });
   }
 
   return names;

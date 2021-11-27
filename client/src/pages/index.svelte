@@ -4,9 +4,7 @@
   import { Storage } from '@capacitor/storage';
   import { operationStore, query } from '@urql/svelte';
   import { GetSharedListsDocument } from '../graphql';
-  import Icon from 'svelte-hero-icons/Icon.svelte';
-  import IconButton from '@components/IconButton.svelte';
-  import { Users, X } from 'svelte-hero-icons';
+  import HomepageList from '@components/HomepageList.svelte';
 
   const sharedListsQuery = operationStore(GetSharedListsDocument);
 
@@ -18,7 +16,25 @@
   $: {
     if (!$sharedLists.fetching && !$sharedLists.error) {
       // onlySharedLists = $sharedLists.data.getSharedLists.filter((val) => !lists.includes(val));
-      onlySharedLists = $sharedLists.data.getSharedLists.filter((val) => lists.some((list) => list.key === val));
+      $sharedLists.data.getSharedLists.forEach((val) => {
+        lists = [...lists, { key: val, name: '', isShared: true, isExternal: true }];
+      });
+
+      lists.sort((a, b) => {
+        if (a.key < b.key) return -1;
+        else if (a.key > b.key) return 1;
+
+        return 0;
+      });
+
+      console.log(lists);
+
+      lists = lists.filter((val, i) => {
+        if (i === 0) return true;
+        if (val.key === lists[i - 1].key) return false;
+
+        return true;
+      });
     }
   }
 
@@ -26,6 +42,11 @@
     const result = await getLists();
     lists = [...result];
   });
+
+  const removeList = async (key: string, i: number) => {
+    await Storage.remove({ key });
+    lists = [...lists.slice(0, i), ...lists.slice(i + 1)];
+  };
 </script>
 
 <div class="w-full md:w-3/4 mx-auto">
@@ -34,38 +55,9 @@
     class="flex flex-col text-center text-3xl m-4 bg-primary-100 rounded-lg
 p-4 bg-opacity-25 shadow-lg"
   >
-    {#each onlySharedLists as key, i (key)}
-      <div class="flex items-center mb-2">
-        <a href={`/sharedList/${key}`} class="self-center">{key}</a>
-        <Icon src={Users} class="w-8 ml-auto mr-2 text-primary-500" />
-        <IconButton
-          icon={X}
-          buttonClass="bg-error-500 text-white"
-          onClickHandler={async () => {
-            await Storage.remove({ key });
-            lists = [...lists.slice(0, i), ...lists.slice(i + 1)];
-          }}
-        />
-      </div>
-    {/each}
-    {#each lists as { name, key, isShared }, i (i)}
+    {#each lists as { name, key, isShared, isExternal }, i (i)}
       {#if key !== 'master'}
-        <div class="flex mb-2 items-center">
-          <a href={isShared ? `/sharedList/${key}` : `/list/${key}`} class="self-center"
-            >{name ? name : 'Untitled list'}</a
-          >
-          {#if isShared}
-            <Icon src={Users} class="w-8 ml-auto mr-2 text-primary-500" />
-          {/if}
-          <IconButton
-            icon={X}
-            buttonClass={`bg-error-500 ${isShared ? '' : 'ml-auto'} text-white`}
-            onClickHandler={async () => {
-              await Storage.remove({ key });
-              lists = [...lists.slice(0, i), ...lists.slice(i + 1)];
-            }}
-          />
-        </div>
+        <HomepageList {key} {name} {isShared} {isExternal} removeList={() => removeList(key, i)} />
       {:else if lists.length === 1}
         <h1 class="text-4xl text-accent-900 drop-shadow-lg">No lists made yet</h1>
       {/if}
