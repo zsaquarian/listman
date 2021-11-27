@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/zsaquarian/listman/compare/v0.2.1...v0.3.0) (2021-11-27)
+
+
+### Features
+
+* **platform:** add tauri for native desktop applications ([22879ca](https://github.com/zsaquarian/listman/commit/22879ca0ef81fd1895b3063a8dc80605222b7f98))
+
 ### 0.2.1 (2021-11-22)
 
 
