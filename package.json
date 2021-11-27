@@ -17,8 +17,14 @@
     "release": "standard-version",
     "cm": "cz"
   },
-  "version": "0.2.1",
+  "version": "0.3.0",
   "standard-version": {
+    "packageFiles": [
+      {
+        "filename": "package.json",
+        "type": "json"
+      }
+    ],
     "bumpFiles": [
       {
         "filename": "client/package.json",
