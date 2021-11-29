@@ -4,11 +4,12 @@
   "license": "MIT",
   "scripts": {
     "start": "node dist/index.js",
-    "dev": "nodemon dist/index.js",
+    "dev:server": "nodemon dist/index.js",
+    "dev:y-server": "HOST=localhost PORT=1234 yarn y-websocket-server",
+    "dev": "run-p dev:server dev:y-server watch",
     "watch": "tsc -w",
     "build": "tsc",
-    "env-types": "gen-env-types .env -o src/env.d.ts -e .",
-    "y-server": "HOST=localhost PORT=1234 yarn y-websocket-server"
+    "env-types": "gen-env-types .env -o src/env.d.ts -e ."
   },
   "dependencies": {
     "@prisma/client": "3.2.1",
@@ -45,6 +46,7 @@
     "eslint-config-prettier": "^8.3.0",
     "gen-env-types": "^1.3.0",
     "nodemon": "^2.0.13",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.4.1",
     "ts-node": "^10.2.1",
     "typescript": "^4.4.3"
