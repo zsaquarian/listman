@@ -27,8 +27,6 @@
         return 0;
       });
 
-      console.log(lists);
-
       lists = lists.filter((val, i) => {
         if (i === 0) return true;
         if (val.key === lists[i - 1].key) return false;
@@ -58,10 +56,14 @@ p-4 bg-opacity-25 shadow-lg"
     {#each lists as { name, key, isShared, isExternal }, i (i)}
       {#if key !== 'master'}
         <HomepageList {key} {name} {isShared} {isExternal} removeList={() => removeList(key, i)} />
-      {:else if lists.length === 1}
-        <h1 class="text-4xl text-accent-900 drop-shadow-lg">No lists made yet</h1>
       {/if}
     {/each}
+    {#if lists.length <= 1}
+      <div class="text-4xl text-accent-900 drop-shadow-lg">
+        <p>No lists made yet 🤔</p>
+        <p class="hidden md:block">Check out the master list to get started!</p>
+      </div>
+    {/if}
   </div>
 </div>
 
