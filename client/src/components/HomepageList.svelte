@@ -13,14 +13,10 @@
   export let isShared: boolean;
   export let removeList: () => void;
   let store = getStore(key);
-
-  if (isExternal) {
-    console.log($store.todos.name);
-  }
 </script>
 
 <div class="flex items-center mb-2">
-  <a href={`/sharedList/${key}`} class="self-center"
+  <a href={isShared ? `/sharedList/${key}` : `/list/${key}`} class="self-center"
     >{isExternal ? $store.todos.name : name === '' ? 'Untitled List' : name}</a
   >
   <div class="ml-auto flex items-center">
