@@ -1,16 +1,13 @@
 <script lang="ts">
   import ListDisplay from '@components/ListDisplay.svelte';
   import { loadList, storeList } from '@utils/shoppingListUtils';
-  import type { ShoppingList } from '@utils/shoppingListUtils';
   import { getContext, onMount } from 'svelte';
-  import { svelteSyncedStore } from '@syncedstore/svelte';
   import { goto, params } from '@roxi/routify';
-  import syncedStore, { getYjsValue } from '@syncedstore/core';
-  import { WebsocketProvider } from 'y-websocket';
   import { operationStore, query } from '@urql/svelte';
   import { CanViewListDocument } from '../../graphql';
   import CantViewList from '@components/CantViewList.svelte';
   import ErrorPopup from '@components/ErrorPopup.svelte';
+  import { getStore } from '@utils/yjsUtils';
 
   const key = $params.id;
 
@@ -18,14 +15,10 @@
   const canViewList = query(canViewListQuery);
   const { open } = getContext('simple-modal');
 
-  const listStore = syncedStore({ todos: {} as ShoppingList });
-  new WebsocketProvider('ws://localhost:1234', key, getYjsValue(listStore) as any); // sync via websocket
-  let store = svelteSyncedStore(listStore);
+  const store = getStore(key);
 
   $: if ($canViewList.error) {
-    console.log($canViewList.error.message);
     if ($canViewList.error.message.includes('Not authorized')) {
-      console.log('saoetnuh');
       open(
         ErrorPopup,
         { error: 'Please login to view collabative lists' },
@@ -45,11 +38,7 @@
         { error: 'List does not exst' },
         {},
         {
-          onOpen: () => {
-            console.log('open');
-          },
           onClose: () => {
-            console.log('closed');
             $goto('/');
           },
         }
@@ -62,9 +51,11 @@
   }
 
   onMount(async () => {
-    const loadedList = await loadList(key);
-    Object.assign($store.todos, loadedList);
-    list.isShared = true;
+    try {
+      const loadedList = await loadList(key);
+      Object.assign($store.todos, loadedList);
+      list.isShared = true;
+    } catch (e) {}
   });
 
   const removeItem = (i: number): void => {
@@ -79,10 +70,6 @@
   }
 
   $: list = $store.todos;
-
-  $: console.log($store.toJSON());
-
-  $: console.log($canViewList);
 </script>
 
 {#if $canViewList.fetching}

@@ -23,8 +23,8 @@
   const shareListMutation = mutation(operationStore(ShareListDocument));
   let addInput: string;
 
-  // $: console.log(list);
-  $: selected = list && list.items.filter((val) => val.done);
+  // console.log(list.name);
+  $: selected = list && list.items && list.items.filter((val) => val.done);
 </script>
 
 <div class="lg:w-3/4 mx-auto flex flex-col items-center">

@@ -27,10 +27,11 @@ export const storeList = async (key: string, list: ShoppingList): Promise<void> 
 
 export const loadList = async (key: string): Promise<ShoppingList> => {
   const { value: val } = await Storage.get({ key });
+  console.log(val);
   if (val !== null && val) {
     return JSON.parse(val) as ShoppingList;
   } else {
-    return createList();
+    throw new Error('List does not exist');
   }
 };
 
