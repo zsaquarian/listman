@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.2](https://github.com/zsaquarian/listman/compare/v0.3.1...v0.3.2) (2021-12-11)
+
+
+### Features
+
+* show "no lists made" text when there are now lists ([fafadd6](https://github.com/zsaquarian/listman/commit/fafadd6087d50f191fd3781d7a120b2307c3c597))
+
+
+### Bug Fixes
+
+* **collaborative lists:** fixed issue where collaborative list's contents would get wiped sometimes ([db06f3f](https://github.com/zsaquarian/listman/commit/db06f3f6eff9f0f1eae2e854c06b4b7b888645d4))
+* **homepage:** make the homepage link for local lists work ([40162b4](https://github.com/zsaquarian/listman/commit/40162b42f6aa2887f5cb3c7b6c1e549db394592d))
+
 ### [0.3.1](https://github.com/zsaquarian/listman/compare/v0.3.0...v0.3.1) (2021-11-27)
 
 
