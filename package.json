@@ -15,8 +15,7 @@
   "scripts": {
     "prepare": "husky install",
     "release": "standard-version",
-    "heroku-prebuild": "cd server && yarn install",
-    "build": "yarn workspace server build",
+    "build": "yarn workspace server install && yarn workspace server build",
     "start": "yarn workspace server start",
     "cm": "cz"
   },
