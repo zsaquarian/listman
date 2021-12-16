@@ -1,6 +1,6 @@
 <script lang="ts">
   import ListDisplay from '@components/ListDisplay.svelte';
-  import { createList, loadList, storeList } from '@utils/shoppingListUtils';
+  import { loadList, loadOrCreateList, storeList } from '@utils/shoppingListUtils';
   import type { ShoppingList } from '@utils/shoppingListUtils';
   import { onMount } from 'svelte';
   import { fade } from 'svelte/transition';
@@ -13,7 +13,7 @@
   let selected = [] as boolean[]; // note that the 'done' property of the master list denotes whether an item is selected
 
   onMount(async () => {
-    list = await loadList(key);
+    list = await loadOrCreateList(key);
   });
 
   const removeItem = (i: number): void => {

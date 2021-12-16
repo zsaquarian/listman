@@ -27,11 +27,19 @@ export const storeList = async (key: string, list: ShoppingList): Promise<void> 
 
 export const loadList = async (key: string): Promise<ShoppingList> => {
   const { value: val } = await Storage.get({ key });
-  console.log(val);
   if (val !== null && val) {
     return JSON.parse(val) as ShoppingList;
   } else {
     throw new Error('List does not exist');
+  }
+};
+
+export const loadOrCreateList = async (key: string): Promise<ShoppingList> => {
+  try {
+    const loadedList = await loadList(key);
+    return loadedList;
+  } catch (e) {
+    return createList();
   }
 };
 
