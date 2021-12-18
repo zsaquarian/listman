@@ -1,6 +1,7 @@
 {
   "name": "listman",
   "version": "0.3.2",
+  "type": "module",
   "scripts": {
     "build:app": "routify -b && vite build && tauri build",
     "build:vercel": "routify -b && vite build",
