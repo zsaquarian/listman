@@ -1,6 +1,0 @@
-{
-  "component": {
-    "componentFolder": "cypress/components",
-    "testFiles": "*.ts"
-  }
-}
