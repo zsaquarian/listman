@@ -1,7 +1,8 @@
 {
   "workspaces": [
     "client",
-    "server"
+    "server",
+    "desktop"
   ],
   "packageManager": "yarn@3.1.0",
   "devDependencies": {
