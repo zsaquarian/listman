@@ -25,10 +25,10 @@ export const genRefreshToken = (user: User | JWTToken) => {
 
 export const setCookie = (ctx: MyContext, jwtToken: string, refreshToken?: string) => {
   if (refreshToken) {
-    ctx.res.cookie('token', jwtToken, { httpOnly: true, secure: IN_PROD });
-    ctx.res.cookie('refresh', refreshToken, { httpOnly: true, secure: IN_PROD, sameSite: IN_PROD });
+    ctx.res.cookie('token', jwtToken, { httpOnly: true, secure: IN_PROD, sameSite: 'none' });
+    ctx.res.cookie('refresh', refreshToken, { httpOnly: true, secure: IN_PROD, sameSite: 'none' });
   } else {
-    ctx.res.cookie('token', jwtToken, { httpOnly: true, secure: IN_PROD, sameSite: IN_PROD });
+    ctx.res.cookie('token', jwtToken, { httpOnly: true, secure: IN_PROD, sameSite: 'none' });
   }
 };
 
