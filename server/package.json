@@ -9,7 +9,8 @@
     "dev": "run-p dev:server dev:y-server watch",
     "watch": "tsc -w",
     "build": "tsc",
-    "env-types": "gen-env-types .env -o src/env.d.ts -e ."
+    "env-types": "gen-env-types .env -o src/env.d.ts -e .",
+    "migrate": "prisma migrate deploy"
   },
   "dependencies": {
     "@prisma/client": "3.2.1",
