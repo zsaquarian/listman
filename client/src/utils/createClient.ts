@@ -6,7 +6,7 @@ import { authExchange } from '@urql/exchange-auth';
 
 export const createClient = (): void => {
   initClient({
-    url: 'http://localhost:3000/graphql',
+    url: import.meta.env.VITE_GRAPHQL_IP,
     fetchOptions: {
       credentials: 'include',
     },

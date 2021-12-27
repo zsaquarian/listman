@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 // Types about gsi from https://dev.to/mremanuel/add-the-new-google-sign-in-to-your-react-app-p6m
 
 interface IdConfiguration {
@@ -82,4 +83,13 @@ interface Window {
       };
     };
   };
+}
+
+interface ImportMetaEnv {
+  readonly VITE_GRAPHQL_IP: string;
+  readonly VITE_YJS_IP: string;
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
 }
