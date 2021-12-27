@@ -11,8 +11,9 @@
 
   if ($me.error) {
     const result = refresh();
-    console.log(result);
   }
+
+  let logOutButton: HTMLElement;
 
   const logOut = mutation(operationStore(LogOutDocument));
 
@@ -20,7 +21,6 @@
 
   const refreshInterval = setInterval(() => {
     const result = refresh();
-    console.log(result);
   }, (refreshTime - 1) * 1000);
 </script>
 
@@ -36,9 +36,8 @@
   {#if $me.data?.me}
     <button
       id="menu-button"
-      on:blur={() => {
-        console.log('blur');
-        dropdown = false;
+      on:blur={(e) => {
+        if (e.relatedTarget !== logOutButton) dropdown = false;
       }}
       on:click={() => {
         dropdown = !dropdown;
@@ -56,6 +55,7 @@
       }`}
     >
       <button
+bind:this={logOutButton}
         on:click={() => {
           logOut();
           me.reexecute();
