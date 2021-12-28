@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Storage } from '@capacitor/storage';
+  import { authStore } from '@store/auth';
   import { getStore } from '@utils/yjsUtils';
 
   import { Users, X } from 'svelte-hero-icons';
@@ -15,14 +16,16 @@
   let store = getStore(key);
 </script>
 
-<div class="flex items-center mb-2">
-  <a href={isShared ? `/sharedList/${key}` : `/list/${key}`} class="self-center"
-    >{isExternal ? $store.todos.name : name === '' ? 'Untitled List' : name}</a
-  >
-  <div class="ml-auto flex items-center">
-    {#if isShared}
-      <Icon src={Users} class="w-8 mr-2 text-primary-500" />
-    {/if}
-    <IconButton icon={X} buttonClass="bg-error-500 text-white" onClickHandler={removeList} />
+{#if (isShared && $authStore.isLoggedIn) || !isShared}
+  <div class="flex items-center mb-2">
+    <a href={isShared ? `/sharedList/${key}` : `/list/${key}`} class="self-center"
+      >{isExternal ? $store.todos.name : name === '' ? 'Untitled List' : name}</a
+    >
+    <div class="ml-auto flex items-center">
+      {#if isShared}
+        <Icon src={Users} class="w-8 mr-2 text-primary-500" />
+      {/if}
+      <IconButton icon={X} buttonClass="bg-error-500 text-white" onClickHandler={removeList} />
+    </div>
   </div>
-</div>
+{/if}
