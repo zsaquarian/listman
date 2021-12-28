@@ -151,7 +151,6 @@ export interface NexusGenArgTypes {
     }
     googleSignIn: { // args
       token?: string | null; // String
-      username?: string | null; // String
     }
     login: { // args
       password?: string | null; // String

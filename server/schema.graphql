@@ -11,7 +11,7 @@ type AuthPayload {
 
 type Mutation {
   createUser(email: String!, password: String!, username: String!): AuthPayload
-  googleSignIn(token: String, username: String): AuthPayload
+  googleSignIn(token: String): AuthPayload
   logOut: Boolean
   login(password: String, usernameOrEmail: String): AuthPayload
   refresh: AuthPayload

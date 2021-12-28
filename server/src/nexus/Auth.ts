@@ -58,7 +58,6 @@ export const AuthMutations = extendType({
       type: 'AuthPayload',
       args: {
         token: stringArg(),
-        username: nullable(stringArg()),
       },
       resolve: async (_source, { token, username }, ctx, _info) => {
         let id;
@@ -82,15 +81,11 @@ export const AuthMutations = extendType({
           };
         }
 
-        if (!username) {
-          return {
-            error: 'user does not exist and no username has been provided for sign up',
-          };
-        }
-
         const info = jwt.decode(token) as GoogleUserInfo;
 
-        const user = await ctx.db.user.create({ data: { uuid: v4(), email: info.email, username, googleToken: id } });
+        const user = await ctx.db.user.create({
+          data: { uuid: v4(), email: info.email, username: info.name, googleToken: id },
+        });
         const { token: jwtToken, refresh } = await genTokensAndSetCookie(user, ctx, true, false);
 
         return {
