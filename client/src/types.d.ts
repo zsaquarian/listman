@@ -93,3 +93,23 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
+
+type FormField = 'username' | 'usernameOrEmail' | 'email' | 'password';
+
+interface SignUpFormValues {
+  username: string;
+  email: string;
+  password: string;
+}
+
+interface LogInFormValues {
+  usernameOrEmail: string;
+  password: string;
+}
+
+interface GenericFormValues {
+  usernameOrEmail: string;
+  username: string;
+  email: string;
+  password: string;
+}
