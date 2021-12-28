@@ -1,4 +1,4 @@
-import { extendType, nonNull, nullable, objectType, stringArg } from 'nexus';
+import { extendType, nonNull, objectType, stringArg } from 'nexus';
 import { verifyToken } from '../utils/google';
 import jwt from 'jsonwebtoken';
 import { v4 } from 'uuid';
@@ -59,7 +59,7 @@ export const AuthMutations = extendType({
       args: {
         token: stringArg(),
       },
-      resolve: async (_source, { token, username }, ctx, _info) => {
+      resolve: async (_source, { token }, ctx, _info) => {
         let id;
         try {
           id = await verifyToken(token);
