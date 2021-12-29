@@ -14,6 +14,8 @@
   export let isShared: boolean;
   export let removeList: () => void;
   let store = getStore(key);
+
+  console.log(isShared, $authStore.isLoggedIn);
 </script>
 
 {#if (isShared && $authStore.isLoggedIn) || !isShared}
