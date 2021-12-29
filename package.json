@@ -20,7 +20,7 @@
     "start": "yarn workspace server start",
     "cm": "cz"
   },
-  "version": "0.3.2",
+  "version": "0.4.0",
   "standard-version": {
     "packageFiles": [
       {
