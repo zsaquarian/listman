@@ -42,7 +42,7 @@
         "type": "json"
       },
       {
-        "filename": "client/src-tauri/tauri.conf.json",
+        "filename": "desktop/src-tauri/tauri.conf.json",
         "updater": "tauri-updater.js"
       }
     ]
