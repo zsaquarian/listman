@@ -23,7 +23,7 @@
     <div class="mx-auto">
       <div
         id="g_id_onload"
-        data-client_id="610976066282-9rpjagnk956552lmej9k047v103stlbu.apps.googleusercontent.com"
+        data-client_id={import.meta.env.VITE_GOOGLE_CLIENT_ID}
         data-context="signin"
         data-ux_mode="popup"
         data-callback="googleLogin"
