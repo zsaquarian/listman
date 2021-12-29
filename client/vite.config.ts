@@ -11,6 +11,8 @@ export default defineConfig({
   publicDir: './assets/',
   build: {
     outDir: './public/',
+    minify: 'esbuild',
+    target: 'esnext',
   },
   resolve: {
     alias: aliases,
