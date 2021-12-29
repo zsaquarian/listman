@@ -18,7 +18,6 @@
 
   $: {
     if (list) {
-      console.log(list);
       storeList(key, list);
     }
   }

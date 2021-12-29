@@ -64,7 +64,6 @@
 
   $: {
     if ($store.todos && $store.todos.items) {
-      console.log($store.todos);
       storeList(key, $store.todos);
     }
   }

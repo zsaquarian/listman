@@ -24,7 +24,6 @@
   $: {
     if (list && list.items) {
       selected = list.items.map((val) => val.done);
-      console.log(selected);
       storeList(key, list);
     }
   }

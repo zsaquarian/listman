@@ -13,7 +13,6 @@
 
   const googleLogin = async (googleUser: CredentialResponse) => {
     const result = await googleSignInMutation({ token: googleUser.credential });
-    console.log(result);
     $goto('/');
   };
 

@@ -23,7 +23,6 @@
   const shareListMutation = mutation(operationStore(ShareListDocument));
   let addInput: string;
 
-  // console.log(list.name);
   $: selected = list && list.items && list.items.filter((val) => val.done);
 </script>
 
@@ -116,7 +115,6 @@
     on:submit|preventDefault={() => {
       // regex which checks for non-whitespace strings
       if (/\S*$/.test(addInput) && addInput) {
-        console.log(addInput, /\S+/.test(''));
         if (isShared) {
           list.items.push({ item: addInput, done: false });
         } else {
