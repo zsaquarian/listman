@@ -54,7 +54,7 @@
 p-4 bg-opacity-25 shadow-lg"
   >
     {#each lists as { name, key, isShared, isExternal }, i (i)}
-      {#if key !== 'master'}
+      {#if key !== 'master' && key !== 'auth-state'}
         <HomepageList {key} {name} {isShared} {isExternal} removeList={() => removeList(key, i)} />
       {/if}
     {/each}
