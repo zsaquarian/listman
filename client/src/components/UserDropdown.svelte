@@ -3,6 +3,7 @@
   import { LogOutDocument, MeDocument, RefreshDocument } from '../graphql';
   import Icon from 'svelte-hero-icons/Icon.svelte';
   import { ChevronDown, ChevronUp } from 'svelte-hero-icons';
+  import { authStore } from '@store/auth';
 
   const meQuery = operationStore(MeDocument);
   const me = query(meQuery);
@@ -26,10 +27,12 @@
 
 <div class={`rounded-md border-2 border-white p-2 flex items-center transition-all ${$$props.class}`}>
   <div class="mr-2">
-    {#if $me.error || $me.data?.me === null}
+    {#if $me.error || $me.data?.me === null || !$authStore.isLoggedIn}
       <a href="/login">Log In</a>
     {:else if !$me.fetching}
       <p>{$me.data.me.username}</p>
+    {:else if $authStore.isLoggedIn}
+      <p>{$authStore.username}</p>
     {/if}
   </div>
 

@@ -5,12 +5,13 @@ const authStateKey = 'auth-state';
 
 export interface AuthState {
   isLoggedIn: boolean;
+  username: string;
 }
 
 const getStoredAuthState = async () => {
   return JSON.parse((await Storage.get({ key: authStateKey })).value) as AuthState;
 };
 
-export const authStore = writable((await getStoredAuthState()) || ({ isLoggedIn: false } as AuthState));
+export const authStore = writable((await getStoredAuthState()) || ({ isLoggedIn: false, username: '' } as AuthState));
 
 authStore.subscribe((val) => Storage.set({ key: authStateKey, value: JSON.stringify(val) }));

@@ -23,7 +23,7 @@ export const createClient = (): void => {
                 if (result.login.error) {
                   return data;
                 } else {
-                  authStore.update((val) => ({ ...val, isLoggedIn: true }));
+                  authStore.update((val) => ({ ...val, isLoggedIn: true, username: user.username }));
                   return {
                     me: {
                       id: user.id,
@@ -38,11 +38,11 @@ export const createClient = (): void => {
             googleSignIn: (result: GoogleSignInMutation, _args, cache, _info) => {
               const user = result.googleSignIn.user;
 
-              authStore.update((val) => ({ ...val, isLoggedIn: true }));
               cache.updateQuery({ query: MeDocument }, (data) => {
                 if (result.googleSignIn.error) {
                   return data;
                 } else {
+                  authStore.update((val) => ({ ...val, isLoggedIn: true, username: user.username }));
                   return {
                     me: {
                       id: user.id,
@@ -57,11 +57,11 @@ export const createClient = (): void => {
             createUser: (result: CreateUserMutation, _args, cache, _info) => {
               const user = result.createUser.user;
 
-              authStore.update((val) => ({ ...val, isLoggedIn: true }));
               cache.updateQuery({ query: MeDocument }, (data) => {
                 if (result.createUser.error) {
                   return data;
                 } else {
+                  authStore.update((val) => ({ ...val, isLoggedIn: true, username: user.username }));
                   return {
                     me: {
                       id: user.id,
@@ -74,7 +74,7 @@ export const createClient = (): void => {
               });
             },
             logOut: (_result, _args, cache, _info) => {
-              authStore.update((val) => ({ ...val, isLoggedIn: false }));
+              authStore.update((val) => ({ ...val, isLoggedIn: false, username: '' }));
 
               cache.updateQuery({ query: MeDocument }, (_data) => {
                 return {
