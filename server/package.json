@@ -10,7 +10,9 @@
     "watch": "tsc -w",
     "build": "tsc",
     "env-types": "gen-env-types .env -o src/env.d.ts -e .",
-    "migrate": "prisma migrate deploy"
+    "migrate": "prisma migrate deploy",
+    "lint": "prettier --check --plugin-search-dir=. . && eslint .",
+    "format": "prettier --write --plugin-search-dir=. ."
   },
   "dependencies": {
     "@prisma/client": "3.2.1",

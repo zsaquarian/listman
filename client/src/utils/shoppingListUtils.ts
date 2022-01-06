@@ -70,7 +70,7 @@ export const getLists = async (): Promise<Lists> => {
   return names;
 };
 
-export const listToString = (list: ShoppingList) => {
+export const listToString = (list: ShoppingList): string => {
   let ret = `${list.name} list is being shared with you from Listman app
  `;
   list.items.forEach((val) => {

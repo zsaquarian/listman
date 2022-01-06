@@ -55,7 +55,7 @@
       }`}
     >
       <button
-bind:this={logOutButton}
+        bind:this={logOutButton}
         on:click={() => {
           logOut();
           me.reexecute();

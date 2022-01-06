@@ -11,7 +11,6 @@ module.exports = {
   parserOptions: {
     sourceType: 'module',
     ecmaVersion: 2019,
-    project: './tsconfig.eslint.json',
   },
   env: {
     browser: true,
@@ -29,4 +28,12 @@ module.exports = {
       },
     ],
   },
+  overrides: [
+    {
+      files: ['src/nexus/*.ts'],
+      rules: {
+        '@typescript-eslint/ban-ts-comment': 'off', // typescript can't pickup on the nexus field authorize plugin, so we have to ts-ignore that line
+      },
+    },
+  ],
 };

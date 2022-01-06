@@ -76,7 +76,7 @@ export const createClient = (): void => {
             logOut: (_result, _args, cache, _info) => {
               authStore.update((val) => ({ ...val, isLoggedIn: false }));
 
-              cache.updateQuery({ query: MeDocument }, (data) => {
+              cache.updateQuery({ query: MeDocument }, (_data) => {
                 return {
                   me: null,
                 };

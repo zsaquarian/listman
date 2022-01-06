@@ -2,10 +2,10 @@
   import type { ParsedError } from '@utils/errorParser';
   import InputWithErrors from './InputWithErrors.svelte';
 
-  export let hasGoogleAuth: boolean = false;
-  export let hasEmail: boolean = false;
-  export let hasUsername: boolean = false;
-  export let hasUsernameOrEmail: boolean = false;
+  export let hasGoogleAuth = false;
+  export let hasEmail = false;
+  export let hasUsername = false;
+  export let hasUsernameOrEmail = false;
 
   export let errors: ParsedError[];
   export let submitHandler: () => void;

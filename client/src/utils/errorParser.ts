@@ -1,5 +1,5 @@
-import type {CombinedError} from '@urql/svelte';
-import type {GraphQLError} from 'graphql';
+import type { CombinedError } from '@urql/svelte';
+import type { GraphQLError } from 'graphql';
 
 export interface ParsedError {
   type: 'MissingParam' | 'InvalidParam' | 'Unknown';
@@ -10,7 +10,7 @@ const fieldMap = {
   usernameOrEmail: 'Username or e mail',
   password: 'Password',
   username: 'Username',
-  email: 'E mail'
+  email: 'E mail',
 };
 
 const missingParamRegex = /Variable "\$(.*)" of/;
@@ -54,7 +54,7 @@ export const parseCombinedError = (err: CombinedError): ParsedError[] => {
 
 export const getReadableError = (err: ParsedError): string => {
   if (err.type === 'MissingParam') return 'Please enter your ' + fieldMap[err.field];
-  if (err.type === 'InvalidParam') return 'Field "' + fieldMap[err.field] + '" is invalid'
+  if (err.type === 'InvalidParam') return 'Field "' + fieldMap[err.field] + '" is invalid';
 
   return 'An unknown error occured. Please try later.';
 };

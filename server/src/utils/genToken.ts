@@ -4,7 +4,7 @@ import { MyContext } from 'src/context';
 import { JWT_SECRET, JWT_EXPIRE_TIME, IN_PROD, REFRESH_SECRET, REFRESH_EXPIRE_TIME } from './constants';
 import { JWTToken, RedisTokenInfo } from './types';
 
-export const genJWTToken = (user: User | JWTToken, isGoogleUser: boolean) => {
+export const genJWTToken = (user: User | JWTToken, isGoogleUser: boolean): string => {
   const jwtToken = jwt.sign(
     { id: user.id, username: user.username, uuid: user.uuid, isGoogleUser } as JWTToken,
     JWT_SECRET,
@@ -15,7 +15,7 @@ export const genJWTToken = (user: User | JWTToken, isGoogleUser: boolean) => {
   return jwtToken;
 };
 
-export const genRefreshToken = (user: User | JWTToken) => {
+export const genRefreshToken = (user: User | JWTToken): string => {
   const refresh = jwt.sign({ id: user.id } as JWTToken, REFRESH_SECRET, {
     expiresIn: REFRESH_EXPIRE_TIME,
   });
@@ -23,7 +23,7 @@ export const genRefreshToken = (user: User | JWTToken) => {
   return refresh;
 };
 
-export const setCookie = (ctx: MyContext, jwtToken: string, refreshToken?: string) => {
+export const setCookie = (ctx: MyContext, jwtToken: string, refreshToken?: string): void => {
   if (refreshToken) {
     ctx.res.cookie('token', jwtToken, { httpOnly: true, secure: IN_PROD, sameSite: IN_PROD ? 'none' : undefined });
     ctx.res.cookie('refresh', refreshToken, {

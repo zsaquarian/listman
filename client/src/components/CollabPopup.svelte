@@ -10,7 +10,7 @@
   let username: string;
 
   const shareList = async () => {
-    const result = await shareListMutation({ listUuid, sharedWith: username });
+    await shareListMutation({ listUuid, sharedWith: username });
     close();
   };
 </script>

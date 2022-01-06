@@ -14,8 +14,8 @@
     "dev": "run-p build:routify dev:vite",
     "dev:vite": "vite --host --port 5000",
     "validate": "svelte-check",
-    "lint": "prettier --ignore-path .gitignore  --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
-    "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
+    "lint": "prettier --check --plugin-search-dir=. . && eslint .",
+    "format": "prettier --write --plugin-search-dir=. .",
     "codegen": "graphql-codegen",
     "test": "jest src",
     "test:watch": "yarn test --watch"

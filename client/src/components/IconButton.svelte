@@ -3,7 +3,7 @@
 
   export let onClickHandler: () => void;
   export let icon: any;
-  export let text: string = '';
+  export let text = '';
   export let buttonClass = '';
   export let resize = true;
 </script>
