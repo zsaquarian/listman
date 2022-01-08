@@ -1,6 +1,6 @@
 {
   "name": "listman",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "type": "module",
   "scripts": {
     "build:app": "routify -b && vite build",
