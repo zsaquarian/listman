@@ -16,7 +16,7 @@
   "scripts": {
     "prepare": "husky install",
     "release": "standard-version",
-    "build": "yarn workspace server install && yarn workspace server build",
+    "build": "yarn workspace server install && yarn workspace server build && yarn workspace server migrate",
     "start": "yarn workspace server start",
     "cm": "cz",
     "lint": "yarn workspaces foreach run lint",
