@@ -7,12 +7,17 @@ quickly create new lists from an existing template.
 
 - Master lists
 - Collaboration
-- Native sharing (only on Android)
+- Native sharing (only on mobile)
+- Desktop app with [tauri](https://tauri.studio/)
 
 ## Todo List
 
 - [ ] Invite an unregistered user when a link is shared
-- [ ] Electron App
+- [ ] Dark mode
+- [ ] Application settings
+  - [ ] Different formats of sharing lists
+  - [ ] I8n
+- [ ] Multiple master lists (maybe call them template lists instead)
 
 ## Develop
 
