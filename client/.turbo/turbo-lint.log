@@ -1,2 +1,2 @@
-[35mlistman:lint: [0mcache hit, replaying output [2m9390965a40fecc98[0m
-[35mlistman:lint: [0m→ No staged files match any configured task.
+[32mlistman:lint: [0mcache hit, replaying output [2me6a449074de938bc[0m
+[32mlistman:lint: [0m→ No staged files match any configured task.

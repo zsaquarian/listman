@@ -7,10 +7,20 @@
   },
   "plugins": {
     "@release-it/bumper": {
-      "out": [ {
-        "file": "desktop/src-tauri/tauri.conf.json",
-        "path": "package.version"
-      }, "package.json", "client/package.json", "server/package.json", "desktop/package.json" ]
+      "out": [
+        {
+          "file": "desktop/src-tauri/tauri.conf.json",
+          "path": "package.version"
+        },
+        "package.json",
+        "client/package.json",
+        "server/package.json",
+        "desktop/package.json"
+      ]
+    },
+    "@release-it/conventional-changelog": {
+      "preset": "conventionalcommits",
+      "infile": "CHANGELOG.md"
     }
   }
 }
