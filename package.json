@@ -33,7 +33,17 @@
   "turbo": {
     "baseBranch": "origin/staging",
     "pipeline": {
-      "lint": {}
+      "lint": {},
+      "build": {
+        "dependsOn": [
+          "^build"
+        ]
+      },
+      "desktop#build": {
+        "dependsOn": [
+          "client#build"
+        ]
+      }
     }
   }
 }

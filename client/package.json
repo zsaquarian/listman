@@ -1,13 +1,13 @@
 {
-  "name": "listman",
+  "name": "client",
   "version": "0.4.2",
   "type": "module",
   "scripts": {
-    "build:app": "routify -b && vite build",
+    "build": "routify -b && vite build",
     "build:vercel": "routify -b && vite build",
     "build:routify": "routify",
-    "build:android": "run-s build:app cap-run:android",
-    "build:ios": "run-s build:app cap-run:ios",
+    "build:android": "run-s build cap-run:android",
+    "build:ios": "run-s build cap-run:ios",
     "cap-run:android": "cap sync android && cap run android",
     "cap-run:ios": "cap sync ios && cap run ios",
     "dev:preview": "vite preview",
