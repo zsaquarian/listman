@@ -18,10 +18,9 @@
   },
   "scripts": {
     "prepare": "husky install",
-    "build": "yarn workspace server install && yarn workspace server build && yarn workspace server migrate",
-    "start": "yarn workspace server install && yarn workspace server start",
-    "cm": "cz",
-    "precommit": ""
+    "build": "cd server && yarn && yarn build && yarn migrate",
+    "start": "yarn workspace server start",
+    "cm": "cz"
   },
   "version": "0.4.2",
   "config": {
