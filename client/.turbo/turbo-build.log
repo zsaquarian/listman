@@ -1,33 +1,33 @@
-[32mclient:build: [0mcache hit, replaying output [2me44960c052f41d64[0m
-[32mclient:build: [0mvite v2.4.4 building for production...
-[32mclient:build: [0mtransforming...
-[32mclient:build: [0m[svelte-preprocess] Deprecation notice: using 'lang="typescript"' is no longer recommended and will be removed in the next major version. Please use 'lang="ts"' instead.
-[32mclient:build: [0m
-[32mclient:build: [0mwarn - You have enabled the JIT engine which is currently in preview.
-[32mclient:build: [0mwarn - Preview features are not covered by semver, may introduce breaking changes, and can change at any time.
-[32mclient:build: [0m✓ 393 modules transformed.
-[32mclient:build: [0mrendering chunks...
-[32mclient:build: [0mpublic/index.html                       1.03kb
-[32mclient:build: [0mpublic/assets/IconButton.59b5c4c1.js    2.28kb / brotli: 1.10kb
-[32mclient:build: [0mpublic/assets/index.dc5f7ff3.js         5.48kb / brotli: 2.32kb
-[32mclient:build: [0mpublic/assets/X.af764c14.js             5.66kb / brotli: 2.03kb
-[32mclient:build: [0mpublic/assets/auth.3175ff91.js          0.25kb / brotli: 0.17kb
-[32mclient:build: [0mpublic/assets/index.0889a28d.js         12.90kb / brotli: 3.29kb
-[32mclient:build: [0mpublic/assets/[id].e3139029.js          0.95kb / brotli: 0.53kb
-[32mclient:build: [0mpublic/assets/ListDisplay.9f8e0d2b.js   10.82kb / brotli: 4.04kb
-[32mclient:build: [0mpublic/assets/login.9c439441.js         1.62kb / brotli: 0.79kb
-[32mclient:build: [0mpublic/assets/Form.7ea4ea9b.js          8.84kb / brotli: 2.86kb
-[32mclient:build: [0mpublic/assets/Exclamation.a9239ba2.js   0.49kb / brotli: 0.30kb
-[32mclient:build: [0mpublic/assets/master.4a36dd0d.js        0.99kb / brotli: 0.55kb
-[32mclient:build: [0mpublic/assets/vendor.175eec12.js        40.25kb / brotli: 14.03kb
-[32mclient:build: [0mpublic/assets/register.f4dfd817.js      1.63kb / brotli: 0.79kb
-[32mclient:build: [0mpublic/assets/[id].96db636a.js          3.11kb / brotli: 1.35kb
-[32mclient:build: [0mpublic/assets/yjs.b26c4c6f.js           0.14kb / brotli: 0.11kb
-[32mclient:build: [0mpublic/assets/web.75841092.js           1.08kb / brotli: 0.45kb
-[32mclient:build: [0mpublic/assets/web.ee484cd0.js           0.27kb / brotli: 0.17kb
-[32mclient:build: [0mpublic/assets/vendor.5973de15.css       1.54kb / brotli: 0.44kb
-[32mclient:build: [0mpublic/assets/index.fd23d9c9.css        9.09kb / brotli: 2.24kb
-[32mclient:build: [0mpublic/assets/_layout.fa9a4209.css      0.05kb / brotli: 0.06kb
-[32mclient:build: [0mpublic/assets/_layout.ea5c9091.js       35.19kb / brotli: 10.92kb
-[32mclient:build: [0mpublic/assets/Icon.8d1f16b7.js          71.91kb / brotli: 17.00kb
-[32mclient:build: [0mpublic/assets/yjsUtils.abcc27c3.js      91.85kb / brotli: 24.43kb
+[35mclient:build: [0mcache hit, replaying output [2ma2e4c52623b17c34[0m
+[35mclient:build: [0mvite v2.4.4 building for production...
+[35mclient:build: [0mtransforming...
+[35mclient:build: [0m[svelte-preprocess] Deprecation notice: using 'lang="typescript"' is no longer recommended and will be removed in the next major version. Please use 'lang="ts"' instead.
+[35mclient:build: [0m
+[35mclient:build: [0mwarn - You have enabled the JIT engine which is currently in preview.
+[35mclient:build: [0mwarn - Preview features are not covered by semver, may introduce breaking changes, and can change at any time.
+[35mclient:build: [0m✓ 393 modules transformed.
+[35mclient:build: [0mrendering chunks...
+[35mclient:build: [0mpublic/index.html                       1.03kb
+[35mclient:build: [0mpublic/assets/IconButton.59b5c4c1.js    2.28kb / brotli: 1.10kb
+[35mclient:build: [0mpublic/assets/index.dc5f7ff3.js         5.48kb / brotli: 2.32kb
+[35mclient:build: [0mpublic/assets/X.af764c14.js             5.66kb / brotli: 2.03kb
+[35mclient:build: [0mpublic/assets/auth.3175ff91.js          0.25kb / brotli: 0.17kb
+[35mclient:build: [0mpublic/assets/index.0889a28d.js         12.90kb / brotli: 3.29kb
+[35mclient:build: [0mpublic/assets/[id].e3139029.js          0.95kb / brotli: 0.53kb
+[35mclient:build: [0mpublic/assets/ListDisplay.9f8e0d2b.js   10.82kb / brotli: 4.04kb
+[35mclient:build: [0mpublic/assets/login.9c439441.js         1.62kb / brotli: 0.79kb
+[35mclient:build: [0mpublic/assets/vendor.175eec12.js        40.25kb / brotli: 14.03kb
+[35mclient:build: [0mpublic/assets/Exclamation.a9239ba2.js   0.49kb / brotli: 0.30kb
+[35mclient:build: [0mpublic/assets/Form.7ea4ea9b.js          8.84kb / brotli: 2.86kb
+[35mclient:build: [0mpublic/assets/master.4a36dd0d.js        0.99kb / brotli: 0.55kb
+[35mclient:build: [0mpublic/assets/register.f4dfd817.js      1.63kb / brotli: 0.79kb
+[35mclient:build: [0mpublic/assets/yjs.b26c4c6f.js           0.14kb / brotli: 0.11kb
+[35mclient:build: [0mpublic/assets/[id].96db636a.js          3.11kb / brotli: 1.35kb
+[35mclient:build: [0mpublic/assets/web.75841092.js           1.08kb / brotli: 0.45kb
+[35mclient:build: [0mpublic/assets/web.ee484cd0.js           0.27kb / brotli: 0.17kb
+[35mclient:build: [0mpublic/assets/vendor.5973de15.css       1.54kb / brotli: 0.44kb
+[35mclient:build: [0mpublic/assets/index.fd23d9c9.css        9.09kb / brotli: 2.24kb
+[35mclient:build: [0mpublic/assets/_layout.fa9a4209.css      0.05kb / brotli: 0.06kb
+[35mclient:build: [0mpublic/assets/_layout.ea5c9091.js       35.19kb / brotli: 10.92kb
+[35mclient:build: [0mpublic/assets/Icon.8d1f16b7.js          71.91kb / brotli: 17.00kb
+[35mclient:build: [0mpublic/assets/yjsUtils.abcc27c3.js      91.85kb / brotli: 24.43kb

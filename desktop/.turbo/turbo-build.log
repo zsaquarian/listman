@@ -1,0 +1,13 @@
+[33mdesktop:build: [0mcache hit, replaying output [2m264a580c0f97d0be[0m
+[33mdesktop:build: [0m app:spawn Running "/media/nahos/Storage/Sohan/Web/listman/desktop/node_modules/@tauri-apps/cli/bin/tauri-cli tauri build" +0ms
+[33mdesktop:build: [0m
+[33mdesktop:build: [0m   Compiling app v0.1.0 (/media/nahos/Storage/Sohan/Web/listman/desktop/src-tauri)
+[33mdesktop:build: [0m    Finished release [optimized] target(s) in 50.81s
+[33mdesktop:build: [0m[0m[1m[32m    Bundling[0m listman_0.4.2_amd64.deb
+[33mdesktop:build: [0m[0m[1m[32m    Bundling[0m listman_0.4.2_amd64.AppImage
+[33mdesktop:build: [0m[0m[1m[32m    Bundling[0m "/media/nahos/Storage/Sohan/Web/listman/desktop/src-tauri/target/release/bundle/appimage/listman_0.4.2_amd64.AppImage.tar.gz"
+[33mdesktop:build: [0m[0m[1m[32m    Finished[0m 3 bundles at:
+[33mdesktop:build: [0m        /media/nahos/Storage/Sohan/Web/listman/desktop/src-tauri/target/release/bundle/deb/listman_0.4.2_amd64.deb
+[33mdesktop:build: [0m        /media/nahos/Storage/Sohan/Web/listman/desktop/src-tauri/target/release/bundle/appimage/listman_0.4.2_amd64.AppImage
+[33mdesktop:build: [0m        /media/nahos/Storage/Sohan/Web/listman/desktop/src-tauri/target/release/bundle/appimage/listman_0.4.2_amd64.AppImage.tar.gz (updater)
+[33mdesktop:build: [0m

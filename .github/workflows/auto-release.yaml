@@ -27,6 +27,7 @@ jobs:
         run: |
           cd client && yarn
           cd ../desktop && yarn
+          cd ../server && yarn
           cd .. && yarn
       - name: build it
         run: yarn turbo run build
@@ -40,6 +41,7 @@ jobs:
           projectPath: desktop
   release-it:
     runs-on: ubuntu-latest
+    needs: publish-tauri
     steps:
       - uses: actions/checkout@v2
         with:
