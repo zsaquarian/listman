@@ -14,7 +14,7 @@ const removeIgnoredFiles = async (files) => {
 export default {
   '**/*.{ts,js,svelte}': async (files) => {
     const filesToLint = await removeIgnoredFiles(files);
-    return [`eslint --max-warnings=0 ${filesToLint}`, `prettier --write ${files}`];
+    return [`eslint --max-warnings=0 ${filesToLint}`, `prettier --write ${files.join(' ')}`];
   },
-  '**/*.{json,md,yaml}': 'prettier --write'
+  '**/*.{json,md,yaml}': 'prettier --write',
 };

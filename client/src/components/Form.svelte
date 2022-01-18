@@ -16,7 +16,7 @@
 </script>
 
 <div
-  class="flex flex-col justify-center m-2 w-full sm:w-3/4 md:w-1/2 mx-auto rounded-lg border-primary-300 border-2 bg-primary-50 py-2 px-16 drop-shadow"
+  class="flex flex-col justify-center m-2 w-full sm:w-3/4 md:w-1/2 mx-auto rounded-lg border-primary-300 border-2 bg-primary-50 py-2 px-16 drop-shadow dark:bg-primary-500"
 >
   {#if hasGoogleAuth}
     <!-- Google Auth -->
@@ -42,7 +42,7 @@
     </div>
 
     <div class="border-b-2 border-black text-center mt-4 mb-4 justify-center" style="line-height: 0.1rem;">
-      <span class="bg-primary-50 px-4">OR</span>
+      <span class="bg-primary-50 dark:bg-primary-500 px-4">OR</span>
     </div>
   {/if}
 

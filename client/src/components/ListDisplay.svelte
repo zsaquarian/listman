@@ -29,13 +29,13 @@
 <div class="lg:w-3/4 mx-auto flex flex-col items-center">
   <div class="p-2 w-full">
     {#if list && list.items}
-      <div class="flex flex-col bg-accent-50 p-2 rounded-md">
+      <div class="flex flex-col bg-accent-50 p-2 rounded-md dark:bg-accent-600">
         <div class="justify-self-center">
           {#if isMasterList}
             <h1 class="text-4xl text-center">Master List</h1>
           {:else}
             <input
-              class="text-4xl text-center rounded-lg w-11/12 mx-auto block"
+              class="text-4xl text-center rounded-lg w-11/12 mx-auto block dark:bg-black"
               bind:value={list.name}
               placeholder="Enter name"
             />
@@ -43,7 +43,7 @@
         </div>
         <div class="flex justify-between">
           <IconButton
-            class="text-primary-300"
+            class="text-primary-300 dark:text-primary-100"
             onClickHandler={async () => {
               await Share.share({
                 title: list.name,
@@ -56,7 +56,9 @@
           />
           {#if isMasterList}
             <IconButton
-              buttonClass={`transition ${selected.length > 0 ? 'text-primary-300' : 'text-black'}`}
+              buttonClass={`transition ${
+                selected.length > 0 ? 'text-primary-300 dark:text-primary-100' : 'text-black dark:text-accent-50'
+              }`}
               onClickHandler={() => {
                 const newVals = [];
                 selected.forEach((_val, i) => {
@@ -76,7 +78,7 @@
           {/if}
           {#if !isMasterList && !isShared}
             <IconButton
-              class="text-primary-300"
+              class="text-primary-300 dark:text-primary-100"
               onClickHandler={() => {
                 open(
                   CollabPopup,
@@ -111,7 +113,7 @@
     {/if}
   </div>
   <form
-    class="flex absolute bottom-0 bg-accent-200 m-0 w-full lg:rounded-lg lg:w-3/4"
+    class="flex absolute bottom-0 bg-accent-200 dark:bg-accent-800 m-0 w-full lg:rounded-lg lg:w-3/4"
     on:submit|preventDefault={() => {
       // regex which checks for non-whitespace strings
       if (/\S*$/.test(addInput) && addInput) {
