@@ -13,7 +13,7 @@ quickly create new lists from an existing template.
 ## Todo List
 
 - [ ] Invite an unregistered user when a link is shared
-- [ ] Dark mode
+- [x] Dark mode
 - [ ] Application settings
   - [ ] Different formats of sharing lists
   - [ ] I8n
