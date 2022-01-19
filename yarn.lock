@@ -5269,7 +5269,7 @@ __metadata:
     lint-staged: ^12.1.7
     npm-run-all: ^4.1.5
     postcss: ^8.3.5
-    postcss-load-config: ^3.1.0
+    postcss-load-config: ^3.1.1
     prettier: ^2.2.1
     prettier-plugin-svelte: ^2.2.0
     socket.io-client: ^4.3.2
@@ -5279,6 +5279,7 @@ __metadata:
     svelte-jester: ^2.1.5
     svelte-preprocess: ^4.10.1
     svelte-simple-modal: ^1.1.1
+    svelte-switch: ^0.0.5
     tailwindcss: ^2.2.4
     ts-jest: ^27.1.2
     typescript: ^4.5.4
@@ -11472,7 +11473,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lilconfig@npm:2.0.4, lilconfig@npm:^2.0.3":
+"lilconfig@npm:2.0.4, lilconfig@npm:^2.0.3, lilconfig@npm:^2.0.4":
   version: 2.0.4
   resolution: "lilconfig@npm:2.0.4"
   checksum: 02ae530aa49218d782eb79e92c600ea5220828987f85aa3403fa512cadc7efe38c0ac7d0cd2edf600ad3fae1f6c1752f5b4bb78c0d9950435b044d53d507c9e1
@@ -13755,6 +13756,21 @@ __metadata:
     ts-node:
       optional: true
   checksum: 7fd62064eab1e0e77ba315d9a782f09f4c62e1025630b53d38a936d5a2730bb632a3f259143115fc639e70d22f14744a75c7a6f471343ebdb03f6a3ef72d2f08
+  languageName: node
+  linkType: hard
+
+"postcss-load-config@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "postcss-load-config@npm:3.1.1"
+  dependencies:
+    lilconfig: ^2.0.4
+    yaml: ^1.10.2
+  peerDependencies:
+    ts-node: ">=9.0.0"
+  peerDependenciesMeta:
+    ts-node:
+      optional: true
+  checksum: d3bf9f159881dc2bab10362d1c782efc940a00148858df51c39e061a3b269c9a364a1fc953bba084d725f989c69f46fae96d625c27176a173f59a7bdc40d66e6
   languageName: node
   linkType: hard
 
@@ -16393,6 +16409,13 @@ __metadata:
   peerDependencies:
     svelte: ^3.31.2
   checksum: f751919c02f7829ad2217b957f2d9548869e9a1ef63805d23b3627622f1e6258eadc67e050bc3ba8ad69f7dfb25a83f876a20c39e03ee6c82dfd75b4dcc77ac7
+  languageName: node
+  linkType: hard
+
+"svelte-switch@npm:^0.0.5":
+  version: 0.0.5
+  resolution: "svelte-switch@npm:0.0.5"
+  checksum: 5a4085e6c4223cb5d9302c8fb65a99531316affdc07cb3a55dc6ca9ff126812f60e3307f6f8ddf214b910d0985ddc2d1e67a23c61a12b64181e97e58fe1a1003
   languageName: node
   linkType: hard
 
