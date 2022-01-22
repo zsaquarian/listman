@@ -25,10 +25,10 @@ jobs:
           sudo apt-get install -y webkit2gtk-4.0
       - name: install app dependencies
         run: |
+          yarn
           cd client && yarn
           cd ../desktop && yarn
           cd ../server && yarn
-          cd .. && yarn
       - name: build it
         run: yarn turbo run build
       - uses: tauri-apps/tauri-action@v0
