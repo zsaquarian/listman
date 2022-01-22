@@ -5,13 +5,13 @@
   import { operationStore, query } from '@urql/svelte';
   import { GetSharedListsDocument } from '../graphql';
   import HomepageList from '@components/HomepageList.svelte';
+  import { IGNORED_KEYS } from '@utils/constants';
 
   const sharedListsQuery = operationStore(GetSharedListsDocument);
 
   const sharedLists = query(sharedListsQuery);
 
   let lists = [];
-  let onlySharedLists = [];
 
   $: {
     if (!$sharedLists.fetching && !$sharedLists.error) {
@@ -54,7 +54,7 @@
 p-4 bg-opacity-25 shadow-lg"
   >
     {#each lists as { name, key, isShared, isExternal }, i (i)}
-      {#if key !== 'master' && key !== 'auth-state'}
+      {#if !IGNORED_KEYS.includes(key)}
         <HomepageList {key} {name} {isShared} {isExternal} removeList={() => removeList(key, i)} />
       {/if}
     {/each}
