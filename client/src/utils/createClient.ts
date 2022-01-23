@@ -1,7 +1,7 @@
 import { dedupExchange, fetchExchange, initClient } from '@urql/svelte';
 import { cacheExchange } from '@urql/exchange-graphcache';
-import { MeDocument, RefreshDocument } from '../graphql';
-import type { CreateUserMutation, GoogleSignInMutation, LoginMutation } from '../graphql';
+import { MeDocument, RefreshDocument } from '@graphql';
+import type { CreateUserMutation, GoogleSignInMutation, LoginMutation } from '@graphql';
 import { authExchange } from '@urql/exchange-auth';
 import { authStore } from '@store/auth';
 

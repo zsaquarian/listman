@@ -1,10 +1,10 @@
 <script lang="ts">
   import ListDisplay from '@components/ListDisplay.svelte';
-  import { loadList, storeList } from '@utils/shoppingListUtils';
+  import { loadList, storeList } from '@utils/listUtils';
   import { getContext, onMount } from 'svelte';
   import { goto, params } from '@roxi/routify';
   import { operationStore, query } from '@urql/svelte';
-  import { CanViewListDocument } from '../../graphql';
+  import { CanViewListDocument } from '@graphql';
   import CantViewList from '@components/CantViewList.svelte';
   import ErrorPopup from '@components/ErrorPopup.svelte';
   import { getStore } from '@utils/yjsUtils';

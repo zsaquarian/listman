@@ -1,7 +1,7 @@
 <script lang="ts">
   import { mutation, operationStore } from '@urql/svelte';
-  import { CreateUserDocument, GoogleSignInDocument, LoginDocument } from '../graphql';
-  import { parseCombinedError, getReadableError } from '@utils/errorParser';
+  import { CreateUserDocument, GoogleSignInDocument } from '@graphql';
+  import { parseCombinedError } from '@utils/errorParser';
   import type { ParsedError } from '@utils/errorParser';
   import { goto } from '@roxi/routify';
   import Form from './Form.svelte';

@@ -1,12 +1,12 @@
 <script lang="ts">
   import ListDisplay from '@components/ListDisplay.svelte';
   import { params } from '@roxi/routify';
-  import { loadList, storeList } from '@utils/shoppingListUtils';
-  import type { ShoppingList } from '@utils/shoppingListUtils';
+  import { loadList, storeList } from '@utils/listUtils';
+  import type { GenericList } from '@utils/listUtils';
   import { onMount } from 'svelte';
 
   const key = $params.id;
-  let list: ShoppingList;
+  let list: GenericList;
 
   onMount(async () => {
     list = await loadList(key);

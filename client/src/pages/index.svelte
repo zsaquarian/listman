@@ -1,9 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { getLists } from '@utils/shoppingListUtils';
+  import { getLists } from '@utils/listUtils';
   import { Storage } from '@capacitor/storage';
   import { operationStore, query } from '@urql/svelte';
-  import { GetSharedListsDocument } from '../graphql';
+  import { GetSharedListsDocument } from '@graphql';
   import HomepageList from '@components/HomepageList.svelte';
   import { IGNORED_KEYS } from '@utils/constants';
 

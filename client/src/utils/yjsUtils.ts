@@ -1,5 +1,5 @@
 import { syncedStore, getYjsValue } from '@syncedstore/core';
-import type { ShoppingList } from './shoppingListUtils';
+import type { ShoppingList } from './listUtils';
 import { svelteSyncedStore } from '@syncedstore/svelte';
 import { WebsocketProvider } from 'y-websocket';
 import type { Readable } from 'svelte/store';

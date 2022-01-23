@@ -1,15 +1,12 @@
 <script lang="ts">
   import ListDisplay from '@components/ListDisplay.svelte';
-  import { loadList, loadOrCreateList, storeList } from '@utils/shoppingListUtils';
-  import type { ShoppingList } from '@utils/shoppingListUtils';
+  import { loadOrCreateList, storeList } from '@utils/listUtils';
+  import type { GenericList } from '@utils/listUtils';
   import { onMount } from 'svelte';
-  import { fade } from 'svelte/transition';
-  import { v4 } from 'uuid';
-  import { goto } from '@roxi/routify';
 
   const key = 'master';
 
-  let list: ShoppingList;
+  let list: GenericList;
   let selected = [] as boolean[]; // note that the 'done' property of the master list denotes whether an item is selected
 
   onMount(async () => {

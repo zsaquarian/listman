@@ -1,6 +1,6 @@
 <script lang="ts">
   import { mutation, operationStore, query } from '@urql/svelte';
-  import { LogOutDocument, MeDocument, RefreshDocument } from '../graphql';
+  import { LogOutDocument, MeDocument, RefreshDocument } from '@graphql';
   import Icon from 'svelte-hero-icons/Icon.svelte';
   import { ChevronDown, ChevronUp } from 'svelte-hero-icons';
   import { authStore } from '@store/auth';

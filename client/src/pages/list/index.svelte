@@ -1,7 +1,7 @@
 <script lang="ts">
   import HomepageList from '@components/HomepageList.svelte';
   import { IGNORED_KEYS } from '@utils/constants';
-  import { getLists, Lists } from '@utils/shoppingListUtils';
+  import { getLists, Lists } from '@utils/listUtils';
   import { onMount } from 'svelte';
   import { Storage } from '@capacitor/storage';
   import Icon from 'svelte-hero-icons/Icon.svelte';

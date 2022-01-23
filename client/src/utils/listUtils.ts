@@ -1,16 +1,16 @@
 import { Storage } from '@capacitor/storage';
 import { LIST_SCHEMA_VERSION_NO } from './constants';
 
-export interface ShoppingListItem {
+export interface GenericListItem {
   item: string;
   done: boolean;
 }
 
-export interface ShoppingList {
+export interface GenericList {
   version: string;
   name: string;
   isShared: boolean;
-  items: ShoppingListItem[];
+  items: ListItem[];
 }
 
 export type Lists = {
@@ -20,21 +20,21 @@ export type Lists = {
   isExternal: boolean;
 }[];
 
-export const storeList = async (key: string, list: ShoppingList): Promise<void> => {
+export const storeList = async (key: string, list: GenericList): Promise<void> => {
   const value = JSON.stringify(list);
   await Storage.set({ key, value });
 };
 
-export const loadList = async (key: string): Promise<ShoppingList> => {
+export const loadList = async (key: string): Promise<GenericList> => {
   const { value: val } = await Storage.get({ key });
   if (val !== null && val) {
-    return JSON.parse(val) as ShoppingList;
+    return JSON.parse(val) as GenericList;
   } else {
     throw new Error('List does not exist');
   }
 };
 
-export const loadOrCreateList = async (key: string): Promise<ShoppingList> => {
+export const loadOrCreateList = async (key: string): Promise<GenericList> => {
   try {
     const loadedList = await loadList(key);
     return loadedList;
@@ -43,11 +43,11 @@ export const loadOrCreateList = async (key: string): Promise<ShoppingList> => {
   }
 };
 
-export const createList = (vals: ShoppingListItem[] = []): ShoppingList => {
+export const createList = (vals: GenericListItem[] = []): GenericList => {
   return { version: LIST_SCHEMA_VERSION_NO, items: vals, name: '', isShared: false };
 };
 
-export const addItem = async (list: ShoppingList, newVal: string): Promise<ShoppingList> => {
+export const addItem = async (list: GenericList, newVal: string): Promise<GenericList> => {
   if (!list.version) {
     list = createList();
   }
@@ -70,7 +70,7 @@ export const getLists = async (): Promise<Lists> => {
   return names;
 };
 
-export const listToString = (list: ShoppingList): string => {
+export const listToString = (list: GenericList): string => {
   let ret = `${list.name} list is being shared with you from Listman app
  `;
   list.items.forEach((val) => {

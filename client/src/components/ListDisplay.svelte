@@ -1,13 +1,13 @@
 <script lang="ts">
-  import { createList, listToString, storeList } from '@utils/shoppingListUtils';
-  import type { ShoppingList } from '@utils/shoppingListUtils';
+  import { createList, listToString, storeList } from '@utils/listUtils';
+  import type { ShoppingList } from '@utils/listUtils';
   import { Share } from '@capacitor/share';
   import { Share as ShareIcon, UserAdd as UserAddIcon, Plus as PlusIcon } from 'svelte-hero-icons';
   import ItemDisplay from './ItemDisplay.svelte';
   import IconButton from './IconButton.svelte';
   import { getContext } from 'svelte';
   import CollabPopup from './CollabPopup.svelte';
-  import { ShareListDocument } from '../graphql';
+  import { ShareListDocument } from '@graphql';
   import { mutation, operationStore } from '@urql/svelte';
   import { goto } from '@roxi/routify';
   import { v4 } from 'uuid';
