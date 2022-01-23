@@ -45,18 +45,15 @@
     await Storage.remove({ key });
     lists = [...lists.slice(0, i), ...lists.slice(i + 1)];
   };
+
+  $: realLists = lists.filter((val) => !IGNORED_KEYS.includes(val.key)).slice(0, 10);
 </script>
 
 <div class="w-full md:w-3/4 mx-auto">
   <h1 class="text-4xl m-2">Lists:</h1>
-  <div
-    class="flex flex-col text-center text-3xl m-4 bg-primary-100 rounded-lg
-p-4 bg-opacity-25 shadow-lg"
-  >
-    {#each lists as { name, key, isShared, isExternal }, i (i)}
-      {#if !IGNORED_KEYS.includes(key)}
-        <HomepageList {key} {name} {isShared} {isExternal} removeList={() => removeList(key, i)} />
-      {/if}
+  <div class="flex flex-col text-center text-3xl m-4 bg-primary-100 rounded-lg p-4 bg-opacity-25 shadow-lg">
+    {#each realLists as { name, key, isShared, isExternal }, i (i)}
+      <HomepageList {key} {name} {isShared} {isExternal} removeList={() => removeList(key, i)} />
     {/each}
     {#if lists.length <= 1}
       <div class="text-4xl text-accent-900 drop-shadow-lg">

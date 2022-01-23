@@ -25,6 +25,7 @@
     <aside class="absolute lg:relative -left-full z-50 w-full lg:left-0 lg:w-auto" class:left-0={open}>
       <nav class="bg-primary-500 flex flex-col gap-4 h-screen lg:h-auto lg:flex-row p-2 mt-12 lg:mt-0">
         <a class="text-2xl" href="/">Home</a>
+        <a class="text-2xl" href="/list">All Lists</a>
         <a class="text-2xl" href="/master">Master list</a>
         <a class="text-2xl" href="/config">Settings</a>
         <hr class="my-2 border-1 rounded-lg lg:hidden" />
