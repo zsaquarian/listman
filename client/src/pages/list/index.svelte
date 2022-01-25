@@ -1,6 +1,5 @@
 <script lang="ts">
   import HomepageList from '@components/HomepageList.svelte';
-  import { IGNORED_KEYS } from '@utils/constants';
   import { getLists, Lists } from '@utils/listUtils';
   import { onMount } from 'svelte';
   import { Storage } from '@capacitor/storage';
@@ -37,7 +36,7 @@
   $: {
     clearTimeout(searchTimeout);
     searchTimeout = setTimeout(() => {
-      filteredLists = lists.filter((val) => !IGNORED_KEYS.includes(val.key) && filter(val.name, searchText));
+      filteredLists = lists.filter((val) => filter(val.name, searchText));
     }, 200);
   }
 </script>

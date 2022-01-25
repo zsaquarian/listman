@@ -5,7 +5,6 @@
   import { operationStore, query } from '@urql/svelte';
   import { GetSharedListsDocument } from '@graphql';
   import HomepageList from '@components/HomepageList.svelte';
-  import { IGNORED_KEYS } from '@utils/constants';
 
   const sharedListsQuery = operationStore(GetSharedListsDocument);
 
@@ -46,7 +45,7 @@
     lists = [...lists.slice(0, i), ...lists.slice(i + 1)];
   };
 
-  $: realLists = lists.filter((val) => !IGNORED_KEYS.includes(val.key)).slice(0, 10);
+  $: realLists = lists.slice(0, 10);
 </script>
 
 <div class="w-full md:w-3/4 mx-auto">

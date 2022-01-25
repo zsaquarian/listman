@@ -62,6 +62,8 @@ export const getLists = async (): Promise<Lists> => {
   const names: Lists = [];
 
   for (const key of keys) {
+    if (IGNORED_KEYS.includes(key)) continue;
+
     const { name, isShared } = await loadList(key);
 
     names.push({ name, key, isShared, isExternal: false });

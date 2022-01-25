@@ -1,2 +1,2 @@
-[32mserver:lint: [0mcache hit, replaying output [2mfda8e664d1ca1061[0m
-[32mserver:lint: [0m→ No staged files match any configured task.
+[35mserver:lint: [0mcache hit, replaying output [2m9928d0de8a6a8f27[0m
+[35mserver:lint: [0m→ No staged files match any configured task.
