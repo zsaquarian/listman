@@ -5,6 +5,21 @@ on:
       - prod
 
 jobs:
+  release-it-1:
+    runs-on: ubuntu-latest
+    needs: publish-tauri
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: git config
+        run: |
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+      - run: yarn
+      - run: yarn release-it --no-github
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   publish-tauri:
     strategy:
       fail-fast: false
@@ -39,7 +54,7 @@ jobs:
           releaseName: 'Release v__VERSION__'
           releaseBody: 'See the assets to download this version and install.'
           projectPath: desktop
-  release-it:
+  release-it-2:
     runs-on: ubuntu-latest
     needs: publish-tauri
     steps:
@@ -51,6 +66,6 @@ jobs:
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
       - run: yarn
-      - run: yarn release-it --github.release --github.update --no-github.draft
+      - run: yarn release-it --github.release --github.update --no-github.draft --no-git
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
