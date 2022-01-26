@@ -14,4 +14,13 @@ const getStoredAuthState = async () => {
 
 export const authStore = writable((await getStoredAuthState()) || ({ isLoggedIn: false, username: '' } as AuthState));
 
-authStore.subscribe((val) => Storage.set({ key: authStateKey, value: JSON.stringify(val) }));
+const authStateInit = async () => {
+  authStore.set(await getStoredAuthState());
+
+  authStore.subscribe((val) => {
+    console.log(val);
+    Storage.set({ key: authStateKey, value: JSON.stringify(val) });
+  });
+};
+
+authStateInit();

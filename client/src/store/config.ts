@@ -13,4 +13,13 @@ const getStoredConfig = async () => {
 
 export const config = writable((await getStoredConfig()) || ({ darkMode: false } as Config));
 
-config.subscribe((val) => Storage.set({ key: configKey, value: JSON.stringify(val) }));
+const authStateInit = async () => {
+  config.set(await getStoredConfig());
+
+  config.subscribe((val) => {
+    console.log(val);
+    Storage.set({ key: configKey, value: JSON.stringify(val) });
+  });
+};
+
+authStateInit();
