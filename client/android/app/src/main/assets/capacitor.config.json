@@ -10,6 +10,7 @@
 	},
 	"cordova": {},
 	"server": {
+		"url": "http://192.168.0.177:5000",
 		"cleartext": true
 	}
 }
