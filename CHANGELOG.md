@@ -1,3 +1,10 @@
+### [0.5.1](https://github.com/zsaquarian/listman/compare/v0.5.0...v0.5.1) (2022-01-26)
+
+
+### Bug Fixes
+
+* give initial values to the stores ([66ecb4a](https://github.com/zsaquarian/listman/commit/66ecb4a92529b5b660ff6fa03cb2d97dbd3b4ec8))
+
 ## [0.5.0](https://github.com/zsaquarian/listman/compare/v0.4.2...v0.5.0) (2022-01-26)
 
 
