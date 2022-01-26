@@ -1,2 +1,2 @@
-[32mclient:lint: [0mcache hit, replaying output [2mf4209713d6ab0d94[0m
-[32mclient:lint: [0m→ No staged files match any configured task.
+client:lint: cache hit, replaying output 2a586718996387e2
+client:lint: → No staged files found.

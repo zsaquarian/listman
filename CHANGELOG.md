@@ -1,3 +1,22 @@
+## [0.5.0](https://github.com/zsaquarian/listman/compare/v0.4.2...v0.5.0) (2022-01-26)
+
+
+### Features
+
+* **a11y:** make outline white in dark mode ([2e995f5](https://github.com/zsaquarian/listman/commit/2e995f5afc2f3f3a4b9f9e7103839e0580b80f02))
+* added a dark mode ([b9d0cfd](https://github.com/zsaquarian/listman/commit/b9d0cfd720606d5516d8fa8823f1284220b768f5))
+* create new `all lists` page to view / search all lists ([6e24491](https://github.com/zsaquarian/listman/commit/6e2449197b4798b8cdad12a497a9cb697c02978b))
+
+
+### Bug Fixes
+
+* add missing import ([85b5eed](https://github.com/zsaquarian/listman/commit/85b5eedd6a5e35a032a354be28026cdde3f80de3))
+* **compatibility:** dont use top-level await ([131bbed](https://github.com/zsaquarian/listman/commit/131bbed8e2eb9a599d1eebfba1ef07837581be1b))
+* **heroku:** properly fix the heroku issue ([f2a18b9](https://github.com/zsaquarian/listman/commit/f2a18b91b4761a82c6ca72d180ebb92ea9b8048f))
+* **home page:** ignore the `config` key in the home page ([692062d](https://github.com/zsaquarian/listman/commit/692062d55f6f28405f00311874de9b1422ec4977))
+* **lockfile:** update lockfile ([d3e0a05](https://github.com/zsaquarian/listman/commit/d3e0a0558af84d5a2e86f8374040ca76a2287b7f))
+* login input text should be dark in dark mode ([7c522f2](https://github.com/zsaquarian/listman/commit/7c522f2113dda9dc97328f05164f35c7c0b630e8))
+
 # Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
