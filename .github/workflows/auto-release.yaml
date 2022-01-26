@@ -7,7 +7,6 @@ on:
 jobs:
   release-it-1:
     runs-on: ubuntu-latest
-    needs: publish-tauri
     steps:
       - uses: actions/checkout@v2
         with:
@@ -27,6 +26,7 @@ jobs:
         platform: [macos-latest, ubuntu-latest, windows-latest]
 
     runs-on: ${{ matrix.platform }}
+    needs: release-it-1
     steps:
       - uses: actions/checkout@v2
       - name: install Rust stable
