@@ -15,7 +15,7 @@ const getStoredAuthState = async () => {
 export const authStore = writable((await getStoredAuthState()) || ({ isLoggedIn: false, username: '' } as AuthState));
 
 const authStateInit = async () => {
-  authStore.set(await getStoredAuthState());
+  authStore.set((await getStoredAuthState()) || { isLoggedIn: false, username: '' });
 
   authStore.subscribe((val) => {
     console.log(val);
