@@ -1,4 +1,4 @@
-package com.svelte.capacitor;
+package dev.nahos.listman;
 
 import com.getcapacitor.BridgeActivity;
 
