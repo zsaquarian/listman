@@ -1,5 +1,5 @@
 import { Storage } from '@capacitor/storage';
-import { LIST_SCHEMA_VERSION_NO } from './constants';
+import { IGNORED_KEYS, LIST_SCHEMA_VERSION_NO } from './constants';
 
 export interface GenericListItem {
   item: string;
@@ -10,7 +10,7 @@ export interface GenericList {
   version: string;
   name: string;
   isShared: boolean;
-  items: ListItem[];
+  items: GenericListItem[];
 }
 
 export type Lists = {
