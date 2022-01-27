@@ -16,7 +16,7 @@ const config: CapacitorConfig = {
   cordova: {},
   server: {
     // TODO: comment next line before building for prod
-    url: process.env.IP,
+    // url: process.env.IP,
     cleartext: true,
   },
 };
