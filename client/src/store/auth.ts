@@ -12,7 +12,7 @@ const getStoredAuthState = async () => {
   return JSON.parse((await Storage.get({ key: authStateKey })).value) as AuthState;
 };
 
-export const authStore = writable((await getStoredAuthState()) || ({ isLoggedIn: false, username: '' } as AuthState));
+export const authStore = writable({} as AuthState);
 
 const authStateInit = async () => {
   authStore.set((await getStoredAuthState()) || { isLoggedIn: false, username: '' });

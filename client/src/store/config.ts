@@ -11,7 +11,7 @@ const getStoredConfig = async () => {
   return JSON.parse((await Storage.get({ key: configKey })).value) as Config;
 };
 
-export const config = writable((await getStoredConfig()) || ({ darkMode: false } as Config));
+export const config = writable({ darkMode: false } as Config);
 
 const authStateInit = async () => {
   config.set((await getStoredConfig()) || { darkMode: false });
