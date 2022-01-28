@@ -72,6 +72,7 @@
     "@capacitor/share": "^1.0.3",
     "@capacitor/storage": "^1.0.3",
     "@reactivedata/reactive": "^0.1.16",
+    "@reslear/capacitor-google-auth": "^3.1.0",
     "@syncedstore/core": "^0.3.4",
     "@syncedstore/svelte": "^0.3.4",
     "@urql/exchange-auth": "^0.1.6",

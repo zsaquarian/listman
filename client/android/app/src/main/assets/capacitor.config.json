@@ -6,10 +6,17 @@
 	"plugins": {
 		"SplashScreen": {
 			"launchShowDuration": 0
+		},
+		"GoogleAuth": {
+			"scopes": [
+				"email"
+			],
+			"serverClientId": "610976066282-9rpjagnk956552lmej9k047v103stlbu.apps.googleusercontent.com"
 		}
 	},
 	"cordova": {},
 	"server": {
+		"url": "http://192.168.0.177:5000",
 		"cleartext": true
 	}
 }

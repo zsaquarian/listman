@@ -12,11 +12,15 @@ const config: CapacitorConfig = {
     SplashScreen: {
       launchShowDuration: 0,
     },
+    GoogleAuth: {
+      scopes: ['email'],
+      serverClientId: process.env.VITE_GOOGLE_CLIENT_ID,
+    },
   },
   cordova: {},
   server: {
     // TODO: comment next line before building for prod
-    // url: process.env.IP,
+    url: process.env.IP,
     cleartext: true,
   },
 };

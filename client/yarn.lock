@@ -2075,6 +2075,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@reslear/capacitor-google-auth@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "@reslear/capacitor-google-auth@npm:3.1.0"
+  peerDependencies:
+    "@capacitor/core": ^3
+  checksum: c7de75532b8f390d81a8da084bd52afebb5b87e1f60d59dcc5cca00d4b35e74675652a41f9ff23d0b71a05a2ed698f509c6fb4ef75df98364a0435ceb3c1d3be
+  languageName: node
+  linkType: hard
+
 "@rollup/pluginutils@npm:^4.1.1":
   version: 4.1.1
   resolution: "@rollup/pluginutils@npm:4.1.1"
@@ -3959,6 +3968,7 @@ __metadata:
     "@graphql-codegen/typescript": ^2.2.4
     "@graphql-codegen/typescript-operations": ^2.1.8
     "@reactivedata/reactive": ^0.1.16
+    "@reslear/capacitor-google-auth": ^3.1.0
     "@roxi/routify": ^2.18.0
     "@sveltejs/vite-plugin-svelte": ^1.0.0-next.17
     "@syncedstore/core": ^0.3.4

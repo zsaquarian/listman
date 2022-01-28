@@ -1,23 +1,14 @@
 <script lang="ts">
   import Form from './Form.svelte';
   import { mutation, operationStore } from '@urql/svelte';
-  import { GoogleSignInDocument, LoginDocument } from '@graphql';
+  import { LoginDocument } from '@graphql';
   import { parseCombinedError } from '@utils/errorParser';
   import type { ParsedError } from '@utils/errorParser';
   import { goto } from '@roxi/routify';
 
   const loginMutation = mutation(operationStore(LoginDocument));
-  const googleSignInMutation = mutation(operationStore(GoogleSignInDocument));
 
   let errors: ParsedError[] = [];
-
-  const googleLogin = async (googleUser: CredentialResponse) => {
-    const result = await googleSignInMutation({ token: googleUser.credential });
-    $goto('/');
-  };
-
-  // @ts-ignore
-  window.googleLogin = googleLogin;
 
   let formVals = { password: '', usernameOrEmail: '' } as GenericFormValues;
 

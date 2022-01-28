@@ -1,6 +1,11 @@
 <script lang="ts">
   import type { ParsedError } from '@utils/errorParser';
+  import { onMount } from 'svelte';
   import InputWithErrors from './InputWithErrors.svelte';
+  import { GoogleAuth } from '@reslear/capacitor-google-auth';
+  import { goto } from '@roxi/routify';
+  import { GoogleSignInDocument } from '@graphql';
+  import { mutation, operationStore } from '@urql/svelte';
 
   export let hasGoogleAuth = false;
   export let hasEmail = false;
@@ -13,35 +18,40 @@
   export let submitText: string;
 
   export let formVals: GenericFormValues;
+
+  onMount(() => {
+    GoogleAuth.initialize({
+      clientId: import.meta.env.VITE_GOOGLE_CLIENT_ID as string,
+      scopes: ['email', 'profile'],
+    });
+  });
+
+  const googleSignInMutation = mutation(operationStore(GoogleSignInDocument));
+
+  const googleSignIn = async () => {
+    const googleResult = await GoogleAuth.signIn();
+
+    const backendResult = await googleSignInMutation({ token: googleResult.authentication.idToken });
+
+    if (!backendResult.data.googleSignIn.error) {
+      $goto('/');
+    }
+  };
 </script>
 
 <div
   class="flex flex-col justify-center m-2 w-full sm:w-3/4 md:w-1/2 mx-auto rounded-lg border-primary-300 border-2 bg-primary-50 py-2 px-16 drop-shadow dark:bg-primary-500"
 >
   {#if hasGoogleAuth}
-    <!-- Google Auth -->
-    <div class="mx-auto">
-      <div
-        id="g_id_onload"
-        data-client_id={import.meta.env.VITE_GOOGLE_CLIENT_ID}
-        data-context="signin"
-        data-ux_mode="popup"
-        data-callback="googleLogin"
-        data-auto_prompt="false"
-      />
-
-      <div
-        class="g_id_signin"
-        data-type="standard"
-        data-shape="rectangular"
-        data-theme="filled_black"
-        data-text="signin_with"
-        data-size="large"
-        data-logo_alignment="left"
-      />
-    </div>
-
-    <div class="border-b-2 border-black text-center mt-4 mb-4 justify-center" style="line-height: 0.1rem;">
+    <div class="border-b-2 border-black text-center mb-4 justify-center" style="line-height: 0.1rem;">
+      <div class="block">
+        <div
+          class="bg-primary-700 dark:bg-primary-900 text-white justify-center my-4 pr-2 w-auto inline-flex rounded-md"
+        >
+          <img src="/assets/google_icon.svg" class="bg-white mr-2 p-2 rounded-l-md dark:bg-black" alt="Google Icon" />
+          <button on:click={googleSignIn}>Sign in with Google</button>
+        </div>
+      </div>
       <span class="bg-primary-50 dark:bg-primary-500 px-4">OR</span>
     </div>
   {/if}
