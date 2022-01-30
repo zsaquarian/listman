@@ -48,7 +48,7 @@
         <div
           class="bg-primary-700 dark:bg-primary-900 text-white justify-center my-4 pr-2 w-auto inline-flex rounded-md"
         >
-          <img src="/assets/google_icon.svg" class="bg-white mr-2 p-2 rounded-l-md dark:bg-black" alt="Google Icon" />
+          <img src="/google_icon.svg" class="bg-white mr-2 p-2 rounded-l-md dark:bg-black" alt="Google Icon" />
           <button on:click={googleSignIn}>Sign in with Google</button>
         </div>
       </div>
