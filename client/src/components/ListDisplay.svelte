@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { createList, listToString, storeList } from '@utils/listUtils';
-  import type { ShoppingList } from '@utils/listUtils';
+  import { createList, getFormattedModifiedTime, listToString, storeList } from '@utils/listUtils';
+  import type { GenericList } from '@utils/listUtils';
   import { Share } from '@capacitor/share';
   import { Share as ShareIcon, UserAdd as UserAddIcon, Plus as PlusIcon } from 'svelte-hero-icons';
   import ItemDisplay from './ItemDisplay.svelte';
@@ -15,7 +15,7 @@
   export let isMasterList = false;
   export let isShared = false;
   export let removeItem: (i: number) => void;
-  export let list: ShoppingList;
+  export let list: GenericList;
   export let listUuid: string;
 
   const { open } = getContext('simple-modal');
@@ -40,6 +40,7 @@
               placeholder="Enter name"
             />
           {/if}
+          <p>Modified: {list.modified && getFormattedModifiedTime(list)}</p>
         </div>
         <div class="flex justify-between">
           <IconButton
@@ -106,7 +107,9 @@
           bind:checked={done}
           itemName={item}
           shouldLineThrough={!isMasterList}
-          removeItem={() => removeItem(i)}
+          removeItem={() => {
+            removeItem(i);
+          }}
           class="m-2 p-2"
         />
       {/each}
@@ -128,7 +131,7 @@
   >
     <input
       type="text"
-      class="input w-full m-2 rounded-lg p-2"
+      class="input w-full m-2 rounded-lg p-2 dark:text-black"
       bind:value={addInput}
       placeholder="Enter the name of a new item"
     />

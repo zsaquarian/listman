@@ -20,8 +20,8 @@
       });
 
       lists.sort((a, b) => {
-        if (a.key < b.key) return -1;
-        else if (a.key > b.key) return 1;
+        if (a.modified < b.modified) return -1;
+        else if (a.modified > b.modified) return 1;
 
         return 0;
       });

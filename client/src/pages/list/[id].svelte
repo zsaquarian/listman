@@ -7,9 +7,11 @@
 
   const key = $params.id;
   let list: GenericList;
+  let storedList: GenericList;
 
   onMount(async () => {
     list = await loadList(key);
+    storedList = JSON.parse(JSON.stringify(list));
   });
 
   const removeItem = (i: number): void => {
@@ -17,8 +19,9 @@
   };
 
   $: {
-    if (list) {
+    if (JSON.stringify(list) !== JSON.stringify(storedList)) {
       storeList(key, list);
+      storedList = list;
     }
   }
 </script>

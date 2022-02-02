@@ -1,5 +1,7 @@
 import { Storage } from '@capacitor/storage';
 import { IGNORED_KEYS, LIST_SCHEMA_VERSION_NO } from './constants';
+import { DateTime } from 'luxon';
+import { migrateList } from './versionUtils';
 
 export interface GenericListItem {
   item: string;
@@ -11,6 +13,7 @@ export interface GenericList {
   name: string;
   isShared: boolean;
   items: GenericListItem[];
+  modified: DateTime;
 }
 
 export type Lists = {
@@ -21,6 +24,8 @@ export type Lists = {
 }[];
 
 export const storeList = async (key: string, list: GenericList): Promise<void> => {
+  list.modified = DateTime.now();
+
   const value = JSON.stringify(list);
   await Storage.set({ key, value });
 };
@@ -28,7 +33,11 @@ export const storeList = async (key: string, list: GenericList): Promise<void> =
 export const loadList = async (key: string): Promise<GenericList> => {
   const { value: val } = await Storage.get({ key });
   if (val !== null && val) {
-    return JSON.parse(val) as GenericList;
+    let list = JSON.parse(val) as GenericList;
+
+    list = migrateList(list);
+
+    return list;
   } else {
     throw new Error('List does not exist');
   }
@@ -44,7 +53,7 @@ export const loadOrCreateList = async (key: string): Promise<GenericList> => {
 };
 
 export const createList = (vals: GenericListItem[] = []): GenericList => {
-  return { version: LIST_SCHEMA_VERSION_NO, items: vals, name: '', isShared: false };
+  return { version: LIST_SCHEMA_VERSION_NO, items: vals, name: '', isShared: false, modified: DateTime.now() };
 };
 
 export const addItem = async (list: GenericList, newVal: string): Promise<GenericList> => {
@@ -80,4 +89,36 @@ export const listToString = (list: GenericList): string => {
 `;
   });
   return ret;
+};
+
+export const getFormattedModifiedTime = (list: GenericList): string => {
+  if (typeof list.modified === 'string') {
+    list.modified = DateTime.fromISO(list.modified);
+  }
+
+  const ago = list.modified.diffNow();
+  // -1 is there as luxon does `now - modified`, but we want `modified - now`
+  const minutesAgo = -1 * ago.as('minutes');
+
+  if (minutesAgo === 0) {
+    return 'a few seconds ago';
+  }
+
+  if (minutesAgo < 60) {
+    return `${minutesAgo.toFixed(0)} minutes ago`;
+  }
+
+  const hoursAgo = -1 * ago.as('hours');
+
+  if (hoursAgo < 24) {
+    return `${hoursAgo.toFixed(0)} hours ago`;
+  }
+
+  const daysAgo = -1 * ago.as('days');
+
+  if (daysAgo < 7) {
+    return `${daysAgo.toFixed(0)} days ago`;
+  }
+
+  return ago.toFormat('dd, MM yyyy');
 };

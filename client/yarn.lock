@@ -2462,6 +2462,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/luxon@npm:^2.0.9":
+  version: 2.0.9
+  resolution: "@types/luxon@npm:2.0.9"
+  checksum: 6c99741e1735aca5b784981ecec3a6ad9497b8e46cc3dd0ba625901bb5b34af4c7b1bf33e32b3e8468312ce2850b31f553f712283a8301a0ee1aacb633276738
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:*":
   version: 16.4.13
   resolution: "@types/node@npm:16.4.13"
@@ -3978,6 +3985,7 @@ __metadata:
     "@testing-library/user-event": ^13.5.0
     "@tsconfig/svelte": ^1.0.10
     "@types/jest": ^27.0.3
+    "@types/luxon": ^2.0.9
     "@types/uuid": ^8.3.1
     "@typescript-eslint/eslint-plugin": ^4.29.1
     "@typescript-eslint/parser": ^4.29.1
@@ -3997,6 +4005,7 @@ __metadata:
     jest: ^27.4.5
     jest-transform-stub: ^2.0.0
     lint-staged: ^12.1.7
+    luxon: ^2.3.0
     npm-run-all: ^4.1.5
     postcss: ^8.3.5
     postcss-load-config: ^3.1.1
@@ -8369,6 +8378,13 @@ __metadata:
   version: 2.2.1
   resolution: "ltgt@npm:2.2.1"
   checksum: 7e3874296f7538bc8087b428ac4208008d7b76916354b34a08818ca7c83958c1df10ec427eeeaad895f6b81e41e24745b18d30f89abcc21d228b94f6961d50a2
+  languageName: node
+  linkType: hard
+
+"luxon@npm:^2.3.0":
+  version: 2.3.0
+  resolution: "luxon@npm:2.3.0"
+  checksum: 3d00e1b812a31082cf0d97e844d7354c93891fbd14795756f396ee5656387e21d2c862edb841516114eb391f8314a6cf3848799acc6d59cf9560c88c909b91f0
   languageName: node
   linkType: hard
 
