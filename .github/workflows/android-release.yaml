@@ -23,12 +23,6 @@ jobs:
           VITE_GOOGLE_CLIENT_ID_ANDROID: 328700882343-675m7k1qnod9s0v1cqvt5ftjko69td2g.apps.googleusercontent.com
           VITE_GRAPHQL_IP: https://listman-backend.herokuapp.com/graphql
 
-      - name: Build android project
-        run: |
-          cd client/android
-          chmod +x gradlew
-          ./gradlew bundleRelease -p .
-
       - uses: actions/setup-ruby@v1
         with:
           ruby-version: '2.7.2'
