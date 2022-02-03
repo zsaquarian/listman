@@ -25,7 +25,7 @@ jobs:
 
       - name: Build android project
         run: |
-          cd android
+          cd client/android
           chmod +x gradlew
           ./gradlew bundleRelease -p .
 
@@ -41,11 +41,13 @@ jobs:
           echo "keyAlias=$KEYSTORE_KEY_ALIAS" >> client/android/keystore.properties
           echo "storePassword=$KEYSTORE_STORE_PASSWORD" >> client/android/keystore.properties
           echo "keyPassword=$KEYSTORE_KEY_PASSWORD" >> client/android/keystore.properties
+          echo "$FASTLANE_KEY_FILE" > client/android/fastlane-key.json
         env:
           ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE_FILE }}
           KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_KEY_ALIAS }}
           KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
           KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
+          FASTLANE_KEY_FILE: ${{ secrets.FASTLANE_KEY_FILE }}
 
       - uses: maierj/fastlane-action@v2.0.1
         with:
