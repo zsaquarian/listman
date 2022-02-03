@@ -22,7 +22,7 @@ platform :android do
   end
 
   desc "Deploy a new version to the Google Play"
-  lane :deploy do
+  lane :internal do
     gradle(task: "clean bundleRelease")
     upload_to_play_store(
       track: 'internal',

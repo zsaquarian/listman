@@ -1,0 +1,53 @@
+name: Android release
+
+on:
+  push:
+    branches:
+      - staging
+
+jobs:
+  distribute:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build app
+        run: |
+          cd client
+          yarn
+          yarn build
+        env:
+          VITE_GOOGLE_CLIENT_ID: 328700882343-69r2ogebmt2fv5g1p7j92bhtmkle3d2t.apps.googleusercontent.com
+          VITE_GOOGLE_CLIENT_ID_WEB: 328700882343-69r2ogebmt2fv5g1p7j92bhtmkle3d2t.apps.googleusercontent.com
+          VITE_GOOGLE_CLIENT_ID_ANDROID: 328700882343-675m7k1qnod9s0v1cqvt5ftjko69td2g.apps.googleusercontent.com
+          VITE_GRAPHQL_IP: https://listman-backend.herokuapp.com/graphql
+
+      - name: Build android project
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew bundleRelease -p .
+
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: '2.7.2'
+
+      - name: Configure Keystore
+        run: |
+          echo "$ANDROID_KEYSTORE_FILE" > keystore.jks.b64
+          base64 -d -i keystore.jks.b64 > client/android/app/release-key.jks
+          echo "storeFile=release-key.jks" >> client/android/keystore.properties
+          echo "keyAlias=$KEYSTORE_KEY_ALIAS" >> client/android/keystore.properties
+          echo "storePassword=$KEYSTORE_STORE_PASSWORD" >> client/android/keystore.properties
+          echo "keyPassword=$KEYSTORE_KEY_PASSWORD" >> client/android/keystore.properties
+        env:
+          ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE_FILE }}
+          KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_KEY_ALIAS }}
+          KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
+          KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
+
+      - uses: maierj/fastlane-action@v2.0.1
+        with:
+          lane: 'internal'
+          subdirectory: 'client/android'
