@@ -1,3 +1,18 @@
+## [0.6.0](https://github.com/zsaquarian/listman/compare/v0.5.1...v0.6.0) (2022-02-03)
+
+
+### Features
+
+* add modified dates to lists ([7370cb1](https://github.com/zsaquarian/listman/commit/7370cb177642b4e99ca0ba27924888e6b526be26))
+* **auth:** switch to Capacitor GoogleAuth Plugin so google auth works on android ([72e99fb](https://github.com/zsaquarian/listman/commit/72e99fb58f9e07fe400892a2028880c676ce75ac))
+
+
+### Bug Fixes
+
+* **backend:** allow capacitor domains in cors ([64af8f3](https://github.com/zsaquarian/listman/commit/64af8f38d9093b52beaf868ccc3adfeb6daac1d2))
+* **capacitor:** fix the top-level await issue properly ([9c9246b](https://github.com/zsaquarian/listman/commit/9c9246b87aeacddc713fcd7cc89aa902f5e69d9f))
+* **collabaration:** make modified dates work with collabaritive lists ([b0dc4e8](https://github.com/zsaquarian/listman/commit/b0dc4e8728da26d1474c5ee87875e309dfc9ff82))
+
 ### [0.5.1](https://github.com/zsaquarian/listman/compare/v0.5.0...v0.5.1) (2022-01-26)
 
 
