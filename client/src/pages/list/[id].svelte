@@ -1,7 +1,7 @@
 <script lang="ts">
   import ListDisplay from '@components/ListDisplay.svelte';
   import { params } from '@roxi/routify';
-  import { loadList, storeList } from '@utils/listUtils';
+  import { isDifferent, loadList, storeList } from '@utils/listUtils';
   import type { GenericList } from '@utils/listUtils';
   import { onMount } from 'svelte';
 
@@ -19,7 +19,7 @@
   };
 
   $: {
-    if (JSON.stringify(list) !== JSON.stringify(storedList)) {
+    if (isDifferent(list, storedList)) {
       storeList(key, list);
       storedList = list;
     }

@@ -1,6 +1,6 @@
 <script lang="ts">
   import ListDisplay from '@components/ListDisplay.svelte';
-  import { loadList, storeList } from '@utils/listUtils';
+  import { GenericList, isDifferent, loadList, storeList } from '@utils/listUtils';
   import { getContext, onMount } from 'svelte';
   import { goto, params } from '@roxi/routify';
   import { operationStore, query } from '@urql/svelte';
@@ -17,6 +17,8 @@
 
   const store = getStore(key);
 
+  let storedList: GenericList;
+
   $: if ($canViewList.error) {
     if ($canViewList.error.message.includes('Not authorized')) {
       open(
@@ -32,7 +34,7 @@
       );
     }
 
-    if ($canViewList.error.message.includes('List does not exist')) {
+    if ($canViewList.error.message.includes('list does not exist')) {
       open(
         ErrorPopup,
         { error: 'List does not exst' },
@@ -55,6 +57,7 @@
       const loadedList = await loadList(key);
       Object.assign($store.todos, loadedList);
       list.isShared = true;
+      storedList = JSON.parse(JSON.stringify(list));
     } catch (e) {}
   });
 
@@ -63,8 +66,9 @@
   };
 
   $: {
-    if ($store.todos && $store.todos.items) {
-      storeList(key, $store.todos);
+    if ($store.todos && $store.todos.items && isDifferent(list, storedList)) {
+      storeList(key, list);
+      storedList = list;
     }
   }
 

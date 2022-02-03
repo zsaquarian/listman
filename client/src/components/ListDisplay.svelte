@@ -22,6 +22,20 @@
 
   const shareListMutation = mutation(operationStore(ShareListDocument));
   let addInput: string;
+  let formattedModifiedTime: string = getFormattedModifiedTime(list);
+
+  let modifiedInterval = setInterval(() => {
+    formattedModifiedTime = getFormattedModifiedTime(list);
+  }, 1000 * 60);
+
+  $: {
+    if (list && list.items) {
+      clearInterval(modifiedInterval);
+      modifiedInterval = setInterval(() => {
+        formattedModifiedTime = getFormattedModifiedTime(list);
+      }, 1000 * 60);
+    }
+  }
 
   $: selected = list && list.items && list.items.filter((val) => val.done);
 </script>
@@ -40,7 +54,7 @@
               placeholder="Enter name"
             />
           {/if}
-          <p>Modified: {list.modified && getFormattedModifiedTime(list)}</p>
+          <p>Modified: {formattedModifiedTime}</p>
         </div>
         <div class="flex justify-between">
           <IconButton

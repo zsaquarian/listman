@@ -2194,38 +2194,38 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@syncedstore/core@npm:^0.3.4":
-  version: 0.3.4
-  resolution: "@syncedstore/core@npm:0.3.4"
+"@syncedstore/core@npm:^0.3.7":
+  version: 0.3.7
+  resolution: "@syncedstore/core@npm:0.3.7"
   dependencies:
     "@reactivedata/reactive": 0.1.16
-    "@syncedstore/yjs-reactive-bindings": ^0.3.4
+    "@syncedstore/yjs-reactive-bindings": ^0.3.7
     "@types/eslint": 6.8.0
   peerDependencies:
     yjs: ^13.5.13
-  checksum: 2f3772f1fa80cd90b5ce331f47f37344b82df5477dc3b3b91d3a34e04d5ef0e7c0b6430c2d93259cfcee3c9ad5f4c278524f68ee4089c71d70e1bc590191ec99
+  checksum: 31d0170068a1e991d1fd20ceee1b85a2a54516ed86ef3458186f5d66ffcf9d4682cffbe2a2e6eff9f0d0093dafd0197cd8f25ae124f51b79b8de06201043ed43
   languageName: node
   linkType: hard
 
-"@syncedstore/svelte@npm:^0.3.4":
-  version: 0.3.4
-  resolution: "@syncedstore/svelte@npm:0.3.4"
+"@syncedstore/svelte@npm:^0.3.6":
+  version: 0.3.6
+  resolution: "@syncedstore/svelte@npm:0.3.6"
   peerDependencies:
     "@reactivedata/reactive": "*"
     "@syncedstore/core": "*"
     svelte: "*"
-  checksum: b3806a8875a3d8ffbfcc8e782f4f9991c3956f50c73212e0abc3bba673b82fdc566dbb936a85f141f6e48863e37920d29b965ebeba746d437038d7778db6262c
+  checksum: bc57b7a4601f2ae9cd9e0102550dbda3588ac8f4ca0d627f66b4fabff0e01d5128b591936df0481f1d7a6b040d8e34dcafd7c16f5cb4b660f8e72db965f0ec43
   languageName: node
   linkType: hard
 
-"@syncedstore/yjs-reactive-bindings@npm:^0.3.4":
-  version: 0.3.4
-  resolution: "@syncedstore/yjs-reactive-bindings@npm:0.3.4"
+"@syncedstore/yjs-reactive-bindings@npm:^0.3.7":
+  version: 0.3.7
+  resolution: "@syncedstore/yjs-reactive-bindings@npm:0.3.7"
   dependencies:
     "@types/eslint": 6.8.0
   peerDependencies:
     yjs: ^13.5.13
-  checksum: 9eee5e739d0bd6d64a3c79a7f91ffebafa5eca996931e06c13b7b6e3ba3bd6b16174aad1a322ab7b039de93c77955b689f1937e3fa07b1f01473ee43960cf6c6
+  checksum: 24886ce9a466e1c5211372f49322107bf5b12496b8e6a619e34371a35fb3db06ab1d8f08eeb5cf68dc9215346c42aa2d5655378ff4fff78f5fa07b235da89e31
   languageName: node
   linkType: hard
 
@@ -3978,8 +3978,8 @@ __metadata:
     "@reslear/capacitor-google-auth": ^3.1.0
     "@roxi/routify": ^2.18.0
     "@sveltejs/vite-plugin-svelte": ^1.0.0-next.17
-    "@syncedstore/core": ^0.3.4
-    "@syncedstore/svelte": ^0.3.4
+    "@syncedstore/core": ^0.3.7
+    "@syncedstore/svelte": ^0.3.6
     "@testing-library/jest-dom": ^5.16.1
     "@testing-library/svelte": ^3.0.3
     "@testing-library/user-event": ^13.5.0

@@ -13,7 +13,7 @@ export interface GenericList {
   name: string;
   isShared: boolean;
   items: GenericListItem[];
-  modified: DateTime;
+  modified: string;
 }
 
 export type Lists = {
@@ -24,7 +24,7 @@ export type Lists = {
 }[];
 
 export const storeList = async (key: string, list: GenericList): Promise<void> => {
-  list.modified = DateTime.now();
+  list.modified = DateTime.now().toISO();
 
   const value = JSON.stringify(list);
   await Storage.set({ key, value });
@@ -92,15 +92,15 @@ export const listToString = (list: GenericList): string => {
 };
 
 export const getFormattedModifiedTime = (list: GenericList): string => {
-  if (typeof list.modified === 'string') {
-    list.modified = DateTime.fromISO(list.modified);
-  }
+  const modifiedTime = DateTime.fromISO(list.modified);
 
-  const ago = list.modified.diffNow();
+  console.log(list.modified);
+
+  const ago = modifiedTime.diffNow();
   // -1 is there as luxon does `now - modified`, but we want `modified - now`
   const minutesAgo = -1 * ago.as('minutes');
 
-  if (minutesAgo === 0) {
+  if (minutesAgo < 1) {
     return 'a few seconds ago';
   }
 
@@ -121,4 +121,13 @@ export const getFormattedModifiedTime = (list: GenericList): string => {
   }
 
   return ago.toFormat('dd, MM yyyy');
+};
+
+export const isDifferent = (list1: GenericList, list2: GenericList): boolean => {
+  const list1Copy = { ...list1, modified: undefined };
+  const list2Copy = { ...list2, modified: undefined };
+
+  console.log(JSON.stringify(list1Copy) !== JSON.stringify(list2Copy));
+
+  return JSON.stringify(list1Copy) !== JSON.stringify(list2Copy);
 };
