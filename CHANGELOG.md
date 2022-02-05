@@ -1,3 +1,10 @@
+### [0.6.1](https://github.com/zsaquarian/listman/compare/v0.6.0...v0.6.1) (2022-02-05)
+
+
+### Bug Fixes
+
+* **android:** update google client id in android strings.xml ([e5780ac](https://github.com/zsaquarian/listman/commit/e5780acb0fae25817e40af715d4f5290dbe4a16b))
+
 ## [0.6.0](https://github.com/zsaquarian/listman/compare/v0.5.1...v0.6.0) (2022-02-03)
 
 
