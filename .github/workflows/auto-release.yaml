@@ -75,6 +75,6 @@ jobs:
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
       - run: yarn
-      - run: yarn release-it --github.release --github.update --no-github.draft --no-git
+      - run: yarn release-it --github.release --github.update --no-github.draft --no-git --no-increment
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
