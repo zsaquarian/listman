@@ -46,10 +46,6 @@
 * **lockfile:** update lockfile ([d3e0a05](https://github.com/zsaquarian/listman/commit/d3e0a0558af84d5a2e86f8374040ca76a2287b7f))
 * login input text should be dark in dark mode ([7c522f2](https://github.com/zsaquarian/listman/commit/7c522f2113dda9dc97328f05164f35c7c0b630e8))
 
-# Changelog
-
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
-
 ### [0.4.2](https://github.com/zsaquarian/listman/compare/v0.4.1...v0.4.2) (2022-01-10)
 
 ### [0.4.1](https://github.com/zsaquarian/listman/compare/v0.4.0...v0.4.1) (2022-01-08)
