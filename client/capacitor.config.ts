@@ -13,8 +13,9 @@ const config: CapacitorConfig = {
       launchShowDuration: 0,
     },
     GoogleAuth: {
-      scopes: ['email'],
-      serverClientId: process.env.VITE_GOOGLE_CLIENT_ID,
+      scopes: ['email', 'profile'],
+      clientId: '328700882343-69r2ogebmt2fv5g1p7j92bhtmkle3d2t.apps.googleusercontent.com',
+      forceCodeForRefreshToken: true,
     },
   },
   cordova: {},

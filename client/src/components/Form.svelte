@@ -19,17 +19,19 @@
 
   export let formVals: GenericFormValues;
 
-  onMount(() => {
-    GoogleAuth.initialize({
-      clientId: import.meta.env.VITE_GOOGLE_CLIENT_ID as string,
-      scopes: ['email', 'profile'],
-    });
-  });
+  // onMount(() => {
+  //   GoogleAuth.initialize({
+  //     clientId: import.meta.env.VITE_GOOGLE_CLIENT_ID as string,
+  //     scopes: ['email', 'profile'],
+  //   });
+  // });
 
   const googleSignInMutation = mutation(operationStore(GoogleSignInDocument));
 
   const googleSignIn = async () => {
     const googleResult = await GoogleAuth.signIn();
+
+    console.log(googleResult);
 
     const backendResult = await googleSignInMutation({ token: googleResult.authentication.idToken });
 

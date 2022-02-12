@@ -4,5 +4,4 @@
     <string name="title_activity_main">Listman</string>
     <string name="package_name">dev.nahos.listman</string>
     <string name="custom_url_scheme">dev.nahos.listman</string>
-    <string name="server_client_id">328700882343-69r2ogebmt2fv5g1p7j92bhtmkle3d2t.apps.googleusercontent.com</string>
 </resources>
