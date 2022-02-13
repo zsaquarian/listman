@@ -22,7 +22,7 @@
 
   const shareListMutation = mutation(operationStore(ShareListDocument));
   let addInput: string;
-  let formattedModifiedTime: string = getFormattedModifiedTime(list);
+  let formattedModifiedTime: string = list && list.modified ? getFormattedModifiedTime(list) : 'a few seconds ago';
 
   let modifiedInterval = setInterval(() => {
     formattedModifiedTime = getFormattedModifiedTime(list);

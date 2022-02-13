@@ -94,8 +94,6 @@ export const listToString = (list: GenericList): string => {
 export const getFormattedModifiedTime = (list: GenericList): string => {
   const modifiedTime = DateTime.fromISO(list.modified);
 
-  console.log(list.modified);
-
   const ago = modifiedTime.diffNow();
   // -1 is there as luxon does `now - modified`, but we want `modified - now`
   const minutesAgo = -1 * ago.as('minutes');
