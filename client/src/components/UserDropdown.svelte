@@ -38,7 +38,6 @@
 
   {#if $me.data?.me}
     <button
-      id="menu-button"
       on:blur={(e) => {
         if (e.relatedTarget !== logOutButton) dropdown = false;
       }}
@@ -62,6 +61,7 @@
         on:click={() => {
           logOut();
           me.reexecute();
+          dropdown = false;
         }}>Log Out</button
       >
     </div>
