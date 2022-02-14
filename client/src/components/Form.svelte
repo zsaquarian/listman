@@ -6,6 +6,7 @@
   import { goto } from '@roxi/routify';
   import { GoogleSignInDocument } from '@graphql';
   import { mutation, operationStore } from '@urql/svelte';
+  import { Capacitor } from '@capacitor/core';
 
   export let hasGoogleAuth = false;
   export let hasEmail = false;
@@ -19,19 +20,19 @@
 
   export let formVals: GenericFormValues;
 
-  // onMount(() => {
-  //   GoogleAuth.initialize({
-  //     clientId: import.meta.env.VITE_GOOGLE_CLIENT_ID as string,
-  //     scopes: ['email', 'profile'],
-  //   });
-  // });
+  onMount(() => {
+    if (Capacitor.getPlatform() == 'web') {
+      GoogleAuth.initialize({
+        clientId: import.meta.env.VITE_GOOGLE_CLIENT_ID as string,
+        scopes: ['email', 'profile'],
+      });
+    }
+  });
 
   const googleSignInMutation = mutation(operationStore(GoogleSignInDocument));
 
   const googleSignIn = async () => {
     const googleResult = await GoogleAuth.signIn();
-
-    console.log(googleResult);
 
     const backendResult = await googleSignInMutation({ token: googleResult.authentication.idToken });
 
