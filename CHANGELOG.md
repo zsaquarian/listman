@@ -1,3 +1,10 @@
+### [0.6.3](https://github.com/zsaquarian/listman/compare/v0.6.2...v0.6.3) (2022-02-14)
+
+
+### Bug Fixes
+
+* **auth:** google auth now initializes only on web ([6b59cc7](https://github.com/zsaquarian/listman/commit/6b59cc78d515e94dc4fa13d8ac31e491b8d10719))
+
 ### [0.6.2](https://github.com/zsaquarian/listman/compare/v0.6.1...v0.6.2) (2022-02-14)
 
 
