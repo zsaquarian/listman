@@ -1,3 +1,12 @@
+### [0.6.2](https://github.com/zsaquarian/listman/compare/v0.6.1...v0.6.2) (2022-02-14)
+
+
+### Bug Fixes
+
+* **android:** fix google auth in android ([59c0041](https://github.com/zsaquarian/listman/commit/59c004101a874540d2b879cd4ad81fcb94593fb0))
+* modified now has a default value ([b96d96b](https://github.com/zsaquarian/listman/commit/b96d96ba75bfb15f657d4c43a5f8c768bc7605e4))
+* **ui:** user dropdown is closed by default ([46eef89](https://github.com/zsaquarian/listman/commit/46eef89143e60f56614aeac42a278a85f9b83539))
+
 ### [0.6.1](https://github.com/zsaquarian/listman/compare/v0.6.0...v0.6.1) (2022-02-05)
 
 
