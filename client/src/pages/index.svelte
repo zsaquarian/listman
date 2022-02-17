@@ -54,7 +54,7 @@
     {#each realLists as { name, key, isShared, isExternal }, i (i)}
       <HomepageList {key} {name} {isShared} {isExternal} removeList={() => removeList(key, i)} />
     {/each}
-    {#if lists.length <= 1}
+    {#if lists.length < 1}
       <div class="text-4xl text-accent-900 drop-shadow-lg">
         <p>No lists made yet 🤔</p>
         <p class="hidden md:block">Check out the master list to get started!</p>
