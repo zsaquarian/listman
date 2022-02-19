@@ -24,6 +24,7 @@ jobs:
           VITE_GOOGLE_CLIENT_ID: 328700882343-69r2ogebmt2fv5g1p7j92bhtmkle3d2t.apps.googleusercontent.com
           VITE_GOOGLE_CLIENT_ID_WEB: 328700882343-69r2ogebmt2fv5g1p7j92bhtmkle3d2t.apps.googleusercontent.com
           VITE_GOOGLE_CLIENT_ID_ANDROID: 328700882343-675m7k1qnod9s0v1cqvt5ftjko69td2g.apps.googleusercontent.com
+          VITE_YJS_IP: wss://listman-collab.herokuapp.com/
           VITE_GRAPHQL_IP: https://listman-backend.herokuapp.com/graphql
 
       - uses: ruby/setup-ruby@v1
