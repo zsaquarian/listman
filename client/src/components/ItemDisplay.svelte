@@ -1,6 +1,5 @@
 <script lang="ts">
-  import Icon from 'svelte-hero-icons/Icon.svelte';
-  import { X } from 'svelte-hero-icons';
+  import { X } from '@steeze-ui/heroicons';
   import IconButton from '@components/IconButton.svelte';
 
   export let checked: boolean;

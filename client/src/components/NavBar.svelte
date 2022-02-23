@@ -1,7 +1,7 @@
 <script lang="ts">
   import UserDropdown from './UserDropdown.svelte';
-  import Icon from 'svelte-hero-icons/Icon.svelte';
-  import { Menu, X } from 'svelte-hero-icons';
+  import { Icon } from '@steeze-ui/svelte-icon';
+  import { Menu, X } from '@steeze-ui/heroicons';
 
   // Most code from https://dev.to/joshnuss/creating-a-sidebar-menu-in-svelte-ih2
   let open = false;

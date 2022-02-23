@@ -2,10 +2,9 @@
   import { Storage } from '@capacitor/storage';
   import { authStore } from '@store/auth';
   import { getStore } from '@utils/yjsUtils';
+  import { X, Users } from '@steeze-ui/heroicons';
+  import { Icon } from '@steeze-ui/svelte-icon';
 
-  import { Users, X } from 'svelte-hero-icons';
-
-  import Icon from 'svelte-hero-icons/Icon.svelte';
   import IconButton from './IconButton.svelte';
 
   export let key: string;

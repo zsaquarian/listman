@@ -3,8 +3,8 @@
   import { getLists, Lists } from '@utils/listUtils';
   import { onMount } from 'svelte';
   import { Storage } from '@capacitor/storage';
-  import Icon from 'svelte-hero-icons/Icon.svelte';
-  import { Search } from 'svelte-hero-icons';
+  import { Icon } from '@steeze-ui/svelte-icon';
+  import { Search } from '@steeze-ui/heroicons';
 
   let lists = [] as Lists;
 

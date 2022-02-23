@@ -2,7 +2,7 @@
   import { createList, getFormattedModifiedTime, listToString, storeList } from '@utils/listUtils';
   import type { GenericList } from '@utils/listUtils';
   import { Share } from '@capacitor/share';
-  import { Share as ShareIcon, UserAdd as UserAddIcon, Plus as PlusIcon } from 'svelte-hero-icons';
+  import { Share as ShareIcon, UserAdd as UserAddIcon, Plus as PlusIcon } from '@steeze-ui/heroicons';
   import ItemDisplay from './ItemDisplay.svelte';
   import IconButton from './IconButton.svelte';
   import { getContext } from 'svelte';
@@ -58,7 +58,7 @@
         </div>
         <div class="flex justify-between">
           <IconButton
-            class="text-primary-300 dark:text-primary-100"
+            buttonClass="text-primary-300 dark:text-primary-100"
             onClickHandler={async () => {
               await Share.share({
                 title: list.name,

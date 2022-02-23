@@ -1,8 +1,8 @@
 <script lang="ts">
   import { mutation, operationStore, query } from '@urql/svelte';
   import { LogOutDocument, MeDocument, RefreshDocument } from '@graphql';
-  import Icon from 'svelte-hero-icons/Icon.svelte';
-  import { ChevronDown, ChevronUp } from 'svelte-hero-icons';
+  import { Icon } from '@steeze-ui/svelte-icon';
+  import { ChevronDown, ChevronUp } from '@steeze-ui/heroicons';
   import { authStore } from '@store/auth';
 
   const meQuery = operationStore(MeDocument);

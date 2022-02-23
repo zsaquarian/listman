@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Icon from 'svelte-hero-icons/Icon.svelte';
-  import { Exclamation } from 'svelte-hero-icons';
+  import { Icon } from '@steeze-ui/svelte-icon';
+  import { Exclamation } from '@steeze-ui/heroicons';
 
   export let error: string;
 </script>

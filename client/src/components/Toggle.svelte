@@ -1,6 +1,6 @@
 <script lang="ts">
   import Switch from 'svelte-switch';
-  import Icon from 'svelte-hero-icons/Icon.svelte';
+  import { Icon } from '@steeze-ui/svelte-icon';
 
   export let toggled: boolean;
   export let label: string;
