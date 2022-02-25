@@ -1,7 +1,7 @@
 <script lang="ts">
   import Toggle from '@components/Toggle.svelte';
   import { config } from '@store/config';
-  import { Moon, Sun } from 'svelte-hero-icons';
+  import { Moon, Sun } from '@steeze-ui/heroicons';
 </script>
 
 <div class="flex-col text-center text-3xl m-4 bg-primary-100 rounded-lg p-4 bg-opacity-25 shadow-lg">
