@@ -6,3 +6,4 @@ src/types.d.ts
 node_modules/
 *.config.ts
 *.config.js
+test/

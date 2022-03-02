@@ -18,12 +18,12 @@
 <Switch bind:checked={toggled} {id} {offColor} {onColor}>
   <div slot="checkedIcon">
     {#if checkedIcon}
-      <Icon src={checkedIcon} class={onIconClass} />
+      <Icon src={checkedIcon} class={onIconClass} data-testid="checked-icon" />
     {/if}
   </div>
   <div slot="unCheckedIcon">
     {#if uncheckedIcon}
-      <Icon src={uncheckedIcon} class={offIconClass} />
+      <Icon src={uncheckedIcon} class={offIconClass} data-testid="unchecked-icon" />
     {/if}
   </div>
 </Switch>

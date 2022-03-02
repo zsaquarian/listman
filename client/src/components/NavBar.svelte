@@ -14,7 +14,11 @@
   }}
 >
   <div class="grid grid-cols-navbar">
-    <button on:click={() => (open = !open)} class="block lg:hidden">
+    <button
+      on:click={() => (open = !open)}
+      class="block lg:hidden"
+      aria-label={open ? 'Close navigation menu' : 'Open navigation menu'}
+    >
       {#if open}
         <Icon src={X} solid class="text-white w-8 h-8" />
       {:else}
