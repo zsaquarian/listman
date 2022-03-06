@@ -1,0 +1,27 @@
+name: 'test'
+
+on:
+  push:
+    branches:
+      - staging
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install
+        run: |
+          yarn
+          cd client
+          yarn
+          cd ..
+
+      - name: Test
+        run: yarn turbo run test
