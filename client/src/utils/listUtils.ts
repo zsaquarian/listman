@@ -53,7 +53,7 @@ export const loadOrCreateList = async (key: string): Promise<GenericList> => {
 };
 
 export const createList = (vals: GenericListItem[] = []): GenericList => {
-  return { version: LIST_SCHEMA_VERSION_NO, items: vals, name: '', isShared: false, modified: DateTime.now() };
+  return { version: LIST_SCHEMA_VERSION_NO, items: vals, name: '', isShared: false, modified: DateTime.now().toISO() };
 };
 
 export const addItem = async (list: GenericList, newVal: string): Promise<GenericList> => {
@@ -124,8 +124,6 @@ export const getFormattedModifiedTime = (list: GenericList): string => {
 export const isDifferent = (list1: GenericList, list2: GenericList): boolean => {
   const list1Copy = { ...list1, modified: undefined };
   const list2Copy = { ...list2, modified: undefined };
-
-  console.log(JSON.stringify(list1Copy) !== JSON.stringify(list2Copy));
 
   return JSON.stringify(list1Copy) !== JSON.stringify(list2Copy);
 };

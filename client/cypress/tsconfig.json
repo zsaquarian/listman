@@ -1,12 +1,10 @@
 {
+  "extends": "../tsconfig.json",
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["es5", "dom"],
-    "types": ["cypress"],
-    "baseUrl": "..",
-    "paths": {
-      "@/*": ["../src/components/*"]
-    }
+    "noEmit": true,
+    // be explicit about types included
+    // to avoid clashing with Jest types
+    "types": ["cypress", "cypress-plugin-snapshots", "cypress-localstorage-commands"]
   },
-  "include": ["*/*.ts"]
+  "include": ["../node_modules/cypress", "./**/*.ts"]
 }
