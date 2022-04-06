@@ -1,3 +1,13 @@
+### [0.6.4](https://github.com/zsaquarian/listman/compare/v0.6.3...v0.6.4) (2022-04-06)
+
+
+### Bug Fixes
+
+* **android:** actually add the capacitor storage plugin ([fe7bdec](https://github.com/zsaquarian/listman/commit/fe7bdec9b778c4953155bb538c1943dd0a2a8958))
+* change `config` page from `svelte-hero-icons` to `@steeze-ui/heroicons` ([d73c3d0](https://github.com/zsaquarian/listman/commit/d73c3d046b86de409d86fe0d9ceb6f63b9957190))
+* list name now saves properly ([1302847](https://github.com/zsaquarian/listman/commit/1302847724ac4772f5cfcb91e0e144672a8bd2fa))
+* **ui:** only show the "no lists made yet" if there are no lists ([ef4ef3f](https://github.com/zsaquarian/listman/commit/ef4ef3fb1bf7e36544522e3ba8d0fd3fb400c924))
+
 ### [0.6.3](https://github.com/zsaquarian/listman/compare/v0.6.2...v0.6.3) (2022-02-14)
 
 
