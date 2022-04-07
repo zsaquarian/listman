@@ -27,7 +27,7 @@ describe('List Display', () => {
     const rendered = render(ListDisplay, props);
 
     it('should be able to add items', async () => {
-      expect(rendered.getAllByText('test item')).toHaveLength(1);
+      expect(rendered.getAllByDisplayValue('test item')).toHaveLength(1);
 
       await fireEvent.input(rendered.getByPlaceholderText('Enter the name of a new item'), {
         target: { value: 'test item' },
@@ -35,7 +35,7 @@ describe('List Display', () => {
 
       await fireEvent.click(rendered.getByText('Add item'));
 
-      expect(rendered.getAllByText('test item')).toHaveLength(2);
+      expect(rendered.getAllByDisplayValue('test item')).toHaveLength(2);
     });
 
     it('should be able to remove items', async () => {

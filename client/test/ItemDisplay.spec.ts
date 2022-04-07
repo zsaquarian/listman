@@ -16,7 +16,7 @@ describe('Item Display', () => {
   it('should show the item name', () => {
     const rendered = render(ItemDisplay, props);
 
-    expect(() => rendered.getByText('test item')).not.toThrow();
+    expect(() => rendered.getByDisplayValue('test item')).not.toThrow();
   });
 
   it('should not have strike through when `shouldLineThrough` is false', async () => {
@@ -24,7 +24,7 @@ describe('Item Display', () => {
 
     await fireEvent.click(rendered.getByRole('checkbox'));
 
-    expect(rendered.getByText('test item').classList.contains('line-through')).toBe(false);
+    expect(rendered.getByDisplayValue('test item').classList.contains('line-through')).toBe(false);
   });
 
   it('should have strike through when `shouldLineThrough` is true', async () => {
@@ -32,7 +32,7 @@ describe('Item Display', () => {
 
     await fireEvent.click(rendered.getByRole('checkbox'));
 
-    expect(rendered.getByText('test item').classList.contains('line-through')).toBe(true);
+    expect(rendered.getByDisplayValue('test item').classList.contains('line-through')).toBe(true);
   });
 
   it('should call `removeItem`', async () => {
