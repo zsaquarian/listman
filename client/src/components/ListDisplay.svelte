@@ -119,7 +119,7 @@
       {#each list.items as { item, done }, i (i)}
         <ItemDisplay
           bind:checked={done}
-          itemName={item}
+          bind:itemName={item}
           shouldLineThrough={!isMasterList}
           removeItem={() => {
             removeItem(i);

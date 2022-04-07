@@ -31,3 +31,20 @@ exports[`Normal List > should save changes > when changing the title #0`] =
   "name": "new title",
   "version": "1.2"
 };
+
+exports[`Normal List > should save changes > when toggling items #0`] =
+{
+  "isShared": false,
+  "items": [
+    {
+      "done": true,
+      "item": "test item"
+    },
+    {
+      "done": false,
+      "item": "new item"
+    }
+  ],
+  "name": "new title",
+  "version": "1.2"
+};

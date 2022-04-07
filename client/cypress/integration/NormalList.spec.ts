@@ -25,7 +25,7 @@ describe('Normal List', () => {
 
   it('should load the key', () => {
     cy.visit(`/list/${key}`);
-    expect(cy.contains('test item'));
+    cy.get('input').eq(2).should('have.value', 'test item');
   });
 
   describe('should save changes', () => {
