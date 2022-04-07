@@ -57,7 +57,7 @@
       const loadedList = await loadList(key);
       Object.assign($store.todos, loadedList);
       list.isShared = true;
-      storedList = JSON.parse(JSON.stringify(list));
+      storedList = Object.create(list); // makes a copy of the list, otherwise it will be a reference
     } catch (e) {}
   });
 
@@ -68,7 +68,7 @@
   $: {
     if ($store.todos && $store.todos.items && isDifferent(list, storedList)) {
       storeList(key, list);
-      storedList = list;
+      storedList = Object.create(list);
     }
   }
 

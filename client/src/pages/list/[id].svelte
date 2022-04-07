@@ -11,7 +11,7 @@
 
   onMount(async () => {
     list = await loadList(key);
-    storedList = { ...list }; // makes a copy of the list, otherwise it will be a reference
+    storedList = Object.create(list); // makes a copy of the list, otherwise it will be a reference
   });
 
   const removeItem = (i: number): void => {
@@ -21,7 +21,7 @@
   $: {
     if (isDifferent(list, storedList)) {
       storeList(key, list);
-      storedList = { ...list };
+      storedList = Object.create(list);
     }
   }
 </script>

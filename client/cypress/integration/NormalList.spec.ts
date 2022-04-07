@@ -43,5 +43,12 @@ describe('Normal List', () => {
         .then((val) => JSON.parse(val))
         .toMatchSnapshot();
     });
+
+    it('when toggling items', () => {
+      cy.get('div.w-full > :nth-child(2) > .mr-2').click();
+      cy.getLocalStorage(capKey)
+        .then((val) => JSON.parse(val))
+        .toMatchSnapshot();
+    });
   });
 });
