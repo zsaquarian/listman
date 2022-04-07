@@ -1,0 +1,1 @@
+Listman is an app that you can use to create, manage, share and collabarate on lists. Its main feature is the master list, a template that allows you to quickly create new lists from the same basic items.

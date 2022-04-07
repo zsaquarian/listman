@@ -21,12 +21,11 @@ platform :android do
     gradle(task: "test")
   end
 
-  desc "Deploy a new version to the Google Play"
+  desc "Deploy a new testing version to the Google Play"
   lane :internal do
     gradle(task: "clean bundleRelease")
     upload_to_play_store(
-      track: 'internal',
-      release_status: 'draft'
+      track: 'internal'
     )
   end
 end

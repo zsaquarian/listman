@@ -29,7 +29,7 @@ Runs all the tests
 [bundle exec] fastlane android internal
 ```
 
-Deploy a new version to the Google Play
+Deploy a new testing version to the Google Play
 
 ----
 
