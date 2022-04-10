@@ -1,3 +1,16 @@
+## [0.7.0](https://github.com/zsaquarian/listman/compare/v0.6.4...v0.7.0) (2022-04-10)
+
+
+### Features
+
+* edit list items ([6c15b49](https://github.com/zsaquarian/listman/commit/6c15b49da7d6e794337b3320ec8a7af72a53876e))
+* show version number in config page ([5db4ca8](https://github.com/zsaquarian/listman/commit/5db4ca863f8a951e213a75aa3da484e2053f80f2))
+
+
+### Bug Fixes
+
+* properly fix previous bug ([84ebde5](https://github.com/zsaquarian/listman/commit/84ebde5071bb0e4f365c618cbff6b61d37224a36))
+
 ### [0.6.4](https://github.com/zsaquarian/listman/compare/v0.6.3...v0.6.4) (2022-04-06)
 
 
