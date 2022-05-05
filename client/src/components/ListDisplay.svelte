@@ -130,7 +130,7 @@
     {/if}
   </div>
   <form
-    class="flex absolute bottom-0 bg-accent-200 dark:bg-accent-800 m-0 w-full lg:rounded-lg lg:w-3/4"
+    class="flex sticky bottom-0 bg-accent-200 dark:bg-accent-800 m-0 w-full lg:rounded-lg lg:w-3/4"
     on:submit|preventDefault={() => {
       // regex which checks for non-whitespace strings
       if (/\S*$/.test(addInput) && addInput) {
