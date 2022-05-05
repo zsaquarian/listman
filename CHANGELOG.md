@@ -1,3 +1,12 @@
+### [0.7.1](https://github.com/zsaquarian/listman/compare/v0.7.0...v0.7.1) (2022-05-05)
+
+
+### Bug Fixes
+
+* add input gets stuck with too many items ([437681a](https://github.com/zsaquarian/listman/commit/437681af8205f46678929481d639d35feb966945))
+* **desktop:** use the correct icons ([1b12e0d](https://github.com/zsaquarian/listman/commit/1b12e0d69475a18c292b07f7b56819bf081be318))
+* **dev-only:** auth cookies now works on localhost ([4318271](https://github.com/zsaquarian/listman/commit/4318271a0e24a56ed6249b5d63768044a519884e))
+
 ## [0.7.0](https://github.com/zsaquarian/listman/compare/v0.6.4...v0.7.0) (2022-04-10)
 
 
