@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { X } from '@steeze-ui/heroicons';
+  import { X, ViewGrid } from '@steeze-ui/heroicons';
+  import { Icon } from '@steeze-ui/svelte-icon';
   import IconButton from '@components/IconButton.svelte';
 
   export let checked: boolean;
@@ -9,9 +10,10 @@
 </script>
 
 <div class="flex ${$$props.class}">
-  <input type="checkbox" bind:checked class="self-center mr-2 w-8 h-8" />
+  <Icon src={ViewGrid} class="opacity-25 hover:opacity-75 transition-opacity w-8 cursor-move m-2" />
+  <input type="checkbox" bind:checked class="self-center w-8 h-8" />
   <input
-    class="self-center dark:bg-black w-max"
+    class="self-center dark:bg-black w-full mx-2"
     class:line-through={shouldLineThrough && checked}
     bind:value={itemName}
   />

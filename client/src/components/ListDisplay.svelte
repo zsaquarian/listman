@@ -1,16 +1,7 @@
 <script lang="ts">
-  import { createList, getFormattedModifiedTime, listToString, storeList } from '@utils/listUtils';
   import type { GenericList } from '@utils/listUtils';
-  import { Share } from '@capacitor/share';
-  import { Share as ShareIcon, UserAdd as UserAddIcon, Plus as PlusIcon } from '@steeze-ui/heroicons';
   import ItemDisplay from './ItemDisplay.svelte';
-  import IconButton from './IconButton.svelte';
-  import { getContext } from 'svelte';
-  import CollabPopup from './CollabPopup.svelte';
-  import { ShareListDocument } from '@graphql';
-  import { mutation, operationStore } from '@urql/svelte';
-  import { goto } from '@roxi/routify';
-  import { v4 } from 'uuid';
+  import ListHeader from './ListHeader.svelte';
 
   export let isMasterList = false;
   export let isShared = false;
@@ -18,24 +9,37 @@
   export let list: GenericList;
   export let listUuid: string;
 
-  const { open } = getContext('simple-modal');
-
-  const shareListMutation = mutation(operationStore(ShareListDocument));
   let addInput: string;
-  let formattedModifiedTime: string = list && list.modified ? getFormattedModifiedTime(list) : 'a few seconds ago';
 
-  let modifiedInterval = setInterval(() => {
-    formattedModifiedTime = getFormattedModifiedTime(list);
-  }, 1000 * 60);
+  let hovering = -1;
 
-  $: {
-    if (list && list.items) {
-      clearInterval(modifiedInterval);
-      modifiedInterval = setInterval(() => {
-        formattedModifiedTime = getFormattedModifiedTime(list);
-      }, 1000 * 60);
+  const drop = (event: DragEvent, target: number) => {
+    event.dataTransfer.dropEffect = 'move';
+    const start = parseInt(event.dataTransfer.getData('text/plain'));
+    const newList = list.items;
+
+    console.log(start, target);
+
+    if (target - 1 == start) {
+      console.log(target + 1, start);
     }
-  }
+
+    if (start < target) {
+      newList.splice(target + 1, 0, newList[start]);
+      newList.splice(start, 1);
+    } else {
+      newList.splice(target, 0, newList[start]);
+      newList.splice(start + 1, 1);
+    }
+    list.items = newList;
+    hovering = -1;
+  };
+
+  const dragstart = (event: DragEvent, i: number) => {
+    event.dataTransfer.effectAllowed = 'move';
+    event.dataTransfer.dropEffect = 'move';
+    event.dataTransfer.setData('text/plain', i.toString());
+  };
 
   $: selected = list && list.items && list.items.filter((val) => val.done);
 </script>
@@ -43,89 +47,29 @@
 <div class="lg:w-3/4 mx-auto flex flex-col items-center">
   <div class="p-2 w-full">
     {#if list && list.items}
-      <div class="flex flex-col bg-accent-50 p-2 rounded-md dark:bg-accent-600">
-        <div class="justify-self-center">
-          {#if isMasterList}
-            <h1 class="text-4xl text-center">Master List</h1>
-          {:else}
-            <input
-              class="text-4xl text-center rounded-lg w-11/12 mx-auto block dark:bg-black"
-              bind:value={list.name}
-              placeholder="Enter name"
-            />
-          {/if}
-          <p>Modified: {formattedModifiedTime}</p>
-        </div>
-        <div class="flex justify-between">
-          <IconButton
-            buttonClass="text-primary-300 dark:text-primary-100"
-            onClickHandler={async () => {
-              await Share.share({
-                title: list.name,
-                text: listToString(list),
-                dialogTitle: 'Share list',
-              });
-            }}
-            icon={ShareIcon}
-            text="Share"
-          />
-          {#if isMasterList}
-            <IconButton
-              buttonClass={`transition ${
-                selected.length > 0 ? 'text-primary-300 dark:text-primary-100' : 'text-black dark:text-accent-50'
-              }`}
-              onClickHandler={() => {
-                const newVals = [];
-                selected.forEach((_val, i) => {
-                  if (selected[i]) newVals.push(list.items[i]);
-                });
-                const newList = createList(newVals);
-                newList.items.forEach((val) => {
-                  val.done = false;
-                });
-                const newKey = v4();
-                storeList(newKey, newList);
-                $goto(`/list/${newKey}`);
-              }}
-              text="Create new list"
-              icon={PlusIcon}
-            />
-          {/if}
-          {#if !isMasterList && !isShared}
-            <IconButton
-              class="text-primary-300 dark:text-primary-100"
-              onClickHandler={() => {
-                open(
-                  CollabPopup,
-                  { listUuid, shareListMutation },
-                  {},
-                  {
-                    onClosed: () => {
-                      $goto(`/sharedList/${listUuid}`);
-                    },
-                  }
-                );
-              }}
-              icon={UserAddIcon}
-              text="Collaborate"
-              filled={true}
-            />
-          {/if}
-        </div>
-      </div>
+      <ListHeader {list} {isMasterList} {isShared} {selected} {listUuid} />
       {#if list.items.length == 0}
         <h1 class="text-2xl text-gray-400 text-center">Try adding some items</h1>
       {/if}
       {#each list.items as { item, done }, i (i)}
-        <ItemDisplay
-          bind:checked={done}
-          bind:itemName={item}
-          shouldLineThrough={!isMasterList}
-          removeItem={() => {
-            removeItem(i);
-          }}
-          class="m-2 p-2"
-        />
+        <div
+          draggable={true}
+          on:dragstart={(event) => dragstart(event, i)}
+          on:drop|preventDefault={(event) => drop(event, i)}
+          ondragover="return false"
+          on:dragenter={() => (hovering = i)}
+          class={`${hovering === i ? 'dark:bg-accent-900 bg-accent-200' : ''} rounded-md`}
+        >
+          <ItemDisplay
+            bind:checked={done}
+            bind:itemName={item}
+            shouldLineThrough={!isMasterList}
+            removeItem={() => {
+              removeItem(i);
+            }}
+            class="m-2 p-2"
+          />
+        </div>
       {/each}
     {/if}
   </div>
