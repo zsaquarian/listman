@@ -1,9 +1,9 @@
 import { beforeEach, describe, it, vi, expect } from 'vitest';
 import { render, RenderResult, fireEvent } from '@testing-library/svelte';
-import Mock from './substituteComponents/UserDropdown.svelte';
+import Empty from './substituteComponents/Empty.svelte';
 import NavBar from '@components/NavBar.svelte';
 
-vi.mock('@components/UserDropdown.svelte', () => ({ default: Mock }));
+vi.mock('@components/UserDropdown.svelte', () => ({ default: Empty }));
 
 let rendered: RenderResult;
 
