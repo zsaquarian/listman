@@ -1,3 +1,10 @@
+## [0.8.0](https://github.com/zsaquarian/listman/compare/v0.7.2...v0.8.0) (2022-05-13)
+
+
+### Features
+
+* change the order of items ([273f5c3](https://github.com/zsaquarian/listman/commit/273f5c3ad6eee2c3c1669198a53f7c88661726f6))
+
 ### [0.7.2](https://github.com/zsaquarian/listman/compare/v0.7.1...v0.7.2) (2022-05-05)
 
 ### [0.7.1](https://github.com/zsaquarian/listman/compare/v0.7.0...v0.7.1) (2022-05-05)
