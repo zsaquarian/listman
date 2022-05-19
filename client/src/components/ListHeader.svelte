@@ -3,6 +3,7 @@
   import { Share as ShareIcon, UserAdd as UserAddIcon, Plus as PlusIcon } from '@steeze-ui/heroicons';
   import IconButton from './IconButton.svelte';
   import CollabPopup from './CollabPopup.svelte';
+  import Popup from './Popup.svelte';
   import { goto } from '@roxi/routify';
   import { v4 } from 'uuid';
   import { getContext } from 'svelte';
@@ -20,6 +21,11 @@
   let formattedModifiedTime: string = list && list.modified ? getFormattedModifiedTime(list) : 'a few seconds ago';
   const { open } = getContext('simple-modal');
   const shareListMutation = mutation(operationStore(ShareListDocument));
+
+  const onSuccess = () => {
+    $goto(`/sharedList/${listUuid}`);
+    open(Popup, { message: "You've successfully shared this list!" });
+  };
 
   let modifiedInterval = setInterval(() => {
     formattedModifiedTime = getFormattedModifiedTime(list);
@@ -87,7 +93,15 @@
       <IconButton
         class="text-primary-300 dark:text-primary-100"
         onClickHandler={() => {
-          open(CollabPopup, { listUuid, shareListMutation }, {});
+          open(
+            CollabPopup,
+            {
+              listUuid,
+              shareListMutation,
+              onSuccess,
+            },
+            {}
+          );
         }}
         icon={UserAddIcon}
         text="Collaborate"

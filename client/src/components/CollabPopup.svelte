@@ -2,10 +2,10 @@
   import type { ExecuteMutation } from '@urql/svelte';
   import { getContext } from 'svelte';
   import InputWithErrors from './InputWithErrors.svelte';
-  import { goto } from '@roxi/routify';
 
   export let shareListMutation: ExecuteMutation;
   export let listUuid: string;
+  export let onSuccess = () => {};
 
   const { close } = getContext('simple-modal');
 
@@ -14,14 +14,13 @@
 
   const shareList = async () => {
     const result = await shareListMutation({ listUuid, sharedWith: username });
-    if (result.error.toString().includes('user with that username does not exist')) {
+    if (result.error && result.error.toString().includes('user with that username does not exist')) {
       error = 'User with that username does not exist';
+    } else if (result.error) {
+      error = 'An unknown error ocurred :(';
     } else {
-      close({
-        onClosed: () => {
-          $goto(`/sharedList/${listUuid}`);
-        },
-      });
+      close();
+      onSuccess();
     }
   };
 </script>
@@ -36,8 +35,8 @@
     {error}
   />
   <button
-    class="bg-accent-300 w-16 p-2 mx-auto my-2 hover:bg-accent-400
+    class="bg-accent-300 p-2 mx-auto my-2 hover:bg-accent-400
 focus:bg-accent-400 text-white transition rounded-md"
-    action="submit">Done</button
+    action="submit">Collabarate</button
   >
 </form>
