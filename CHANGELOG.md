@@ -1,3 +1,10 @@
+### [0.8.1](https://github.com/zsaquarian/listman/compare/v0.8.0...v0.8.1) (2022-05-19)
+
+
+### Bug Fixes
+
+* closing the popup manually broke the list ([00939fb](https://github.com/zsaquarian/listman/commit/00939fba94fada91b36d0fc5044d23c7a4723eee))
+
 ## [0.8.0](https://github.com/zsaquarian/listman/compare/v0.7.2...v0.8.0) (2022-05-13)
 
 
