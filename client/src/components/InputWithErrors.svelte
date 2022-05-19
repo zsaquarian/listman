@@ -7,7 +7,7 @@
   export let placeholder: string;
   export let type: 'text' | 'password' = 'text';
 
-  export let error: ParsedError;
+  export let error: ParsedError | string;
 </script>
 
 <div {...$$props}>

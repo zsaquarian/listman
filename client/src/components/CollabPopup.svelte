@@ -1,6 +1,8 @@
 <script lang="ts">
   import type { ExecuteMutation } from '@urql/svelte';
   import { getContext } from 'svelte';
+  import InputWithErrors from './InputWithErrors.svelte';
+  import { goto } from '@roxi/routify';
 
   export let shareListMutation: ExecuteMutation;
   export let listUuid: string;
@@ -8,25 +10,34 @@
   const { close } = getContext('simple-modal');
 
   let username: string;
+  let error = '';
 
   const shareList = async () => {
-    await shareListMutation({ listUuid, sharedWith: username });
-    close();
+    const result = await shareListMutation({ listUuid, sharedWith: username });
+    if (result.error.toString().includes('user with that username does not exist')) {
+      error = 'User with that username does not exist';
+    } else {
+      close({
+        onClosed: () => {
+          $goto(`/sharedList/${listUuid}`);
+        },
+      });
+    }
   };
 </script>
 
 <form class="flex flex-col m-0" action="submit" on:submit|preventDefault={shareList}>
-  <label class="mb-2" for="collab-username">Collabarate with others</label>
-  <input
-    class="bg-gray-200 rounded-md p-2 focus:bg-gray-100 hover:bg-gray-100"
-    id="collab-username"
-    type="text"
+  <p class="mb-2 text-xl">Collabarate with others</p>
+  <InputWithErrors
     bind:value={username}
+    type="text"
     placeholder="Add people using their username"
+    class="text-center"
+    {error}
   />
   <button
-    class="bg-blue-300 w-16 p-2 mx-auto my-2 hover:bg-blue-400
-focus:bg-blue-400 text-white transition rounded-sm"
+    class="bg-accent-300 w-16 p-2 mx-auto my-2 hover:bg-accent-400
+focus:bg-accent-400 text-white transition rounded-md"
     action="submit">Done</button
   >
 </form>

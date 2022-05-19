@@ -87,16 +87,7 @@
       <IconButton
         class="text-primary-300 dark:text-primary-100"
         onClickHandler={() => {
-          open(
-            CollabPopup,
-            { listUuid, shareListMutation },
-            {},
-            {
-              onClosed: () => {
-                $goto(`/sharedList/${listUuid}`);
-              },
-            }
-          );
+          open(CollabPopup, { listUuid, shareListMutation }, {});
         }}
         icon={UserAddIcon}
         text="Collaborate"
