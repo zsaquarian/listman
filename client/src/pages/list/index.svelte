@@ -5,8 +5,36 @@
   import { Storage } from '@capacitor/storage';
   import { Icon } from '@steeze-ui/svelte-icon';
   import { Search } from '@steeze-ui/heroicons';
+  import { operationStore, query } from '@urql/svelte';
+  import { GetSharedListsDocument } from '@graphql';
 
   let lists = [] as Lists;
+
+  const sharedListsQuery = operationStore(GetSharedListsDocument);
+
+  const sharedLists = query(sharedListsQuery);
+  $: {
+    if (!$sharedLists.fetching && !$sharedLists.error) {
+      // onlySharedLists = $sharedLists.data.getSharedLists.filter((val) => !lists.includes(val));
+      $sharedLists.data.getSharedLists.forEach((val) => {
+        lists = [...lists, { key: val, name: '', isShared: true, isExternal: true }];
+      });
+
+      lists.sort((a, b) => {
+        if (a.modified < b.modified) return -1;
+        else if (a.modified > b.modified) return 1;
+
+        return 0;
+      });
+
+      lists = lists.filter((val, i) => {
+        if (i === 0) return true;
+        if (val.key === lists[i - 1].key) return false;
+
+        return true;
+      });
+    }
+  }
 
   onMount(async () => {
     const result = await getLists();
