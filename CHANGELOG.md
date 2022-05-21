@@ -1,3 +1,10 @@
+### [0.8.2](https://github.com/zsaquarian/listman/compare/v0.8.1...v0.8.2) (2022-05-19)
+
+
+### Bug Fixes
+
+* properly fix the previous error ([faaf004](https://github.com/zsaquarian/listman/commit/faaf004d5f3f7d2ed7ef0be14a66070a71f39668))
+
 ### [0.8.1](https://github.com/zsaquarian/listman/compare/v0.8.0...v0.8.1) (2022-05-19)
 
 
