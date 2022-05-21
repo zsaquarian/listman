@@ -1,3 +1,10 @@
+### [0.8.3](https://github.com/zsaquarian/listman/compare/v0.8.2...v0.8.3) (2022-05-21)
+
+
+### Bug Fixes
+
+* collabarated lists are now shown in the 'all lists' tab ([3b0134a](https://github.com/zsaquarian/listman/commit/3b0134af6c4aa49afc2f63e54af11f6f43d0630e))
+
 ### [0.8.2](https://github.com/zsaquarian/listman/compare/v0.8.1...v0.8.2) (2022-05-19)
 
 
