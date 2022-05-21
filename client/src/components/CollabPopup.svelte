@@ -16,6 +16,8 @@
     const result = await shareListMutation({ listUuid, sharedWith: username });
     if (result.error && result.error.toString().includes('user with that username does not exist')) {
       error = 'User with that username does not exist';
+    } else if (result.error && result.error.toString().includes('Not authorized')) {
+      error = 'Login to collabarate';
     } else if (result.error) {
       error = 'An unknown error ocurred :(';
     } else {
