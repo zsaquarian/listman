@@ -22,7 +22,7 @@
     "start": "yarn workspace server start",
     "cm": "cz"
   },
-  "version": "0.9.0",
+  "version": "0.9.1",
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"

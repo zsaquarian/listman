@@ -1,3 +1,11 @@
+### [0.9.1](https://github.com/zsaquarian/listman/compare/v0.9.0...v0.9.1) (2022-05-23)
+
+
+### Bug Fixes
+
+* subscriptions url should be an environment variable ([ddddf6c](https://github.com/zsaquarian/listman/commit/ddddf6c0f1740a4d611664130f064913665484d1))
+* typescript compilation errors ([ca00998](https://github.com/zsaquarian/listman/commit/ca009981a276a1fa469cb90c44938662a71d9daf))
+
 ## [0.9.0](https://github.com/zsaquarian/listman/compare/v0.8.3...v0.9.0) (2022-05-23)
 
 
