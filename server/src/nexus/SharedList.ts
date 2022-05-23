@@ -4,6 +4,7 @@ import { isAuth } from '../utils/isAuth';
 import { JWTToken } from '../utils/types';
 import jwt from 'jsonwebtoken';
 import { JWT_SECRET } from '../utils/constants';
+import { createNotification } from '../utils/notification';
 
 export const SharedList = objectType({
   name: 'SharedList',
@@ -37,6 +38,7 @@ export const SharedListMutations = extendType({
         }
 
         await ctx.db.sharedList.create({ data: { listUuid, owner: user.uuid, sharedWith: [sharedWithUser.uuid] } });
+        await createNotification(ctx.redis, `${user.username} has shared a list with you`, sharedWithUser);
         return true;
       },
     });

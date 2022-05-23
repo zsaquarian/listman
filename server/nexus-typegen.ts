@@ -36,6 +36,10 @@ export interface NexusGenObjects {
     user?: NexusGenRootTypes['User'] | null; // User
   }
   Mutation: {};
+  Notification: { // root type
+    id?: string | null; // String
+    message?: string | null; // String
+  }
   Query: {};
   RefreshPayload: { // root type
     error?: string | null; // String
@@ -47,6 +51,7 @@ export interface NexusGenObjects {
     owner?: string | null; // String
     sharedWith?: Array<string | null> | null; // [String]
   }
+  Subscription: {};
   User: { // root type
     id: number; // Int!
     username: string; // String!
@@ -79,6 +84,10 @@ export interface NexusGenFieldTypes {
     refresh: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
     shareList: boolean | null; // Boolean
   }
+  Notification: { // field return type
+    id: string | null; // String
+    message: string | null; // String
+  }
   Query: { // field return type
     canViewList: boolean | null; // Boolean
     getSharedLists: Array<string | null> | null; // [String]
@@ -94,6 +103,9 @@ export interface NexusGenFieldTypes {
     listUuid: string | null; // String
     owner: string | null; // String
     sharedWith: Array<string | null> | null; // [String]
+  }
+  Subscription: { // field return type
+    notifications: Array<NexusGenRootTypes['Notification'] | null> | null; // [Notification]
   }
   User: { // field return type
     email: string; // String!
@@ -118,6 +130,10 @@ export interface NexusGenFieldTypeNames {
     refresh: 'AuthPayload'
     shareList: 'Boolean'
   }
+  Notification: { // field return type name
+    id: 'String'
+    message: 'String'
+  }
   Query: { // field return type name
     canViewList: 'Boolean'
     getSharedLists: 'String'
@@ -133,6 +149,9 @@ export interface NexusGenFieldTypeNames {
     listUuid: 'String'
     owner: 'String'
     sharedWith: 'String'
+  }
+  Subscription: { // field return type name
+    notifications: 'Notification'
   }
   User: { // field return type name
     email: 'String'

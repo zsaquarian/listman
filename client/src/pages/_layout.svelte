@@ -2,6 +2,7 @@
   import NavBar from '@components/NavBar.svelte';
   import { config } from '@store/config';
   import { createClient } from '@utils/createClient';
+  import NotificationManager from '@components/NotificationManager.svelte';
 
   createClient();
 
@@ -15,6 +16,7 @@
 </script>
 
 <div class="min-h-screen dark:bg-black dark:text-white transition-colors">
+  <NotificationManager />
   <NavBar />
   <slot />
 </div>

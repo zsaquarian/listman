@@ -1,0 +1,6 @@
+subscription Notifications {
+  notifications {
+    message
+    id    
+  }
+}

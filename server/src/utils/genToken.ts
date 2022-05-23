@@ -1,7 +1,7 @@
 import { User } from '@prisma/client';
 import jwt from 'jsonwebtoken';
 import { MyContext } from 'src/context';
-import { JWT_SECRET, JWT_EXPIRE_TIME, IN_PROD, REFRESH_SECRET, REFRESH_EXPIRE_TIME } from './constants';
+import { JWT_SECRET, JWT_EXPIRE_TIME, REFRESH_SECRET, REFRESH_EXPIRE_TIME } from './constants';
 import { JWTToken, RedisTokenInfo } from './types';
 
 export const genJWTToken = (user: User | JWTToken, isGoogleUser: boolean): string => {

@@ -8,3 +8,9 @@ export interface MyContext {
   res: Response;
   redis: WrappedNodeRedisClient;
 }
+
+export interface SubscriptionContext {
+  redis: WrappedNodeRedisClient;
+  cookies: Record<string, string>;
+  db: PrismaClient;
+}

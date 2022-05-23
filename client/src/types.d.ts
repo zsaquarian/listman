@@ -87,6 +87,7 @@ interface Window {
 
 interface ImportMetaEnv {
   readonly VITE_GRAPHQL_IP: string;
+  readonly VITE_SUB_GRAPHQL_IP: string;
   readonly VITE_YJS_IP: string;
   readonly VITE_GOOGLE_CLIENT_ID: string;
 }

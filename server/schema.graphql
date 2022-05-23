@@ -18,6 +18,11 @@ type Mutation {
   shareList(listUuid: String, sharedWith: String): Boolean
 }
 
+type Notification {
+  id: String
+  message: String
+}
+
 type Query {
   canViewList(uuid: String): Boolean
   getSharedLists: [String]
@@ -35,6 +40,10 @@ type SharedList {
   listUuid: String
   owner: String
   sharedWith: [String]
+}
+
+type Subscription {
+  notifications: [Notification]
 }
 
 type User {

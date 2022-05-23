@@ -1,9 +1,14 @@
-import { dedupExchange, fetchExchange, initClient } from '@urql/svelte';
+import { dedupExchange, fetchExchange, initClient, subscriptionExchange } from '@urql/svelte';
 import { cacheExchange } from '@urql/exchange-graphcache';
 import { MeDocument, RefreshDocument } from '@graphql';
 import type { CreateUserMutation, GoogleSignInMutation, LoginMutation } from '@graphql';
 import { authExchange } from '@urql/exchange-auth';
 import { authStore } from '@store/auth';
+import { createClient as createWSClient } from 'graphql-ws';
+
+const wsClient = createWSClient({
+  url: 'ws://localhost:3000/graphql',
+});
 
 export const createClient = (): void => {
   initClient({
@@ -113,6 +118,13 @@ export const createClient = (): void => {
         },
       }),
       fetchExchange,
+      subscriptionExchange({
+        forwardSubscription: (operation) => ({
+          subscribe: (sink) => ({
+            unsubscribe: wsClient.subscribe(operation, sink),
+          }),
+        }),
+      }),
     ],
   });
 };

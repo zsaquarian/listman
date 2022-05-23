@@ -1,15 +1,46 @@
 import express from 'express';
 import { GOOD_ORIGINS, IN_PROD, PORT } from './utils/constants';
 import dotenv from 'dotenv';
-import { server } from './server';
+import { makeServer } from './server';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { seed } from './seed';
+import { createServer } from 'http';
+import { WebSocketServer } from 'ws';
+import { useServer } from 'graphql-ws/lib/use/ws';
+import { schema } from './schema';
+import { SubscriptionContext } from './context';
+import { redis } from './redis';
+import { db } from './db';
 
 dotenv.config();
 
 const main = async () => {
   const app = express();
+  const http = createServer(app);
+
+  const wsServer = new WebSocketServer({
+    server: http,
+    path: '/graphql',
+  });
+  const serverCleanup = useServer(
+    {
+      schema,
+      context: (ctx, msg, args): SubscriptionContext => {
+        const pairs = ctx.extra.request.headers.cookie.split(';');
+        const splittedPairs = pairs.map((cookie) => cookie.split('='));
+        const cookies = splittedPairs.reduce((obj, cookie) => {
+          obj[decodeURIComponent(cookie[0].trim())] = decodeURIComponent(cookie[1].trim());
+          return obj;
+        }, {});
+
+        return { cookies, redis, db };
+      },
+    },
+    wsServer
+  );
+
+  const server = makeServer(http, serverCleanup);
 
   app.use(
     cors({
@@ -42,7 +73,7 @@ const main = async () => {
     res.send('Database seeded succesfully');
   });
 
-  app.listen(PORT, () => {
+  http.listen(PORT, () => {
     console.log(`server started at http://localhost:${PORT}`);
   });
 };

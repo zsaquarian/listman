@@ -3859,6 +3859,7 @@ __metadata:
     socket.io-client: ^4.3.2
     svelte: ^3.46.4
     svelte-check: ^2.2.4
+    svelte-notifications: ^0.9.95
     svelte-preprocess: ^4.10.1
     svelte-simple-modal: ^1.1.1
     svelte-switch: ^0.0.5
@@ -11298,6 +11299,13 @@ __metadata:
   peerDependencies:
     svelte: ">=3.19.0"
   checksum: f13e152cad53a82181409fe1a3aebfb0465f837109f7f4a7aa52f357ab4153920a9d3aefb077b68d1cbc01e4fc4f907b9b142734bed2aa43b0e64f5b15ae9d98
+  languageName: node
+  linkType: hard
+
+"svelte-notifications@npm:^0.9.95":
+  version: 0.9.95
+  resolution: "svelte-notifications@npm:0.9.95"
+  checksum: 7ae8000ed227d1dcda5536fd00c45a1faca0171400e7887bd3714ccc8c5a6bd53a021755bde06d387fcb38671a0e3ae020c6cfafa8acbdc73bca178953d38a12
   languageName: node
   linkType: hard
 
