@@ -26,10 +26,14 @@ const main = async () => {
   const serverCleanup = useServer(
     {
       schema,
-      context: (ctx, msg, args): SubscriptionContext => {
-        const pairs = ctx.extra.request.headers.cookie.split(';');
+      context: (ctx, _msg, _args): SubscriptionContext => {
+        const cookieString = ctx.extra.request.headers.cookie;
+        if (!cookieString) return { redis, db, cookies: {} };
+        const pairs = cookieString.split(';');
         const splittedPairs = pairs.map((cookie) => cookie.split('='));
         const cookies = splittedPairs.reduce((obj, cookie) => {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           obj[decodeURIComponent(cookie[0].trim())] = decodeURIComponent(cookie[1].trim());
           return obj;
         }, {});

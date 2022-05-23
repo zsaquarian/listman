@@ -16,10 +16,12 @@ export const NotificationSubscriptions = extendType({
   type: 'Subscription',
   definition: (t) => {
     t.list.field('notifications', {
+      // @ts-ignore
       type: 'Notification',
       resolve: (data) => {
         return data;
       },
+      // @ts-ignore
       subscribe: async (_root, _args, ctx: SubscriptionContext, _info) => {
         const token = ctx.cookies.token;
         // @ts-ignore typescript doesn't know that the fields are in the JWT

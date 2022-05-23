@@ -8,12 +8,19 @@ export interface Notification {
   id: string;
 }
 
-export const createNotification = async (redis: WrappedNodeRedisClient, message: string, user: User | string) => {
+export const createNotification = async (
+  redis: WrappedNodeRedisClient,
+  message: string,
+  user: User | string
+): Promise<Notification | undefined> => {
   const uuid = typeof user === 'string' ? user : user.uuid;
   const notif = { message, user: uuid, id: v4() } as Notification;
   const key = `user-${uuid}`;
+  const val = await redis.get(key);
 
-  if ((await redis.exists(key)) && (await redis.get(key)).length > 0) {
+  if (!val) return;
+
+  if (val.length > 0) {
     await redis.append(key, ';' + JSON.stringify(notif));
   } else {
     await redis.append(key, JSON.stringify(notif));
@@ -22,7 +29,11 @@ export const createNotification = async (redis: WrappedNodeRedisClient, message:
   return notif;
 };
 
-export const deleteNotification = async (redis: WrappedNodeRedisClient, id: string, user: User | string) => {
+export const deleteNotification = async (
+  redis: WrappedNodeRedisClient,
+  id: string,
+  user: User | string
+): Promise<void> => {
   const uuid = typeof user === 'string' ? user : user.uuid;
   let notifs = (await redis.get(`user-${uuid}`))?.split(';').map((val) => JSON.parse(val) as Notification);
 
@@ -33,7 +44,7 @@ export const deleteNotification = async (redis: WrappedNodeRedisClient, id: stri
   await redis.set(`user-${uuid}`, notifs.map((val) => JSON.stringify(val)).join(','));
 };
 
-export const getNotifications = async (redis: WrappedNodeRedisClient, user: User | string) => {
+export const getNotifications = async (redis: WrappedNodeRedisClient, user: User | string): Promise<Notification[]> => {
   const uuid = typeof user === 'string' ? user : user.uuid;
   const notifs = (await redis.get(`user-${uuid}`))?.split(';').map((val) => JSON.parse(val) as Notification);
 
