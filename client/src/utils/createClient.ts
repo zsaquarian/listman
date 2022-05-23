@@ -7,7 +7,7 @@ import { authStore } from '@store/auth';
 import { createClient as createWSClient } from 'graphql-ws';
 
 const wsClient = createWSClient({
-  url: 'ws://localhost:3000/graphql',
+  url: import.meta.env.VITE_SUB_GRAPHQL_IP,
 });
 
 export const createClient = (): void => {
