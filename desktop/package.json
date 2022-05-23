@@ -10,5 +10,5 @@
     "@tauri-apps/cli": "^1.0.0-beta.10",
     "vite-plugin-tauri": "^0.1.10"
   },
-  "version": "0.8.3"
+  "version": "0.9.0"
 }

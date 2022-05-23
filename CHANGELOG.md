@@ -1,3 +1,10 @@
+## [0.9.0](https://github.com/zsaquarian/listman/compare/v0.8.3...v0.9.0) (2022-05-23)
+
+
+### Features
+
+* show notification when a list is shared with you ([c3c6b64](https://github.com/zsaquarian/listman/commit/c3c6b64b787853d241cd863bf6c7678c4434296f))
+
 ### [0.8.3](https://github.com/zsaquarian/listman/compare/v0.8.2...v0.8.3) (2022-05-21)
 
 
