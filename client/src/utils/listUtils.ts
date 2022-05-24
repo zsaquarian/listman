@@ -21,6 +21,7 @@ export type Lists = {
   name: string;
   isShared: boolean;
   isExternal: boolean;
+  modified: string;
 }[];
 
 export const storeList = async (key: string, list: GenericList): Promise<void> => {

@@ -17,7 +17,7 @@
     if (!$sharedLists.fetching && !$sharedLists.error) {
       // onlySharedLists = $sharedLists.data.getSharedLists.filter((val) => !lists.includes(val));
       $sharedLists.data.getSharedLists.forEach((val) => {
-        lists = [...lists, { key: val, name: '', isShared: true, isExternal: true }];
+        lists = [...lists, { key: val, name: '', isShared: true, isExternal: true, modified: '' }];
       });
 
       lists.sort((a, b) => {
@@ -27,11 +27,10 @@
         return 0;
       });
 
-      lists = lists.filter((val, i) => {
-        if (i === 0) return true;
-        if (val.key === lists[i - 1].key) return false;
+      const keys = lists.map((val) => val.key);
 
-        return true;
+      lists = lists.filter((val, i) => {
+        return keys.indexOf(val.key) === i;
       });
     }
   }
